@@ -1,10 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="initial-scale=1.25, user-scalable=no">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edit Website</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/assignment/css/style.css" rel="stylesheet"/>
 </head>
 <body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="website-list.html">
+                <span class="navbar-text pull-left glyphicon glyphicon-chevron-left"/>
+            </a>
+            <a class="navbar-brand" href="#">
+                Edit Website
+            </a>
+            <p class="navbar-text pull-right">
+                <a href="website-list.html" class="navbar-link">
+          <span class="glyphicon glyphicon-ok">
+          </span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+<div class="container">
+<form>
+    <div class="form-group">
+        <label  for="ApplicationName">Application Name</label>
+        <input type="ApplicationName" class="form-control" id="ApplicationName" placeholder="Blogger">
+    </div>
+    <div class="form-group">
+        <label  for="ApplicationDescription">Application Description</label>
+        <textarea
+                class="form-control"
+                id="ApplicationDescription"
+                rows="4"
+                placeholder="Blogger is a blog-publishing service that allows multi-user blogs with time-stamped entries. It was developed by Pyra labs, which was bought by Google in 2003. Generally, the blogs are hosted by Google"></textarea>
+    </div>
+</form>
+    <a class="btn btn-danger btn-block" href="website-list.html" role="button">Delete</a>
+</div>
 
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="row navbar-text">
+            <div class="col-xs-3 text-center">
+            </div>
+            <div class="col-xs-3 text-center">
+            </div>
+            <div class="col-xs-3 text-center">
+            </div>
+            <div class="col-xs-3 text-center">
+                <a href="/assignment/user/profile.html">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
 </body>
 </html>
