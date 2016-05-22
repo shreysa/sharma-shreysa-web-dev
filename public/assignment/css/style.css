@@ -7,7 +7,14 @@ body {
     padding-top: 60px;
 
 }
+.para-pad {
+    padding-top: 10px;
+}
 
+.para-end {
+
+    padding-bottom: 20px;
+}
 .form-group{
     margin-top: 10px;
 }
