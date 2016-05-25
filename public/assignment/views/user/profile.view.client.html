@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="viewport" content="initial-scale=1.25, user-scalable=no">
-    <meta charset="UTF-8">
-    <title>Profile</title>
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/assignment/css/style.css" rel="stylesheet"/>
-
-
-</head>
-<body>
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -37,22 +23,22 @@
     <form>
         <div class="form-group">
             <label for="Username">Username</label>
-            <input type="text" class="form-control" id="Username" value="john">
+            <input ng-model="model.user.username" type="text" class="form-control" id="Username" >
         </div>
         <div class="form-group">
             <label for="Email">Email</label>
-            <input type="Email" class="form-control" id="Email" value="john@gmail.com">
+            <input ng.model="model.user.email" type="Email" class="form-control" id="Email" value="john@gmail.com">
         </div>
         <div class="form-group">
             <label for="FirstName">First Name</label>
-            <input type="text"  class="form-control" id="FirstName" value="John">
+            <input ng-model="model.user.firstName" type="text"  class="form-control" id="FirstName" >
         </div>
         <div class="form-group">
             <label for="LastName">Last Name</label>
-            <input type="text" class="form-control" id="LastName" value="D'souza">
+            <input ng-model="model.user.lastName" type="text" class="form-control" id="LastName">
         </div>
-        <a class="btn btn-primary btn-block" href="/assignment/website/website-list.html"  role="button">Websites</a>
-        <a class="btn btn-danger btn-block" href="/assignment/user/login.html" role="button">Logout</a>
+        <a class="btn btn-primary btn-block" href="#/website-list"  role="button">Websites</a>
+        <a class="btn btn-danger btn-block" href="#/login" role="button">Logout</a>
 
     </form>
 </div>
@@ -77,5 +63,3 @@
         </div>
     </div>
 </nav>
-</body>
-</html>
