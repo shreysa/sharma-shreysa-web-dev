@@ -6,7 +6,7 @@
                 Profile
             </a>
             <p class="navbar-text pull-right">
-                <a href="/assignment/user/profile.html" class="navbar-link">
+                <a ng-click="model.updateUser()" class="navbar-link">
           <span class="glyphicon glyphicon-ok">
           </span>
                 </a>
@@ -23,19 +23,32 @@
     <form>
         <div class="form-group">
             <label for="Username">Username</label>
-            <input ng-model="model.user.username" type="text" class="form-control" id="Username" >
+            <input ng-model="model.user.username"
+                   type="text"
+                   class="form-control"
+                   id="Username" >
         </div>
         <div class="form-group">
             <label for="Email">Email</label>
-            <input ng.model="model.user.email" type="Email" class="form-control" id="Email" value="john@gmail.com">
+            <input ng.model="model.user.email"
+                   type="Email"
+                   class="form-control"
+                   id="Email"
+                   value="john@gmail.com">
         </div>
         <div class="form-group">
             <label for="FirstName">First Name</label>
-            <input ng-model="model.user.firstName" type="text"  class="form-control" id="FirstName" >
+            <input ng-model="model.user.firstName"
+                   type="text"
+                   class="form-control"
+                   id="FirstName" >
         </div>
         <div class="form-group">
             <label for="LastName">Last Name</label>
-            <input ng-model="model.user.lastName" type="text" class="form-control" id="LastName">
+            <input ng-model="model.user.lastName"
+                   type="text"
+                   class="form-control"
+                   id="LastName">
         </div>
         <a class="btn btn-primary btn-block" href="#/website-list"  role="button">Websites</a>
         <a class="btn btn-danger btn-block" href="#/login" role="button">Logout</a>

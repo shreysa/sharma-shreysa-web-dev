@@ -13,16 +13,22 @@
 
     function ProfileController($routeParams) {
        var vm = this;
+        vm.updateUser = updateUser;
+        var index = -1;
         var id = $routeParams["id"];
         for (var i in users) {
             if(users[i]._id === id) {
                 vm.user = users[i];
+                index = i;
             }
-
-
         }
-        console.log(id);
-    }
+        function updateUser() {
+            users[i].firstName = vm.user.firstName;
+            users[i].lastName = vm.user.lastName;
+
+            
+        }
+      }
 
     function LoginController($location) {
 
