@@ -9,7 +9,7 @@
         var vm = this;
         // vm.updateUser = updateUser;
         var index = -1;
-        var id = $routeParams["id"];
+        var id = $routeParams["userId"];
 
         function init() {
             vm.user = UserService.findUserById(id);
@@ -17,7 +17,7 @@
         }
         init();
         function updateUser() {
-            var result =  UserService.updateUser(vm.user._id, vm.user);
+            var result =  UserService.updateUser(vm._id, vm.user);
             if (result){
                 vm.success = "Profile was successfully updated";
             } else {

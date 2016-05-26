@@ -10,7 +10,12 @@
                 controller: "LoginController",
                 controllerAs: "model"
             })
-            .when("/user/:id", {
+            .when("/", {
+                templateUrl: "views/user/login.view.client.html",
+                controller: "LoginController",
+                controllerAs: "model"
+            })
+            .when("/user/:userId", {
             templateUrl: "views/user/profile.view.client.html",
                 controller:"ProfileController",
                 controllerAs: "model"
@@ -30,8 +35,10 @@
             .when("/website-edit", {
                 templateUrl: "views/website/website-edit.view.client.html"
             })
-            .when("/user/:uid/website", {
-                templateUrl: "views/website/website-list.view.client.html"
+            .when("/user/:userId/website", {
+                templateUrl: "views/website/website-list.view.client.html",
+                controller: "WebsiteListController",
+                controllerAs: "model"
             })
             .when("/website-new", {
                 templateUrl: "views/website/website-new.view.client.html"

@@ -38,7 +38,7 @@
             return true;
         }
 
-        
+
 
         function deleteUser(id) {
             //    users.add()
@@ -60,10 +60,8 @@
                 if(users[i]._id === id) {
                     return users[i];
                 }
-                else{
-                    return null;
-                }
             }
+            return null;
         }
 
         function updateUser(id, newUser) {
