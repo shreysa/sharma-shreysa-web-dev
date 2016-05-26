@@ -10,7 +10,7 @@
                 controller: "LoginController",
                 controllerAs: "model"
             })
-            .when("/profile/:id", {
+            .when("/user/:id", {
             templateUrl: "views/user/profile.view.client.html",
                 controller:"ProfileController",
                 controllerAs: "model"
@@ -30,7 +30,7 @@
             .when("/website-edit", {
                 templateUrl: "views/website/website-edit.view.client.html"
             })
-            .when("/website-list", {
+            .when("/user/:uid/website", {
                 templateUrl: "views/website/website-list.view.client.html"
             })
             .when("/website-new", {
