@@ -18,6 +18,12 @@
         vm.navigateToPageList = navigateToPageList;
         vm.updatePage = updatePage;
         vm.deletePage = deletePage;
+        vm.navigateToProfile = navigateToProfile;
+
+
+        function navigateToProfile() {
+            $location.url("/user/" + vm.userId);
+        }
 
         function deletePage() {
             var result = PageService.deletePage(vm.pageId);

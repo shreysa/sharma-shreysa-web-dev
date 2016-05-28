@@ -10,6 +10,8 @@
 
         vm.navigateToProfile = navigateToProfile;
         vm.navigateToWebsite = navigateToWebsite;
+        vm.navigateToNewPage = navigateToNewPage;
+        
 
 
         function  init() {
@@ -25,6 +27,13 @@
         function navigateToWebsite() {
             $location.url("/user/" + vm.userId + "/website");
         }
+
+        function navigateToNewPage() {
+            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/new");
+
+        }
+
+
     }
 
 })();

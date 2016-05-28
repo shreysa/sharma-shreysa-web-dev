@@ -14,7 +14,8 @@
             findPageByWebsiteId: findPageByWebsiteId,
             findPageById: findPageById,
             updatePage: updatePage,
-            deletePage: deletePage
+            deletePage: deletePage,
+          //  createPage: createPage
         };
 
         return api;
@@ -28,6 +29,19 @@
             }
             return false;
 
+        }
+
+      var newPage = {};
+        function createPage(websiteId, page) {
+
+            var newPage = {
+                _id: (new Date()).getTime().toString(),
+                name: page.pageName,
+                websiteId: websiteId,
+                title: page.pageTitle
+            };
+            pages.push(newPage);
+            return newPage;
         }
 
         function findPageByWebsiteId(websiteId) {
