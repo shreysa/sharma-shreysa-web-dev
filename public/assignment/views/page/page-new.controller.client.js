@@ -13,8 +13,8 @@
         vm.navigateToPageList = navigateToPageList;
         vm.navigateToProfile = navigateToProfile;
 
-       function createPage() {
-            var result = PageService.createPage(vm.websiteId, {pageName: vm.page.name, pageTitle: vm.page.title});
+       function createPage(pageName, pageTitle) {
+            var result = PageService.createPage(vm.websiteId, {pageName: pageName, pageTitle: pageTitle});
             if (result){
                 vm.success = "Page was successfully created";
                 $location.url("/user/" + vm.userId + "/website/" + result.websiteId + "/page");
@@ -34,4 +34,4 @@
 
     }
 
-})
+})();

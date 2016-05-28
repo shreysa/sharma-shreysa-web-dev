@@ -15,7 +15,7 @@
             findPageById: findPageById,
             updatePage: updatePage,
             deletePage: deletePage,
-          //  createPage: createPage
+            createPage: createPage
         };
 
         return api;
