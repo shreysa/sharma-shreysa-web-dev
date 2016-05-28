@@ -1,26 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="viewport" content="initial-scale=1.25, user-scalable=no">
-    <meta charset="UTF-8">
-    <title>Edit Website</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/assignment/css/style.css" rel="stylesheet"/>
-</head>
-<body>
+
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a href="/assignment/website/website-list.html">
+            <a ng-click="model.navigateToWebsite()">
                 <span class="navbar-text pull-left glyphicon glyphicon-chevron-left"/>
             </a>
             <a class="navbar-brand" href="#">
                 Edit Website
             </a>
             <p class="navbar-text pull-right">
-                <a href="/assignment/website/website-list.html" class="navbar-link">
+                <a ng-click="model.updateWebsite()" class="navbar-link">
           <span class="glyphicon glyphicon-ok">
           </span>
                 </a>
@@ -31,19 +20,27 @@
 <div class="container">
 <form>
     <div class="form-group">
-        <label  for="ApplicationName">Application Name</label>
-        <input type="text" class="form-control" id="ApplicationName" value="Blogger">
+        <label  for="WebsiteName">Website Name</label>
+        <input
+                ng-model="model.website.name"
+                type="text"
+                class="form-control"
+                id="WebsiteName"
+                value="Blogger">
     </div>
     <div class="form-group">
-        <label  for="ApplicationDescription">Application Description</label>
+        <label  for="WebsiteDescription">Website Description</label>
         <textarea
+                ng-model="model.website.description"
                 class="form-control"
-                id="ApplicationDescription"
+                id="WebsiteDescription"
                 rows="4"
                 value="Blogger is a blog-publishing service that allows multi-user blogs with time-stamped entries. It was developed by Pyra labs, which was bought by Google in 2003. Generally, the blogs are hosted by Google"></textarea>
     </div>
 </form>
-    <a class="btn btn-danger btn-block" href="/assignment/website/website-list.html" role="button">Delete</a>
+    <a class="btn btn-danger btn-block"
+       ng-click="model.deleteWebsite(model.websiteId)"
+       role="button">Delete</a>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
@@ -56,12 +53,10 @@
             <div class="col-xs-3 text-center">
             </div>
             <div class="col-xs-3 text-center">
-                <a href="/assignment/user/profile.html">
+                <a ng-click="model.navigateToProfile()">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </div>
         </div>
     </div>
 </nav>
-</body>
-</html>

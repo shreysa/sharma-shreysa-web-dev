@@ -15,7 +15,7 @@
     <div class="container-fluid">
 
         <div class="navbar-header">
-            <a href="/assignment/website/website-list.html">
+            <a ng-click="model.navigateToWebsite()">
                 <span class="navbar-text pull-left glyphicon glyphicon-chevron-left"/>
             </a>
             <a class="navbar-brand" href="#">
@@ -31,37 +31,14 @@
     </div>
 </nav>
 <div class="container">
+
     <ul class="list-group">
-        <li class="list-group-item list-group">
-            <a href="/assignment/widget/widget-list.html" class="actionlink">Blog Post</a>
-            <a href="/assignment/page/page-edit.html" class="pull-right">
+        <li ng-repeat="page in model.pages" class="list-group-item list-group">
+            <a href="#/user/{{website.developerId}}/website/{{website._id}}/page" class="actionlink">{{page.name}}</a>
+            <a href="#/user/{{model.userId}}/website/{{page.websiteId}}/page/{{page._id}}" class="pull-right">
                 <span class="glyphicon glyphicon-cog"></span>
-
             </a> </li>
-        <li class="list-group-item list-group">
-            <a href="/assignment/widget/widget-list.html" class="actionlink">Blogs</a>
-            <a href="/assignment/page/page-edit.html" class="pull-right">
-                <span class="glyphicon glyphicon-cog"></span>
 
-            </a> </li>
-        <li class="list-group-item list-group">
-            <a href="/assignment/widget/widget-list.html" class="actionlink">Home</a>
-            <a href="/assignment/page/page-edit.html" class="pull-right">
-                <span class="glyphicon glyphicon-cog"></span>
-
-            </a> </li>
-        <li class="list-group-item list-group">
-            <a href="/assignment/widget/widget-list.html" class="actionlink">About</a>
-            <a href="/assignment/page/page-edit.html" class="pull-right">
-                <span class="glyphicon glyphicon-cog"></span>
-
-            </a> </li>
-        <li class="list-group-item list-group">
-            <a href="/assignment/widget/widget-list.html" class="actionlink">Contact Us</a>
-            <a href="/assignment/page/page-edit.html" class="pull-right">
-                <span class="glyphicon glyphicon-cog"></span>
-
-            </a> </li>
     </ul>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
@@ -74,7 +51,7 @@
             <div class="col-xs-3 text-center">
             </div>
             <div class="col-xs-3 text-center">
-                <a href="/assignment/user/profile.html">
+                <a ng-click="model.navigateToProfile()">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </div>

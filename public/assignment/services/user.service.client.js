@@ -12,40 +12,59 @@
         ];
 
         var api = {
-            createUser: createUser,
-            findUserByUsernameAndPassword: findUserByUsernameAndPassword,
+
+            findUserByCredentials: findUserByCredentials,
             findUserById: findUserById,
             updateUser: updateUser,
-            deleteUser: deleteUser
+            deleteUser: deleteUser,
+            createUser: createUser,
+            findUserByUsername: findUserByUsername
+
         };
 
         return api;
-        var newid = 0;
-        var cnewuser = null;
+
+        var cnewuser = {};
+
+
 
         function createUser(newUser) {
-            for (var i in users) {
-                if (users[i].username === newUser.username) {
-                    return false;
+
+            var cnewuser = {
+                _id: (new Date()).getTime().toString(),
+                username: newUser.username,
+                password: newUser.password
+            };
+            users.push(cnewuser);
+            return cnewuser;
+        }
+
+        function findUserByUsername(username){
+            for (var i in users){
+                if(users[i].username === username){
+                    return true;
                 }
             }
-            var maxid = users[i]._id.max;
-            cnewuser._id = maxid++;
-            cnewuser.username = newUser.username;
-            cnewuser.password = newUser.password;
-            cnewuser.firstName = newUser.firstName;
-            cnewuser.lastName = newUser.lastName;
-            return true;
+            return false;
         }
 
 
 
-        function deleteUser(id) {
-            //    users.add()
+
+
+        function deleteUser(userId) {
+          for(var i in users){
+              if(users[i]._id === userId){
+                 users.splice(i, 1);
+                  return true;
+              }
+          }
+            return false;
 
         }
 
-        function findUserByUsernameAndPassword(username, password) {
+
+        function findUserByCredentials(username, password) {
             for (var i in users)
             {
                 if (users[i].username === username && users[i].password === password) {

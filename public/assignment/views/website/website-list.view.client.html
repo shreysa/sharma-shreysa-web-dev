@@ -6,7 +6,7 @@
                 Websites
             </a>
             <p class="navbar-text pull-right">
-                <a href="/assignment/website/website-new.html" class="navbar-link">
+                <a ng-click="model.navigateToNewWebsite()" class="navbar-link">
           <span  class="glyphicon glyphicon-plus">
           </span>
                 </a>
@@ -16,11 +16,11 @@
 </nav>
 <div class="container">
 
-    {{model.websites}}
+
     <ul class="list-group">
         <li ng-repeat="website in model.websites" class="list-group-item list-group">
-            <a href="/assignment/views/page/page-list.html" class="actionlink">{{website.name}}</a>
-        <a href="/assignment/website/website-edit.html"  class="pull-right">
+            <a href="#/user/{{website.developerId}}/website/{{website._id}}/page" class="actionlink">{{website.name}}</a>
+        <a href="#/user/{{website.developerId}}/website/{{website._id}}"  class="pull-right">
             <span class="glyphicon glyphicon-cog"></span>
             <span class="glyphicon glyphicon-play"></span>
         </a> </li>
@@ -36,7 +36,7 @@
             <div class="col-xs-3 text-center">
             </div>
             <div class="col-xs-3 text-center">
-                <a href="/assignment/user/profile.html">
+                <a ng-click="model.navigateToProfile()">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </div>
