@@ -17,7 +17,7 @@
         } init();
 
         function navigateToWebsiteList(){
-            $location.url("/user/" + userId + "/website");
+            $location.url("/user/" + vm.userId + "/website");
         }
 
         function createWebsite(websiteName, websiteDescription) {

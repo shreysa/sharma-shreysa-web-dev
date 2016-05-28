@@ -67,11 +67,16 @@
             .when("/widget-image", {
                 templateUrl: "views/widget/widget-image.view.client.html"
             })
-            .when("/widget-list", {
-                templateUrl: "views/widget/widget-list.view.client.html"
+            .when("/user/:userId/website/:websiteId/page/:pageId/widget", {
+                templateUrl: "views/widget/widget-list.view.client.html",
+                controller: "WidgetListController",
+                controllerAs: "model"
             })
             .when("/widget-youtube", {
                 templateUrl: "views/widget/widget-youtube.view.client.html"
+            })
+            .otherwise({
+                redirectTo: "/login"
             });
 
     }
