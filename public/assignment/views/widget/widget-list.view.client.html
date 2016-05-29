@@ -19,12 +19,13 @@
 </nav>
 <div class="container">
 
-    <div ng-repeat="widget in model.widgets" class="jga-widget">
+    <div ng-repeat="widget in model.widgets" class="jga-widget {{widget.widgetType}}">
         <div class="jga-widget-tool ">
             <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
                 <span class="glyphicon glyphicon-cog"></span>
-                </a>
-            <span class="glyphicon glyphicon-align-justify"></span>
+            </a>
+            <a>
+                <span class="glyphicon glyphicon-align-justify"></span>
             </a>
         </div>
 
