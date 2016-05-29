@@ -20,7 +20,7 @@
 <div class="container">
 
     <div ng-repeat="widget in model.widgets" class="jga-widget">
-        <div class="jga-widget-tool">
+        <div class="jga-widget-tool ">
             <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
                 <span class="glyphicon glyphicon-cog"></span>
                 </a>
@@ -28,8 +28,8 @@
             </a>
         </div>
 
-        <div ng-switch="widget.widgetType">
-            <div ng-switch-when="HEADER">
+        <div  ng-switch="widget.widgetType">
+            <div  ng-switch-when="HEADER">
                 <div ng-switch="widget.size">
                     <div ng-switch-when="1">
                         <h1>{{widget.text}}</h1>
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div ng-switch-when="HTML">
-                <div ng-bind-html="model.getSafeHtml(widget)"></div>
+                <div  ng-bind-html="model.getSafeHtml(widget)"></div>
                 </div>
             <div ng-switch-when="IMAGE"><img width="{{widget.width}}" ng-src="{{widget.url}}"></div>
             <div ng-switch-when="YOUTUBE"><iframe width="{{widget.width}}"

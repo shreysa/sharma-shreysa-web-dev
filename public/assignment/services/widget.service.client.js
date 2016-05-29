@@ -49,9 +49,9 @@
 
        }
 
-            function createWidget(pageId, newWidget) {
-                widgets.push(newWidget);
-                return newWidget;
+            function createWidget(pageId, widget) {
+                widgets.push(widget);
+                return widget;
                 
             }
 
