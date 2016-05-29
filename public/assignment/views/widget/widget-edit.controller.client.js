@@ -29,7 +29,7 @@
 
 
         function deleteWidget() {
-            var result =  WebsiteService.deleteWidget(vm.widgetId);
+            var result =  WidgetService.deleteWidget(vm.widgetId);
             if (result){
                 vm.success = "Widget was successfully deleted";
                 $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
