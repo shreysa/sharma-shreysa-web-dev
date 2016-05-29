@@ -5,9 +5,15 @@ input.form-control {
 }
 body {
     padding-top: 60px;
-    padding-bottom: 20px;
+    padding-bottom: 60px;
 
 }
+
+.HTML {
+    padding-top: 15px;
+}
+
+
 
 a.actionlink {text-decoration: none;
 }
