@@ -58,23 +58,24 @@
                 controller: "WebsiteListController",
                 controllerAs: "model"
             })
-            .when("/widget-chooser", {
-                templateUrl: "views/widget/widget-chooser.view.client.html"
+            .when("/user/:userId/website/:websiteId/page/:pageId/widget/new", {
+                templateUrl: "views/widget/widget-chooser.view.client.html",
+                controller: "NewWidgetController",
+                controllerAs: "model"
             })
-            .when("/widget-heading", {
-                templateUrl: "views/widget/widget-heading.view.client.html"
+            .when("/user/:userId/website/:websiteId/page/:pageId/widget/:widgetId", {
+                templateUrl: "views/widget/widget-edit.view.client.html",
+                controller: "EditWidgetController",
+                controllerAs: "model"
             })
-            .when("/widget-image", {
-                templateUrl: "views/widget/widget-image.view.client.html"
-            })
+
+
             .when("/user/:userId/website/:websiteId/page/:pageId/widget", {
                 templateUrl: "views/widget/widget-list.view.client.html",
                 controller: "WidgetListController",
                 controllerAs: "model"
             })
-            .when("/widget-youtube", {
-                templateUrl: "views/widget/widget-youtube.view.client.html"
-            })
+           
             .otherwise({
                 redirectTo: "/login"
             });

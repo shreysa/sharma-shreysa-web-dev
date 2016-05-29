@@ -9,7 +9,7 @@
                 Widgets
             </a>
             <p class="navbar-text pull-right">
-                <a href="/assignment/widget/widget-chooser.html" class="navbar-link">
+                <a ng-click="model.navigateToNewWidget()" class="navbar-link">
           <span class="glyphicon glyphicon-plus">
           </span>
                 </a>
@@ -21,21 +21,39 @@
 
     <div ng-repeat="widget in model.widgets" class="jga-widget">
         <div class="jga-widget-tool">
-            <a href="/assignment/widget/widget-heading.html">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
                 <span class="glyphicon glyphicon-cog"></span>
-            </a>
+                </a>
             <span class="glyphicon glyphicon-align-justify"></span>
+            </a>
         </div>
 
         <div ng-switch="widget.widgetType">
             <div ng-switch-when="HEADER">
                 <div ng-switch="widget.size">
-                    <div ng-switch-when="1"><h1>{{widget.text}}</h1></div>
-                    <div ng-switch-when="2"><h2>{{widget.text}}</h2></div>
-                    <div ng-switch-when="3"><h3>{{widget.text}}</h3></div>
-                    <div ng-switch-when="4"><h4>{{widget.text}}</h4></div>
-                    <div ng-switch-when="5"><h5>{{widget.text}}</h5></div>
-                    <div ng-switch-when="6"><h6>{{widget.text}}</h6></div>
+                    <div ng-switch-when="1">
+                        <h1>{{widget.text}}</h1>
+                    </div>
+
+                    <div ng-switch-when="2">
+                        <h2>{{widget.text}}</h2>
+                    </div>
+
+                    <div ng-switch-when="3">
+                        <h3>{{widget.text}}</h3>
+                    </div>
+
+                    <div ng-switch-when="4">
+                        <h4>{{widget.text}}</h4>
+                    </div>
+
+                    <div ng-switch-when="5">
+                        <h5>{{widget.text}}</h5>
+                    </div>
+
+                    <div ng-switch-when="6">
+                        <h6>{{widget.text}}</h6>
+                    </div>
                 </div>
             </div>
             <div ng-switch-when="HTML">
@@ -61,7 +79,7 @@
             <div class="col-xs-3 text-center">
             </div>
             <div class="col-xs-3 text-center">
-                <a href="/assignment/user/profile.html">
+                <a href="#/user/{{model.userId}}">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </div>

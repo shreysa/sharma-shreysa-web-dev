@@ -1,21 +1,9 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="viewport" content="initial-scale=1.25, user-scalable=no">
-    <meta charset="UTF-8">
-    <title>Widget chooser</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/assignment/css/style.css" rel="stylesheet"/>
-</head>
-<body>
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
 
         <div class="navbar-header">
-            <a href="/assignment/widget/widget-list.html">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
                 <span class="navbar-text pull-left glyphicon glyphicon-chevron-left"/>
             </a>
             <a class="navbar-brand" href="#">
@@ -27,7 +15,7 @@
 <div class="container">
     <ul class="list-group">
         <li class="list-group-item list-group">
-            <a href="/assignment/widget/widget-heading.html" class="actionlink">Header</a>
+            <a ng-click="model.createHeaderWidget()" class="actionlink">Header</a>
 
             </a> </li>
         <li class="list-group-item list-group">
@@ -35,7 +23,7 @@
 
             </a> </li>
         <li class="list-group-item list-group">
-            <a href="#" class="actionlink">HTML</a>
+            <a ng-click="model.createHTMLWidget()" class="actionlink">HTML</a>
 
 
             </a> </li>
@@ -55,12 +43,12 @@
 
             </a> </li>
         <li class="list-group-item list-group">
-            <a href="/assignment/widget/widget-image.html" class="actionlink">Image</a>
+            <a ng-click="model.createImageWidget()" class="actionlink">Image</a>
 
 
             </a> </li>
         <li class="list-group-item list-group">
-            <a href="/assignment/widget/widget-youtube.html" class="actionlink">Youtube</a>
+            <a ng-click="model.createYoutubeWidget()" class="actionlink">Youtube</a>
             </a> </li>
         <li class="list-group-item list-group">
             <a href="#" class="actionlink">Data Table</a>
@@ -80,12 +68,10 @@
             <div class="col-xs-3 text-center">
             </div>
             <div class="col-xs-3 text-center">
-                <a href="/assignment/user/profile.html">
+                <a href="#/user/{{model.userId}}">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </div>
         </div>
     </div>
 </nav>
-</body>
-</html>

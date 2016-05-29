@@ -7,10 +7,12 @@
         var vm = this;
         vm.pageId = $routeParams.pageId;
         vm.websiteId = $routeParams.websiteId;
+        vm.userId = $routeParams.userId;
         vm.navigateToPageList = navigateToPageList;
         vm.getSafeHtml = getSafeHtml;
         vm.getSafeUrl = getSafeUrl;
-      //  vm.navigateToEditWidget = navigateToEditWidget;
+        vm.navigateToEditWidget = navigateToEditWidget;
+        vm.navigateToNewWidget = navigateToNewWidget;
 
 
         function init(){
@@ -18,11 +20,16 @@
 
         } init();
 
-      /*  function navigateToEditWidget() {
-            if()
+
+        function navigateToNewWidget() {
+            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/new");
 
         }
-*/
+
+        function navigateToEditWidget() {
+            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId)
+
+        }
 
         function  getSafeHtml(widget) {
             return $sce.trustAsHtml(widget.text);

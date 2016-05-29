@@ -1,26 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="viewport" content="initial-scale=1.25, user-scalable=no">
-    <meta charset="UTF-8">
-    <title>Widget youtube</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/assignment/css/style.css" rel="stylesheet"/>
-</head>
-<body>
+
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a href="/assignment/widget/widget-list.html">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
                 <span class="navbar-text pull-left glyphicon glyphicon-chevron-left"/>
             </a>
             <a class="navbar-brand" href="#">
                 Widget Edit
             </a>
             <p class="navbar-text pull-right">
-                <a href="/assignment/widget/widget-list.html" class="navbar-link">
+                <a ng-click="model.updateWidget(model.widget)" class="navbar-link">
           <span class="glyphicon glyphicon-ok">
           </span>
                 </a>
@@ -32,30 +21,48 @@
     <form>
         <div class="form-group">
             <label  for="Name">Name</label>
-            <input type="text" class="form-control" id="Name" value="Roses blossoming ">
+            <input ng-model="model.widget.name"
+                    type="text"
+                    class="form-control"
+                    id="Name"
+                    value="Roses blossoming ">
         </div>
         <div class="form-group">
             <label  for="TextForWidget">Text</label>
-            <input type="text" class="form-control" id="TextForWidget" value="The roses blossoming">
+            <input ng-model="model.widget.text"
+                    type="text"
+                    class="form-control"
+                    id="TextForWidget"
+                    value="The roses blossoming">
         </div>
         <div class="form-group">
             <label  for="URL">URL</label>
-            <input type="text" class="form-control" id="URL" value="https://www.google.com/search?q=images">
+            <input  ng-model="model.widget.url"
+                    type="text"
+                    class="form-control"
+                    id="URL"
+                    value="https://www.google.com/search?q=images">
         </div>
         <div class="form-group">
             <label  for="width">Width</label>
-            <input type="text" class="form-control" id="width" value="100%">
+            <input  ng-model="model.widget.width"
+                    type="text"
+                    class="form-control"
+                    id="width"
+                    value="100%">
         </div>
         <div class="form-group">
             <label for="image-upload">Upload</label>
-            <input type="file"
+            <input  ng-model="model.widget.upload"
+                    type="file"
                    class="form-control"
                    id="image-upload"
-                   placeholder="No file chosen">
+                   placeholder="No file chosen"
+                    data-show-preview="false">
         </div>
     </form>
     <a class="btn btn-primary btn-block" href="/assignment/widget/widget-list.html"  role="button">Upload Image</a>
-    <a class="btn btn-danger btn-block" href="/assignment/widget/widget-list.html" role="button">Delete</a>
+    <a class="btn btn-danger btn-block" ng-click="model.deleteWidget()" role="button">Delete</a>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
@@ -68,12 +75,10 @@
             <div class="col-xs-3 text-center">
             </div>
             <div class="col-xs-3 text-center">
-                <a href="/assignment/user/profile.html">
+                <a href="#/user/{{model.userId}}">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </div>
         </div>
     </div>
 </nav>
-</body>
-</html>
