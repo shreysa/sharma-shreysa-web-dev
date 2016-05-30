@@ -9,6 +9,7 @@
         var vm = this;
          vm.updateUser = updateUser;
       //  vm.deleteUser = deleteUser;
+        vm.navigateToProfile = navigateToProfile;
         var index = -1;
         var id = $routeParams["userId"];
 
@@ -18,7 +19,12 @@
         }
         init();
 
-      // function deleteUser() {
+        function navigateToProfile() {
+            $location.url("/user/" + vm.userId);
+        }
+
+
+        // function deleteUser() {
          //   var result = UserService.deleteUser(id);
            // if(result){
              //   vm.success = "Profile was successfully deleted";
@@ -30,7 +36,7 @@
 
        // }
         function updateUser() {
-            var result =  UserService.updateUser(vm._id, vm.user);
+            var result =  UserService.updateUser(vm.user._id, vm.user);
             if (result){
                 vm.success = "Profile was successfully updated";
             } else {
