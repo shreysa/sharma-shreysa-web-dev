@@ -18,6 +18,12 @@
     </div>
 </nav>
 <div class="container">
+    <div ng-show="model.success" class="alert alert-success">
+        {{model.success}}
+    </div>
+
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
     <form>
         <div class="form-group">
             <label  for="Name">Name</label>
@@ -61,7 +67,7 @@
                     data-show-preview="false">
         </div>
     </form>
-    <a class="btn btn-primary btn-block" href="/assignment/widget/widget-list.html"  role="button">Upload Image</a>
+    <a class="btn btn-primary btn-block" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"  role="button">Upload Image</a>
     <a class="btn btn-danger btn-block" ng-click="model.deleteWidget()" role="button">Delete</a>
 </div>
 

@@ -18,6 +18,13 @@
     </div>
 </nav>
 <div class="container">
+    <div ng-show="model.success" class="alert alert-success">
+        {{model.success}}
+    </div>
+
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
 <form>
     <div class="form-group">
         <label  for="WebsiteName">Website Name</label>
@@ -47,6 +54,7 @@
     <div class="container">
         <div class="row navbar-text">
             <div class="col-xs-3 text-center">
+                <span class="glyphicon glyphicon-share-alt"></span>
             </div>
             <div class="col-xs-3 text-center">
             </div>

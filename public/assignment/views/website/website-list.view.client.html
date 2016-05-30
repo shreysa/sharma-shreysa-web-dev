@@ -15,7 +15,12 @@
     </div>
 </nav>
 <div class="container">
+    <div ng-show="model.success" class="alert alert-success">
+        {{model.success}}
+    </div>
 
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
 
     <ul class="list-group">
         <li ng-repeat="website in model.websites" class="list-group-item list-group">

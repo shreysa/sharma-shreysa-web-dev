@@ -18,7 +18,12 @@
     </div>
 </nav>
 <div class="container">
+    <div ng-show="model.success" class="alert alert-success">
+        {{model.success}}
+    </div>
 
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
     <ul class="list-group">
         <li ng-repeat="page in model.pages" class="list-group-item list-group">
             <a href="#/user/{{model.userId}}/website/{{page.websiteId}}/page/{{page._id}}/widget" class="actionlink">{{page.name}}</a>
