@@ -25,9 +25,6 @@
         return api;
 
         var cnewuser = {};
-
-
-
         function createUser(newUser) {
 
             var cnewuser = {

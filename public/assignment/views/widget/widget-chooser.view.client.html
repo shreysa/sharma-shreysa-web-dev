@@ -13,6 +13,9 @@
     </div>
 </nav>
 <div class="container">
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
     <ul class="list-group">
         <li class="list-group-item list-group">
             <a ng-click="model.createHeaderWidget()" class="actionlink">Header</a>
