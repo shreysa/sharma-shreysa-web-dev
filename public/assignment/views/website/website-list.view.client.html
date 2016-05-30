@@ -2,11 +2,12 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" >
                 Websites
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click="model.navigateToNewWebsite()" class="navbar-link">
+                <a ng-click="model.navigateToNewWebsite()"
+                   class="navbar-link">
           <span  class="glyphicon glyphicon-plus">
           </span>
                 </a>
@@ -15,18 +16,23 @@
     </div>
 </nav>
 <div class="container">
-    <div ng-show="model.success" class="alert alert-success">
+    <div ng-show="model.success"
+         class="alert alert-success">
         {{model.success}}
     </div>
 
-    <div ng-show="model.error" class="alert alert-danger">
+    <div ng-show="model.error"
+         class="alert alert-danger">
         {{model.error}}
     </div>
 
     <ul class="list-group">
-        <li ng-repeat="website in model.websites" class="list-group-item list-group">
-            <a href="#/user/{{website.developerId}}/website/{{website._id}}/page" class="actionlink">{{website.name}}</a>
-        <a href="#/user/{{website.developerId}}/website/{{website._id}}"  class="pull-right">
+        <li ng-repeat="website in model.websites"
+            class="list-group-item list-group">
+            <a href="#/user/{{website.developerId}}/website/{{website._id}}/page"
+               class="actionlink">{{website.name}}</a>
+        <a href="#/user/{{website.developerId}}/website/{{website._id}}"
+           class="pull-right">
             <span class="glyphicon glyphicon-cog"></span>
             <span class="glyphicon glyphicon-play"></span>
         </a> </li>

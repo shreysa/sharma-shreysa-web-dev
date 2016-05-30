@@ -2,11 +2,12 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" >
                 Profile
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click="model.updateUser()" class="navbar-link">
+                <a ng-click="model.updateUser()"
+                   class="navbar-link">
           <span class="glyphicon glyphicon-ok">
           </span>
                 </a>
@@ -16,11 +17,13 @@
 </nav>
 
 <div class="container">
-    <div ng-show="model.success" class="alert alert-success">
+    <div ng-show="model.success"
+         class="alert alert-success">
     {{model.success}}
     </div>
 
-    <div ng-show="model.error" class="alert alert-danger">
+    <div ng-show="model.error"
+         class="alert alert-danger">
         {{model.error}}
     </div>
 

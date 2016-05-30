@@ -5,11 +5,12 @@
             <a ng-click="model.navigateToWebsite()">
                 <span class="navbar-text pull-left glyphicon glyphicon-chevron-left"/>
             </a>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" >
                 Edit Website
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click="model.updateWebsite()" class="navbar-link">
+                <a ng-click="model.updateWebsite()"
+                   class="navbar-link">
           <span class="glyphicon glyphicon-ok">
           </span>
                 </a>
@@ -18,11 +19,13 @@
     </div>
 </nav>
 <div class="container">
-    <div ng-show="model.success" class="alert alert-success">
+    <div ng-show="model.success"
+         class="alert alert-success">
         {{model.success}}
     </div>
 
-    <div ng-show="model.error" class="alert alert-danger">
+    <div ng-show="model.error"
+         class="alert alert-danger">
         {{model.error}}
     </div>
 <form>
