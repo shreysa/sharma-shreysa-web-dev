@@ -6,30 +6,45 @@ module.exports = function (app) {
         {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose", lastName: "Annunzi"}
     ];
 
+    app.put("/api/user/:userId", updateUser);
     app.post("/api/user", createUser);
     app.get("/api/user", getUsers);
     app.get("/api/user/:userId", findUserById);
+    app.delete("/api/user/:userId", deleteUser);
 
     function createUser(req, res) {
         var user = req.body;
         user._id = (new Date()).getTime().toString();
         users.push(user);
-        console.log(users);
         res.send(user);
-        
+
+    }
+
+    function updateUser(req, res) {
+        var id = req.params.userId;
+        var newUser = req.body;
+        for (var i in users) {
+            if (users[i]._id === id) {
+                users[i].firstName = newUser.firstName;
+                users[i].lastName = newUser.lastName;
+                res.send(newUser);
+                return;
+            }
+        }
+        res.send(400);
     }
 
 
     function getUsers(req, res) {
         var username = req.query['username'];
         var password = req.query['password'];
-        if(username && password){
+        if (username && password) {
             findUserByCredentials(username, password, res);
         }
-        else if(username){
+        else if (username) {
             findUserByUsername(username, res);
         }
-        else{
+        else {
 
             res.send(users);
         }
@@ -37,8 +52,8 @@ module.exports = function (app) {
 
     function findUserById(req, res) {
         var id = req.params.userId;
-        for(var i in users){
-            if(users[i]._id === id){
+        for (var i in users) {
+            if (users[i]._id === id) {
                 res.send(users[i]);
                 return;
             }
@@ -46,10 +61,26 @@ module.exports = function (app) {
         res.send({});
 
     }
-    function findUserByUsername(username, res){
 
-        for (var i in users){
-            if(users[i].username === username){
+    function deleteUser(req, res) {
+        var id = req.params.userId;
+        for(var i in users){
+            if(users[i]._id === id){
+                users.splice(i, 1);
+               res.send(200);
+                return;
+            }
+        }
+        res.send(400);
+
+    }
+
+    
+
+    function findUserByUsername(username, res) {
+
+        for (var i in users) {
+            if (users[i].username === username) {
                 res.send(users[i]);
                 return;
             }
@@ -58,8 +89,7 @@ module.exports = function (app) {
     }
 
     function findUserByCredentials(username, password, res) {
-        for (var i in users)
-        {
+        for (var i in users) {
             if (users[i].username === username && users[i].password === password) {
                 res.send(users[i]);
                 return;
@@ -67,7 +97,9 @@ module.exports = function (app) {
         }
         res.send({});
     }
+}
 
 
 
-};
+
+

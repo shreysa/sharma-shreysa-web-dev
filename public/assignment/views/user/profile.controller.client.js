@@ -8,7 +8,7 @@
     function ProfileController($routeParams, UserService, $location) {
         var vm = this;
          vm.updateUser = updateUser;
-      //  vm.deleteUser = deleteUser;
+       vm.unregister = unregister;
         vm.navigateToProfile = navigateToProfile;
         var index = -1;
         var id = $routeParams["userId"];
@@ -27,26 +27,30 @@
         }
 
 
-        // function deleteUser() {
-         //   var result = UserService.deleteUser(id);
-           // if(result){
-             //   vm.success = "Profile was successfully deleted";
-               // $location.url("#/login");
-            //}
-            //else{
-             //   vm.error("Unable to delete user");
-            //}
-
-       // }
-        function updateUser() {
-            var result =  UserService.updateUser(vm.user._id, vm.user);
-            if (result){
-                vm.success = "Profile was successfully updated";
-            } else {
-                vm.error = "User not found";
-            }
+        function unregister() {
+            UserService
+                .deleteUser(id)
+                .then(function () {
+                        $location.url("/login");
+                    },
+                    function () {
+                        vm.error = "Not able to delete";
+                    });
         }
 
+
+
+        function updateUser() {
+            UserService
+                .updateUser(id, vm.user)
+                .then(function (response){
+                   vm.success= "user was updated successfully";
+
+                },
+                    function (error) {
+                    vm.error = "User not updated";
+                });
+    }
     }
 
 

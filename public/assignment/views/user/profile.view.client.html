@@ -17,15 +17,31 @@
 </nav>
 
 <div class="container">
-    <div ng-show="model.success"
-         class="alert alert-success">
+    <div ng-if="model.success"
+         class="alert alert-success alert dismissible"
+    role="alert">
+        <button type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+        <strong>Success!</strong>
     {{model.success}}
     </div>
 
-    <div ng-show="model.error"
-         class="alert alert-danger">
+    <div ng-if="model.error"
+         class="alert alert-danger alert dismissible"
+         role="alert">
+        <button type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+        <strong>Error!</strong>
         {{model.error}}
     </div>
+
+
 
     <form>
         <div class="form-group">
@@ -59,6 +75,7 @@
         </div>
         <a class="btn btn-primary btn-block" href="#/user/{{model.user._id}}/website"  role="button">Websites</a>
         <a class="btn btn-danger btn-block" href="#/login" role="button">Logout</a>
+        <a ng-click="model.unregister()" class="btn btn-danger btn-block"  role="button">Unregister</a>
 
     </form>
 </div>
