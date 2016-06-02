@@ -13,34 +13,42 @@
         vm.deleteWebsite = deleteWebsite;
 
         function init() {
-            vm.website = WebsiteService.findWebsiteById(vm.websiteId);
+            WebsiteService
+                .findWebsiteById( vm.websiteId )
+                .then(function (response) {
+                    vm.website = response.data;
+
+                });
+          
 
 
         }
         init();
 
         function deleteWebsite(websiteId){
-            var result = WebsiteService.deleteWebsite(vm.websiteId);
-            if(result){
-                vm.success = "Website was successfully deleted";
-                $location.url("/user/" + vm.userId + "/website");
-            } else {
-                vm.error = "Website could not be deleted";
-                $location.url("/user/" + vm.userId + "/website");
-
-            }
-
+            WebsiteService
+                .deleteWebsite(vm.websiteId)
+                .then(function () {
+                    vm.success = "Website was successfully deleted";
+                    $location.url("/user/" + vm.userId + "/website");
+                }, function () {
+                    vm.error = "Website not deleted";
+                    $location.url("/user/" + vm.userId + "/website");
+                });
         }
+        
+
         function updateWebsite() {
-            var result =  WebsiteService.updateWebsite(vm.websiteId, vm.website);
-            if (result){
-                vm.success = "Website was successfully updated";
+            WebsiteService
+                .updateWebsite(vm.websiteId, vm.website)
+                .then(function (response) {
+                    vm.success = "Website was successfully updated";
                 $location.url("/user/" + vm.userId + "/website");
-            } else {
-                vm.error = "Website not found";
-                $location.url("/user/" + vm.userId + "/website");
-            }
+            }, function (error) {
+                vm.error = "Website not updated";
+            });
         }
+
         function navigateToWebsite() {
             $location.url("/user/" + vm.userId + "/website");
         }
@@ -50,5 +58,8 @@
         }
         
     }
+
+
+
         
 })();

@@ -11,7 +11,11 @@
         vm.pageId = $routeParams.pageId;
         
         function init() {
-            vm.page = PageService.findPageById(vm.pageId);
+            PageService
+                .findPageById( vm.pageId)
+                .then(function (response) {
+                    vm.page = response.data;
+                });
         }
         init();
         
@@ -26,35 +30,32 @@
         }
 
         function deletePage() {
-            var result = PageService.deletePage(vm.pageId);
-            if (result) {
-                if (result) {
-                    vm.success = "Page was successfully deleted";
-                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
-                } else {
-                    vm.error = "Website could not be deleted";
-                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
-
-                }
-
-            }
+          PageService
+              .deletePage(vm.pageId)
+        .then(function () {
+                vm.success = "Page was successfully deleted";
+            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+            }, function () {
+                vm.error = "Page was not deleted";
+            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+            });
         }
+        
 
         function navigateToPageList() {
             $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
         }
 
         function updatePage() {
-            var result =  PageService.updatePage(vm.pageId, vm.page);
-            if (result){
-                vm.success = "Page was successfully updated";
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
-            } else {
-                vm.error = "Website not found";
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
-            }
-
-
+            PageService
+                .updatePage(vm.pageId, vm.page)
+                .then(function (response) {
+                    vm.success = "Page was successfully updated";
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                }, function (error) {
+                    vm.error = "page not updated";
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                });
         }
         
     }

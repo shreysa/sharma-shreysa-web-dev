@@ -13,10 +13,10 @@
                 .createUser(username, password1)
                 .then(function (response) {
                     var user = response.data;
-                    if (user) {
+                    if (user._id) {
                         $location.url("/user/" + user._id);
                     }
-                    /* else if(password1 !==password2) {
+               /*     else if(password1 !==password2) {
                      vm.error = "Passwords dont match";
                      }
                      else{

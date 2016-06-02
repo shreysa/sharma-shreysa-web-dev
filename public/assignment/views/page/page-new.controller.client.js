@@ -9,20 +9,22 @@
         vm.userId = $routeParams.userId;
         vm.websiteId = $routeParams.websiteId;
 
-      vm.createPage = createPage;
+        vm.createPage = createPage;
         vm.navigateToPageList = navigateToPageList;
         vm.navigateToProfile = navigateToProfile;
 
-       function createPage(pageName, pageTitle) {
-            var result = PageService.createPage(vm.websiteId, {pageName: pageName, pageTitle: pageTitle});
-            if (result){
-                vm.success = "Page was successfully created";
-                $location.url("/user/" + vm.userId + "/website/" + result.websiteId + "/page");
-            } else {
-                vm.error = "Page not created";
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
-            }
+        function createPage() {
+            PageService
+                .createPage(vm.websiteId, vm.page)
+                .then(function (response) {
+                var page = response.data;
+                if (page._id) {
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                }
+
+            });
         }
+
         function navigateToPageList() {
             $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
         }
