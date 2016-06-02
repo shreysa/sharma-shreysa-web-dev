@@ -6,9 +6,18 @@ module.exports = function (app) {
         {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose", lastName: "Annunzi"}
     ];
 
+    app.post("/api/user", createUser);
     app.get("/api/user", getUsers);
-    app.get("/api/user?username=:username", findUserByUsername);
     app.get("/api/user/:userId", findUserById);
+
+    function createUser(req, res) {
+        var user = req.body;
+        user._id = (new Date()).getTime().toString();
+        users.push(user);
+        console.log(users);
+        res.send(user);
+        
+    }
 
 
     function getUsers(req, res) {
@@ -41,10 +50,11 @@ module.exports = function (app) {
 
         for (var i in users){
             if(users[i].username === username){
-                return true;
+                res.send(users[i]);
+                return;
             }
         }
-        return false;
+        res.send({});
     }
 
     function findUserByCredentials(username, password, res) {
