@@ -35,6 +35,11 @@
                 controller: "EditPageController",
                 controllerAs: "model"
             })
+            .when("/user/:userId/website/:websiteId/page/:pageId/flicker", {
+                templateUrl: "views/widget/widget.flicker.search.view.client.html",
+                controller: "FlickerImageSearchController",
+                controllerAs: "model"
+            })
 
             .when("/user/:userId/website/:websiteId/page", {
                 templateUrl: "views/page/page-list.view.client.html",

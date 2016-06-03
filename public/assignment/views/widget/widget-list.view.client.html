@@ -18,13 +18,29 @@
     </div>
 </nav>
 <div class="container">
-    <div ng-show="model.success" class="alert alert-success">
+    <div ng-if="model.success"
+         class="alert alert-success alert dismissible"
+         role="alert">
+        <button type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+        <strong>Success!</strong>
         {{model.success}}
     </div>
 
-    <div ng-show="model.error" class="alert alert-danger">
+    <div ng-if="model.error"
+         class="alert alert-danger alert dismissible"
+         role="alert">
+        <button type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+        <strong>Error!</strong>
         {{model.error}}
-        </div>
+    </div>
 
 
     <div ng-repeat="widget in model.widgets" class="jga-widget">
@@ -35,6 +51,7 @@
             <span class="glyphicon glyphicon-align-justify"></span>
             </a>
         </div>
+
 
         <div  ng-switch="widget.widgetType">
             <div  ng-switch-when="HEADER">
@@ -74,6 +91,7 @@
                                                    allowfullscreen></iframe></div>
             <div ng-switch-default>Unable to render widget</div>
     </div>
+        </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">

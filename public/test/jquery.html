@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../css/jquery-ui.css" rel="stylesheet" />
+    <script src="..js/jquery.js"></script>
+    <script src="../js/jquery-ui.js"></script>
+
+</head>
+<body>
+<h1>Hello World</h1>
+<script>
+    jQuery("h1")
+            .html("hello from jQuery")
+            .css("background-color", "green");
+
+    var list = jQuery(".list");
+    list.append("<li>Item 123</li>");
+
+    for(var i=0; i<4; i++){
+        list.append("<li>Item" + i + "</li>");
+    }
+
+    for(var i=9; i<14; i++){
+        var li = $("<li>Item" + i + "</li>");
+        list.append(li);
+    }
+</script>
+
+</body>
+</html>

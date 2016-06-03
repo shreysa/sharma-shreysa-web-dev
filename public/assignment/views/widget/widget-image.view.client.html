@@ -9,7 +9,7 @@
                 Widget Edit
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click="model.updateWidget(model.widget)" class="navbar-link">
+                <a ng-click="model.updateWidget()" class="navbar-link">
           <span class="glyphicon glyphicon-ok">
           </span>
                 </a>
@@ -18,18 +18,30 @@
     </div>
 </nav>
 <div class="container">
-    <div ng-show="model.success" class="alert alert-success">
+    <div ng-if="model.success"
+         class="alert alert-success alert dismissible"
+         role="alert">
+        <button type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+        <strong>Success!</strong>
         {{model.success}}
     </div>
 
-    <div ng-show="model.success" class="alert alert-success">
-        {{model.success}}
-    </div>
-
-    <div ng-show="model.error" class="alert alert-danger">
+    <div ng-if="model.error"
+         class="alert alert-danger alert dismissible"
+         role="alert">
+        <button type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+        <strong>Error!</strong>
         {{model.error}}
     </div>
-    <form>
+    <form action="/api/upload" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label  for="Name">Name</label>
             <input ng-model="model.widget.name"
@@ -55,32 +67,40 @@
                     value="https://www.google.com/search?q=images">
         </div>
         <div class="form-group">
-            <label  for="width">Width</label>
+            <!--<label  for="width">Width</label>-->
             <input  ng-model="model.widget.width"
                     type="text"
                     class="form-control"
                     id="width"
-                    value="100%">
+                    name="width"
+                    value="{{model.widget.width}}"
+                    style="display: none">
         </div>
+
+        <input  name="widgetId"
+                value="{{model.widget._id}}"
+                style="display: none"/>
+
         <div class="form-group">
             <label for="image-upload">Upload</label>
-            <input  ng-model="model.widget.upload"
+            <input  ng-model="model.widget.myFile"
                     type="file"
                    class="form-control"
+                    name="myFile"
                    id="image-upload"
                    placeholder="No file chosen"
                     data-show-preview="false">
         </div>
-    </form>
-    <a class="btn btn-primary btn-block"
-       href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
-       role="button">Upload Image</a>
+
+    <button type="submit" class="btn btn-primary btn-block"
+       role="button">Upload Image</button>
     <a class="btn btn-danger btn-block"
        ng-click="model.deleteWidget()"
        role="button">Delete</a>
+    </form>
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
+<nav class="navbar navbar-default navbar-fixed-bottom ">
     <div class="container">
         <div class="row navbar-text">
             <div class="col-xs-3 text-center">
@@ -89,9 +109,9 @@
             </div>
             <div class="col-xs-3 text-center">
             </div>
-            <div class="col-xs-3 text-center">
+            <div class="col-xs-3 col-lg-3 bottom-profile text-center ">
                 <a href="#/user/{{model.userId}}">
-                    <span class="glyphicon glyphicon-user"></span>
+                    <span class="glyphicon glyphicon-user "></span>
                 </a>
             </div>
         </div>

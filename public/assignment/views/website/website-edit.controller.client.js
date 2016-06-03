@@ -25,7 +25,7 @@
         }
         init();
 
-        function deleteWebsite(websiteId){
+        function deleteWebsite(){
             WebsiteService
                 .deleteWebsite(vm.websiteId)
                 .then(function () {
@@ -36,7 +36,7 @@
                     $location.url("/user/" + vm.userId + "/website");
                 });
         }
-        
+
 
         function updateWebsite() {
             WebsiteService

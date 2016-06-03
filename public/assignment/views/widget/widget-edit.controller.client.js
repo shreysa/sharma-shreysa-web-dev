@@ -13,31 +13,39 @@
         vm.updateWidget = updateWidget;
         vm.deleteWidget = deleteWidget;
         function init() {
-            vm.widget = WidgetService.findWidgetById(vm.widgetId);
+            WidgetService
+                .findWidgetById( vm.widgetId )
+                .then(function (response) {
+                    vm.widget = response.data;
+                });
         } init();
 
-        function updateWidget(newWidget) {
-            var result =  WidgetService.updateWidget(vm.widgetId, newWidget);
-            if (result){
-                vm.success = "Widget was successfully updated";
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
-            } else {
-                vm.error = "Widget not found";
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
-            }
+        function updateWidget() {
+            WidgetService
+                .updateWidget(vm.widgetId, vm.widget)
+                .then(function (response) {
+                    vm.success = "Widget was successfully updated";
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+                }, function (error) {
+                    vm.error = "Widget not updated";
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+                });
         }
 
 
         function deleteWidget() {
-            var result =  WidgetService.deleteWidget(vm.widgetId);
-            if (result){
-                vm.success = "Widget was successfully deleted";
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
-            } else {
-                vm.error = "Widget not found";
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
-            }
+            WidgetService
+                .deleteWidget(vm.widgetId)
+                .then(function () {
+                    vm.success = "Widget was successfully deleted";
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+                }, function () {
+                    vm.error = "Widget was not deleted";
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+                });
         }
+        
+       
         
     }
 })();
