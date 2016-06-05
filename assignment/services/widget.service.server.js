@@ -25,12 +25,12 @@ module.exports = function (app) {
     function uploadImage(req, res) {
         console.log("Inside upload");
         console.log(req.body);
-        console.log(req.params.userId);
-        console.log(req.params.websiteId);
-        console.log(req.params.pageId);
-        var userId = req.params.userId;
-        var websiteId = req.params.websiteId;
-        var pageId = req.params.pageId;
+        console.log(req.body.userId);
+        console.log(req.body.websiteId);
+        console.log(req.body.pageId);
+        var userId = req.body.userId;
+        var websiteId = req.body.websiteId;
+        var pageId = req.body.pageId;
         var widgetId      = req.body.widgetId;
         var width         = req.body.width;
         var myFile        = req.file;
