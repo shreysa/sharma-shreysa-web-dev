@@ -25,6 +25,12 @@ module.exports = function (app) {
     function uploadImage(req, res) {
         console.log("Inside upload");
         console.log(req.body);
+        console.log(req.params.userId);
+        console.log(req.params.websiteId);
+        console.log(req.params.pageId);
+        var userId = req.params.userId;
+        var websiteId = req.params.websiteId;
+        var pageId = req.params.pageId;
         var widgetId      = req.body.widgetId;
         var width         = req.body.width;
         var myFile        = req.file;
@@ -41,7 +47,8 @@ module.exports = function (app) {
             }
         }
 
-        res.redirect("/assignment/#/user/:userId/website/:websiteId/page/:pageId/widget/" + widgetId);
+        res.redirect("/assignment/#/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
+
     }
 
     function deleteWidget(req, res) {

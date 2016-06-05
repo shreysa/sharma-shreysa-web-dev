@@ -2,19 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link href="../css/jquery-ui.css" rel="stylesheet" />
-    <script src="..js/jquery.js"></script>
+    <title></title>
+    <link href="../css/jquery-ui.css" rel="stylesheet"/>
+    <script src="../js/jquery.js"></script>
     <script src="../js/jquery-ui.js"></script>
-
+    <style>
+        h1{
+            color: red;
+        }
+    </style>
 </head>
 <body>
-<h1>Hello World</h1>
+<h1>Hello home</h1>
+<ul class="list">
+
+
+</ul>
+
+
 <script>
     jQuery("h1")
-            .html("hello from jQuery")
-            .css("background-color", "green");
-
+            .html("Hello from Jquery")
+            .css("background-color",  "green");
     var list = jQuery(".list");
     list.append("<li>Item 123</li>");
 
@@ -26,7 +35,10 @@
         var li = $("<li>Item" + i + "</li>");
         list.append(li);
     }
-</script>
+    list.sortable({
+        axis: 'y'
+    });
 
+</script>
 </body>
 </html>
