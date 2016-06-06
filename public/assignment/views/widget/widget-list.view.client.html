@@ -46,7 +46,7 @@
     <div ng-repeat="widget in model.widgets" class="jga-widget">
         <div class="jga-widget-tool ">
             <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
-                <span class="glyphicon glyphicon-cog {{widget.widgetType}}"></span>
+                <span class="glyphicon glyphicon-cog HTML"></span>
                 </a>
             <span class="glyphicon glyphicon-align-justify"></span>
             </a>
@@ -84,8 +84,8 @@
             <div ng-switch-when="HTML" class="HTML">
                 <div  ng-bind-html="model.getSafeHtml(widget)"></div>
                 </div>
-            <div ng-switch-when="IMAGE"><img width="{{widget.width}}" ng-src="{{widget.url}}"></div>
-            <div ng-switch-when="YOUTUBE"><iframe width="{{widget.width}}"
+            <div ng-switch-when="IMAGE" class="HTML"><img width="{{widget.width}}" ng-src="{{widget.url}}"></div>
+            <div ng-switch-when="YOUTUBE" class="HTML"><iframe width="{{widget.width}}"
                                                    ng-src="{{model.getSafeUrl(widget)}}"
                                                    frameborder="0"
                                                    allowfullscreen></iframe></div>

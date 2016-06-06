@@ -23,11 +23,6 @@ module.exports = function (app) {
 
 
     function uploadImage(req, res) {
-        console.log("Inside upload");
-        console.log(req.body);
-        console.log(req.body.userId);
-        console.log(req.body.websiteId);
-        console.log(req.body.pageId);
         var userId = req.body.userId;
         var websiteId = req.body.websiteId;
         var pageId = req.body.pageId;
@@ -99,9 +94,6 @@ module.exports = function (app) {
     function updateWidget(req, res) {
         var id = req.params.widgetId;
         var newWidget = req.body;
-        console.log(req.body.url);
-        console.log(req.body._id);
-        console.log(req.body.pageId);
         for (var i in widgets) {
             if (widgets[i]._id === id) {
                 var type = widgets[i].widgetType;
