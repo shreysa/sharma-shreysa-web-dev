@@ -23,12 +23,17 @@
                 pageId: vm.pageId,
                 widgetType: "HEADER"
             };
-            if (WidgetService.createWidget(vm.pageId, headerWidget)) {
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + headerWidget._id);
-            }
-            else {
-                vm.error = "Unable to create Header";
-            }
+            WidgetService
+                .createWidget(vm.pageId, headerWidget)
+                .then(
+                    function(response){
+                        var realWidget = response.data;
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + realWidget._id);
+                    },
+                    function(){
+                        vm.error= "Unable to create Header";
+                    }
+                );
         }
         function  getSafeHtml(widget) {
             return $sce.trustAsHtml(widget.text);
@@ -60,14 +65,6 @@
                         vm.error= "Unable to create Image";
                     }
                 );
-            //
-            // if(WidgetService.createWidget(vm.pageId, imageWidget)){
-            //
-            //     $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + imageWidget._id);
-            // }
-            // else{
-            //     vm.error= "Unable to create Image";
-            // }
         }
 
 
@@ -78,13 +75,17 @@
                 pageId: vm.pageId,
                 widgetType: "YOUTUBE"
             };
-            if(WidgetService.createWidget(vm.pageId, youtubeWidget)){
-
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + youtubeWidget._id);
-            }
-            else{
-                vm.error= "Unable to create youtube video";
-            }
+            WidgetService
+                .createWidget(vm.pageId, youtubeWidget)
+                .then(
+                    function(response){
+                        var realWidget = response.data;
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + realWidget._id);
+                    },
+                    function(){
+                        vm.error= "Unable to create Youtube video";
+                    }
+                );
         }
 
 
@@ -94,13 +95,17 @@
             pageId: vm.pageId,
             widgetType: "HTML"
         };
-            if(WidgetService.createWidget(vm.pageId, htmlWidget)){
-
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + htmlWidget._id);
-            }
-            else{
-                vm.error= "Unable to create HTML";
-            }
+            WidgetService
+                .createWidget(vm.pageId, htmlWidget)
+                .then(
+                    function(response){
+                        var realWidget = response.data;
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + realWidget._id);
+                    },
+                    function(){
+                        vm.error= "Unable to create HTML";
+                    }
+                );
         }
 
 
