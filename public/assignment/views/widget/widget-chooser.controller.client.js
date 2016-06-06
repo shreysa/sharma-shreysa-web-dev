@@ -48,13 +48,26 @@
                 widgetType: "IMAGE"
             };
 
-            if(WidgetService.createWidget(vm.pageId, imageWidget)){
 
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + imageWidget._id);
-            }
-            else{
-                vm.error= "Unable to create Image";
-            }
+            WidgetService
+                .createWidget(vm.pageId, imageWidget)
+                .then(
+                    function(response){
+                        var realWidget = response.data;
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + realWidget._id);
+                    },
+                    function(){
+                        vm.error= "Unable to create Image";
+                    }
+                );
+            //
+            // if(WidgetService.createWidget(vm.pageId, imageWidget)){
+            //
+            //     $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + imageWidget._id);
+            // }
+            // else{
+            //     vm.error= "Unable to create Image";
+            // }
         }
 
 

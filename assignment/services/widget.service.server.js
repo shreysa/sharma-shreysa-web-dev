@@ -104,7 +104,9 @@ module.exports = function (app) {
         console.log(req.body.pageId);
         for (var i in widgets) {
             if (widgets[i]._id === id) {
+                var type = widgets[i].widgetType;
                 widgets[i] = newWidget;
+                widgets[i].widgetType = type;
                 res.send(newWidget);
                 return;
             }
