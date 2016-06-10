@@ -15,6 +15,8 @@ module.exports = function () {
     return api;
 
     function createWidget(pageId, newWidget) {
+        console.log(newWidget);
+        console.log("model");
         newWidget._page = pageId;
         return Widget.create(newWidget);
     }

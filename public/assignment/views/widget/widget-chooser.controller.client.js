@@ -21,7 +21,7 @@
             var headerWidget = {
              //   _id: (new Date()).getTime() + "",
               //  pageId: vm.pageId,
-                widgetType: "HEADER"
+                type : "HEADER"
             };
             WidgetService
                 .createWidget(vm.pageId, headerWidget)
@@ -48,9 +48,9 @@
 
         function createImageWidget(){
             var imageWidget = {
-                _id:  (new Date()).getTime() + "",
-                pageId: vm.pageId,
-                widgetType: "IMAGE"
+               // _id:  (new Date()).getTime() + "",
+              //  pageId: vm.pageId,
+                type: "IMAGE"
             };
 
 
@@ -71,9 +71,9 @@
 
         function createYoutubeWidget(){
             var youtubeWidget = {
-                _id:  (new Date()).getTime() + "",
-                pageId: vm.pageId,
-                widgetType: "YOUTUBE"
+             //   _id:  (new Date()).getTime() + "",
+               // pageId: vm.pageId,
+                type: "YOUTUBE"
             };
             WidgetService
                 .createWidget(vm.pageId, youtubeWidget)

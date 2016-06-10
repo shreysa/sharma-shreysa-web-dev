@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table class="table">
+  <thead>
+
+      <thead>
+        <tr>
+            <th ng-repeat="(key, value) in data[0]">
+                {{key}}
+            </th>
+        </tr>
+</thead>
+
+
+   <tbody >
+    <tr ng-repeat="row in data | orderBy : 'priority'">
+        <td ng-repeat="(key, value) in row">
+            {{value}}
+        </td>
+        <!--<td>-->
+            <!--{{todoObj.title}}-->
+        <!--</td>-->
+        <!--<td>-->
+            <!--{{todoObj.todo}}-->
+        <!--</td>-->
+    <!--</tr>-->
+   <!--<tr>-->
+       <!--<td>-->
+           <!--2-->
+       <!--</td>-->
+       <!--<td>-->
+           <!--CS5200-->
+       <!--</td>-->
+       <!--<td>-->
+           <!--Data model-->
+       <!--</td>-->
+   <!--</tr>-->
+   </tbody>
+</table>
+
+</body>
+</html>
