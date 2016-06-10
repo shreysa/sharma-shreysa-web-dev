@@ -29,8 +29,8 @@
     </div>
     <ul class="list-group">
         <li ng-repeat="page in model.pages" class="list-group-item list-group">
-            <a href="#/user/{{model.userId}}/website/{{page.websiteId}}/page/{{page._id}}/widget" class="actionlink">{{page.name}}</a>
-            <a href="#/user/{{model.userId}}/website/{{page.websiteId}}/page/{{page._id}}" class="pull-right">
+            <a href="#/user/{{model.userId}}/website/{{page._website}}/page/{{page._id}}/widget" class="actionlink">{{page.name}}</a>
+            <a href="#/user/{{model.userId}}/website/{{page._website}}/page/{{page._id}}" class="pull-right">
                 <span class="glyphicon glyphicon-cog"></span>
             </a> </li>
 

@@ -19,8 +19,8 @@
 
         function createHeaderWidget() {
             var headerWidget = {
-                _id: (new Date()).getTime() + "",
-                pageId: vm.pageId,
+             //   _id: (new Date()).getTime() + "",
+              //  pageId: vm.pageId,
                 widgetType: "HEADER"
             };
             WidgetService
@@ -30,7 +30,7 @@
                         var realWidget = response.data;
                         $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + realWidget._id);
                     },
-                    function(){
+                    function(error){
                         vm.error= "Unable to create Header";
                     }
                 );

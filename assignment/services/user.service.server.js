@@ -1,10 +1,13 @@
-module.exports = function (app) {
-    var users = [
+module.exports = function (app, models) {
+
+    var userModel = models.userModel;
+
+    /*var users = [
         {_id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder"},
         {_id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley"},
         {_id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia"},
         {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose", lastName: "Annunzi"}
-    ];
+    ];*/
 
     app.put("/api/user/:userId", updateUser);
     app.post("/api/user", createUser);
@@ -13,25 +16,50 @@ module.exports = function (app) {
     app.delete("/api/user/:userId", deleteUser);
 
     function createUser(req, res) {
-        var user = req.body;
-        user._id = (new Date()).getTime().toString();
+        var newUser = req.body;
+        console.log(req.body);
+        userModel
+            .createUser(newUser)
+            .then(
+                function (user) {
+                    res.json(user);
+                },
+                function (error) {
+                    res.status(400).send("Username  " + newUser.username + " is already in use");
+                    
+                }
+        
+            );
+        /*user._id = (new Date()).getTime().toString();
         users.push(user);
-        res.send(user);
+        res.send(user);*/
 
     }
 
     function updateUser(req, res) {
         var id = req.params.userId;
         var newUser = req.body;
-        for (var i in users) {
-            if (users[i]._id === id) {
-                users[i].firstName = newUser.firstName;
-                users[i].lastName = newUser.lastName;
-                res.send(newUser);
-                return;
-            }
-        }
-        res.send(400);
+        userModel
+            .updateUser(id, newUser)
+            .then(
+                function (stats) {
+                    console.log(stats);
+                    res.send(200);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+
+                }
+            );
+        // for (var i in users) {
+        //     if (users[i]._id === id) {
+        //         users[i].firstName = newUser.firstName;
+        //         users[i].lastName = newUser.lastName;
+        //         res.send(newUser);
+        //         return;
+        //     }
+        // }
+        // res.send(400);
     }
 
 
@@ -51,51 +79,58 @@ module.exports = function (app) {
     }
 
     function findUserById(req, res) {
-        var id = req.params.userId;
-        for (var i in users) {
-            if (users[i]._id === id) {
-                res.send(users[i]);
-                return;
-            }
-        }
-        res.send({});
+        var userId = req.params.userId;
+        userModel
+            .findUserById(userId)
+            .then(function(user) {
+                    res.send(user);
+                },function(error) {
+                    res.status(400).send(error);
+                });
 
     }
 
     function deleteUser(req, res) {
         var id = req.params.userId;
-        for(var i in users){
-            if(users[i]._id === id){
-                users.splice(i, 1);
-               res.send(200);
-                return;
-            }
-        }
-        res.send(400);
-
+        userModel
+            .deleteUser(id)
+            .then(
+                function (stats) {
+                    console.log(stats);
+                    res.send(200);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+                }
+            );
     }
 
     
 
     function findUserByUsername(username, res) {
-
-        for (var i in users) {
-            if (users[i].username === username) {
-                res.send(users[i]);
-                return;
-            }
-        }
-        res.send({});
+        userModel
+            .findUserByUsername(username)
+            .then(
+                function (user) {
+                    res.json(user);
+                },
+                function (error) {
+                    res.status(400).send(error);
+                }
+            );
     }
 
     function findUserByCredentials(username, password, res) {
-        for (var i in users) {
-            if (users[i].username === username && users[i].password === password) {
-                res.send(users[i]);
-                return;
-            }
-        }
-        res.send({});
+        userModel
+            .findUserByCredentials(username, password)
+            .then(
+                function (user) {
+                    res.json(user);
+                },
+                function (error) {
+                    res.status(400).send(error);
+                }
+            );
     }
 }
 

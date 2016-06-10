@@ -33,7 +33,7 @@
             var newWebsite = {
 
                 name: website.name,
-                developerId: userId,
+               //  developerId: userId,
                 description: website.description
             };
             var url = "/api/user/" + userId + "/website";
@@ -47,9 +47,9 @@
         }
 
 
-        function updateWebsite(websiteId, newWebsite) {
+        function updateWebsite(websiteId, website) {
             var url = "/api/website/" + websiteId;
-            return $http.put(url, newWebsite);
+            return $http.put(url, website);
         }
 
 

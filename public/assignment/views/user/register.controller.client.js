@@ -9,21 +9,22 @@
         var vm = this;
         vm.register = register;
         function register(username, password1, password2) {
-            if(password1 !==password2) {
+            if (password1 !== password2) {
                 vm.error = "Passwords don't match";
-            }else {
+            } else {
                 UserService
                     .findUserByUsername(username)
                     .then(function (response) {
                         var userExist = response.data;
-                        if (userExist._id) {
+                        if (userExist!= null) {
                             vm.error = "Username already exists";
-                        } else {
+                        }
+                        else {
                             UserService
                                 .createUser(username, password1)
                                 .then(function (response) {
                                     var user = response.data;
-                                    if (user._id) {
+                                    if (user!=null) {
                                         $location.url("/user/" + user._id);
                                     } else {
                                         vm.error = "user did not get added";
@@ -31,10 +32,13 @@
 
                                 });
                         }
-                    });
-            }
 
+
+                    });
+
+            }
+        }
     }
-    }
+    
 })();
 

@@ -13,10 +13,12 @@
         var index = -1;
         var id = $routeParams["userId"];
 
+
         function init() {
                 UserService
                     .findUserById(id)
                     .then(function (response) {
+                        console.log(response.data);
                         vm.user = response.data;
                     });
         }
