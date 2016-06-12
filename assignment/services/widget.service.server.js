@@ -57,11 +57,10 @@ module.exports = function (app, models) {
        //              });
                     widgetModel
                         .reorderWidget( start, end)
-
                         .then(
                             function (response) {
-                                console.log("************");
-                                console.log(response);
+                              //  console.log("************");
+                               // console.log(response);
 
                                 res.json(widgets);
                             },

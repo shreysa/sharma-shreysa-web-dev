@@ -22,25 +22,27 @@ module.exports = function () {
                     //               console.log("displaying length of this widget" + widget.name);
                     //             console.log(widget.order);
                    // delete widget._id;
-                    if(widget.order==start){
-                        console.log(widget.order);
-                        console.log("before end is assigned");
+                    if(widget.order == start){
+                    //    console.log(widget.order);
+                     //   console.log("before end is assigned");
                         widget.order = end;
                         widget.save();
-                        console.log(widget.order);
+                       // console.log(widget.order);
                     }
-                    else if(widget.order> start && widget.order<=end){
-                        console.log("widget before - 1  " + widget.order);
-                        widget.order = widget.order -1 ;
+                    else if(widget.order > start && widget.order <= end){
+                     //   console.log("widget before - 1  " + widget.order);
+                        widget.order--;
+                       // widget.order = widget.order -1 ;
                         widget.save();
-                        console.log(widget.order);
+                      //  console.log(widget.order);
 
                     }
-                    else if(widget.order<start && widget.order>=end){
-                        console.log("widget before + 1  " + widget.order);
-                        widget.order = widget.order +1 ;
+                    else if(widget.order < start && widget.order >= end){
+                      //  console.log("widget before + 1  " + widget.order);
+                        widget.order++;
+                      //  widget.order = widget.order +1 ;
                         widget.save();
-                        console.log(widget.order);
+                        //console.log(widget.order);
 
                     }
                 });
