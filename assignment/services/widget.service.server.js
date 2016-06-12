@@ -28,35 +28,35 @@ module.exports = function (app, models) {
         start = start;
         end = end;
        // console.log("in reorder service server");
-        widgetModel
-            .findAllWidgetsForPage(pageId)
-            .then(
-                function (widgets) {
-                    widgets.forEach(function (widget) {
-         //               console.log("displaying length of this widget" + widget.name);
-           //             console.log(widget.order);
-                        delete widget._id;
-                        if(widget.order==start){
-                            console.log(widget.order);
-                            console.log("before end is assigned");
-                            widget.order = end;
-                            console.log(widget.order);
-                        }
-                        else if(widget.order> start && widget.order<=end){
-                            console.log("widget before - 1  " + widget.order);
-                            widget.order = widget.order -1 ;
-                            console.log(widget.order);
-
-                        }
-                        else if(widget.order<start && widget.order>=end){
-                            console.log("widget before + 1  " + widget.order);
-                            widget.order = widget.order +1 ;
-                            console.log(widget.order);
-
-                        }
-                    });
+       //  widgetModel
+       //      .findAllWidgetsForPage(pageId)
+       //      .then(
+       //          function (widgets) {
+       //              widgets.forEach(function (widget) {
+       //   //               console.log("displaying length of this widget" + widget.name);
+       //     //             console.log(widget.order);
+       //                  delete widget._id;
+       //                  if(widget.order==start){
+       //                      console.log(widget.order);
+       //                      console.log("before end is assigned");
+       //                      widget.order = end;
+       //                      console.log(widget.order);
+       //                  }
+       //                  else if(widget.order> start && widget.order<=end){
+       //                      console.log("widget before - 1  " + widget.order);
+       //                      widget.order = widget.order -1 ;
+       //                      console.log(widget.order);
+       //
+       //                  }
+       //                  else if(widget.order<start && widget.order>=end){
+       //                      console.log("widget before + 1  " + widget.order);
+       //                      widget.order = widget.order +1 ;
+       //                      console.log(widget.order);
+       //
+       //                  }
+       //              });
                     widgetModel
-                        .reorderWidget(pageId, widgets)
+                        .reorderWidget( start, end)
 
                         .then(
                             function (response) {
@@ -68,10 +68,10 @@ module.exports = function (app, models) {
                         function (error) {
                             res.json({});
                         });
-                            },
-                function (error) {
-                    res.json({});
-                });
+                //             },
+                // function (error) {
+                //     res.json({});
+                // });
     }
 
     var multer = require('multer');

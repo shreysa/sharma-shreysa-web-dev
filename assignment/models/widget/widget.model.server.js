@@ -15,9 +15,36 @@ module.exports = function () {
     };
     return api;
 
-    function reorderWidget(pageId, widgets) {
-        console.log(widgets);
-        return Widget.update({_page: pageId}, {$set: widgets}, false, true);
+    function reorderWidget(start, end) {
+        return Widget
+            .find(function (err, widgets) {
+                widgets.forEach(function (widget) {
+                    //               console.log("displaying length of this widget" + widget.name);
+                    //             console.log(widget.order);
+                   // delete widget._id;
+                    if(widget.order==start){
+                        console.log(widget.order);
+                        console.log("before end is assigned");
+                        widget.order = end;
+                        widget.save();
+                        console.log(widget.order);
+                    }
+                    else if(widget.order> start && widget.order<=end){
+                        console.log("widget before - 1  " + widget.order);
+                        widget.order = widget.order -1 ;
+                        widget.save();
+                        console.log(widget.order);
+
+                    }
+                    else if(widget.order<start && widget.order>=end){
+                        console.log("widget before + 1  " + widget.order);
+                        widget.order = widget.order +1 ;
+                        widget.save();
+                        console.log(widget.order);
+
+                    }
+                });
+    });
     }
 
     function createWidget(pageId, widget) {
