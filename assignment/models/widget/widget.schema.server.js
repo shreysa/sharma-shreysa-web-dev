@@ -2,8 +2,9 @@ module.exports = function () {
 
     var mongoose = require("mongoose");
     var WidgetSchema = mongoose.Schema({
+        order:Number,
         _page: {type: mongoose.Schema.ObjectId, ref: "Page"},
-        type: String,
+        type: {type: String, enum: ['HEADER', 'IMAGE', 'YOUTUBE', 'HTML', 'INPUT', 'TEXT']},
         name: String,
         text: String,
         placeholder: String,

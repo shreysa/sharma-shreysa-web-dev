@@ -1,0 +1,102 @@
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" >
+                Profile
+            </a>
+            <p class="navbar-text pull-right">
+                <a ng-click="model.updateUser()"
+                   class="navbar-link">
+          <span class="glyphicon glyphicon-ok">
+          </span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div ng-if="model.success"
+         class="alert alert-success alert dismissible"
+    role="alert">
+        <button type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+        <strong>Success!</strong>
+    {{model.success}}
+    </div>
+
+    <div ng-if="model.error"
+         class="alert alert-danger alert dismissible"
+         role="alert">
+        <button type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+        <strong>Error!</strong>
+        {{model.error}}
+    </div>
+
+
+
+    <form>
+        <div class="form-group">
+            <label for="Username">Username</label>
+            <input ng-model="model.user.username"
+                   type="text"
+                   class="form-control"
+                   id="Username" >
+        </div>
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <input ng.model="model.user.email"
+                   type="Email"
+                   class="form-control"
+                   id="Email"
+                   value="john@gmail.com">
+        </div>
+        <div class="form-group">
+            <label for="FirstName">First Name</label>
+            <input ng-model="model.user.firstName"
+                   type="text"
+                   class="form-control"
+                   id="FirstName" >
+        </div>
+        <div class="form-group">
+            <label for="LastName">Last Name</label>
+            <input ng-model="model.user.lastName"
+                   type="text"
+                   class="form-control"
+                   id="LastName">
+        </div>
+        <a class="btn btn-primary btn-block" href="#/user/{{model.user._id}}/website"  role="button">Websites</a>
+        <a class="btn btn-danger btn-block" href="#/login" role="button">Logout</a>
+        <a ng-click="model.unregister()" class="btn btn-danger btn-block"  role="button">Unregister</a>
+
+    </form>
+</div>
+
+
+
+</div>
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="row navbar-text">
+            <div class="col-xs-3 text-center">
+            </div>
+            <div class="col-xs-3 text-center">
+            </div>
+            <div class="col-xs-3 text-center">
+            </div>
+            <div class="col-lg-3 bottom-profile  text-center">
+                <a href="#/user/{{model.user._id}}">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

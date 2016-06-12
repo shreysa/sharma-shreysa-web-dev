@@ -41,16 +41,7 @@ module.exports = function (app, models) {
         var newUser = req.body;
         userModel
             .updateUser(id, newUser)
-            .then(
-                function (stats) {
-                    console.log(stats);
-                    res.send(200);
-                },
-                function (error) {
-                    res.statusCode(404).send(error);
-
-                }
-            );
+            .then()
         // for (var i in users) {
         //     if (users[i]._id === id) {
         //         users[i].firstName = newUser.firstName;

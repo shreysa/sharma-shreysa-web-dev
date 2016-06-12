@@ -21,16 +21,18 @@
         } init();
 
         function updateWidget() {
-            WidgetService
-                .updateWidget(vm.widgetId, vm.widget)
-                .then(function (response) {
-                    vm.success = "Widget was successfully updated";
-                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
-                }, function (error) {
-                    vm.error = "Widget not updated";
-                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
-                });
-        }
+
+                WidgetService
+                    .updateWidget(vm.widgetId, vm.widget)
+                    .then(function (response) {
+                        vm.success = "Widget was successfully updated";
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+                    }, function (error) {
+                        vm.error = "Widget not updated";
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+                    });
+            }
+        
 
 
         function deleteWidget() {

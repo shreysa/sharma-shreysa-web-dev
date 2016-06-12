@@ -9,9 +9,18 @@
         var vm = this;
         vm.register = register;
         function register(username, password1, password2) {
-            if (password1 !== password2) {
+            if(username == null){
+                vm.error = "Username cannot be empty";
+            }
+            else if(password1 == null){
+                vm.error = "password cannot be empty";
+            }
+            else if(password2 == null){
+                vm.error = "verify password cannot be empty";
+            } else  if (password1 !== password2) {
                 vm.error = "Passwords don't match";
-            } else {
+            }
+            else {
                 UserService
                     .findUserByUsername(username)
                     .then(function (response) {

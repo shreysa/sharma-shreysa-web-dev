@@ -1,0 +1,89 @@
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+                <span class="navbar-text pull-left glyphicon glyphicon-chevron-left"/>
+            </a>
+            <a class="navbar-brand" >
+               HTML Widget
+            </a>
+            <p class="navbar-text pull-right">
+                <a ng-click="model.updateWidget()"
+                   class="navbar-link">
+          <span class="glyphicon glyphicon-ok">
+          </span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div ng-if="model.success"
+         class="alert alert-success alert dismissible"
+         role="alert">
+        <button type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+        <strong>Success!</strong>
+        {{model.success}}
+    </div>
+
+    <div ng-if="model.error"
+         class="alert alert-danger alert dismissible"
+         role="alert">
+        <button type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+        <strong>Error!</strong>
+        {{model.error}}
+    </div>
+
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text"
+        ng-model="model.widget.name"
+        class="form-control"
+        id="name">
+    </div>
+    <div class="form-group">
+        <label for="boot">Bootstrap Class</label>
+        <input type="text"
+               ng-model="model.widget.name"
+               class="form-control"
+               id="boot"
+        value="col-xs-3">
+    </div>
+    <div ng-model="model.widget.text"
+         text-angular
+         ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+        ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+        ['indent','outdent'],['html']]">
+    </div>
+    <!--<div ng-bind-html="model.widget.text"></div>-->
+    <p></p>
+    <a class="btn btn-danger btn-block" ng-click="model.deleteWidget()" role="button">Delete</a>
+</div>
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="row navbar-text">
+            <div class="col-xs-3 text-center">
+            </div>
+            <div class="col-xs-3 text-center">
+            </div>
+            <div class="col-xs-3 text-center">
+            </div>
+            <div class="col-lg-3 bottom-profile  text-center">
+                <a href="#/user/{{model.userId}}">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

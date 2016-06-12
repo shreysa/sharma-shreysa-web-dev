@@ -13,9 +13,26 @@
         vm.createImageWidget = createImageWidget;
         vm.createYoutubeWidget = createYoutubeWidget;
         vm.createHTMLWidget = createHTMLWidget;
+        vm.createTextWidget = createTextWidget;
         vm.getSafeHtml = getSafeHtml;
         vm.getSafeUrl = getSafeUrl;
 
+        function createTextWidget() {
+            var textWidget = {
+                type: "TEXT"
+            };
+            WidgetService
+                .createWidget(vm.pageId, textWidget)
+                .then(
+                    function (response) {
+                        var realWidget = response.data;
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + realWidget._id);
+                    },
+                    function(error){
+                        vm.error= "Unable to create text widget";
+                    }
+                );
+        }
 
         function createHeaderWidget() {
             var headerWidget = {
@@ -91,9 +108,9 @@
 
         function createHTMLWidget(){
             var htmlWidget = {
-            _id:  (new Date()).getTime() + "",
-            pageId: vm.pageId,
-            widgetType: "HTML"
+          //  _id:  (new Date()).getTime() + "",
+           // pageId: vm.pageId,
+            type: "HTML"
         };
             WidgetService
                 .createWidget(vm.pageId, htmlWidget)

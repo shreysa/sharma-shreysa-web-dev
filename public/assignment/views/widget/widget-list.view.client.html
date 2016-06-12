@@ -17,7 +17,7 @@
         </div>
     </div>
 </nav>
-<div class="container">
+<div wam-sortable wam-callback="model.reorderWidget(start, end)" class="container">
     <div ng-if="model.success"
          class="alert alert-success alert dismissible"
          role="alert">
@@ -43,7 +43,7 @@
     </div>
 
 
-    <div ng-repeat="widget in model.widgets" class="jga-widget">
+    <div ng-repeat="widget in model.widgets | orderBy: 'order'" class="jga-widget">
         <div class="jga-widget-tool ">
             <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
                 <span class="glyphicon glyphicon-cog HTML"></span>
@@ -85,10 +85,29 @@
                 <div  ng-bind-html="model.getSafeHtml(widget)"></div>
                 </div>
             <div ng-switch-when="IMAGE" class="HTML"><img width="{{widget.width}}" ng-src="{{widget.url}}"></div>
-            <div ng-switch-when="YOUTUBE" class="HTML"><iframe width="{{widget.width}}"
+            <div ng-switch-when="YOUTUBE" class="HTML youtube-widget"><iframe width="{{widget.width}}"
                                                    ng-src="{{model.getSafeUrl(widget)}}"
                                                    frameborder="0"
                                                    allowfullscreen></iframe></div>
+            <div ng-switch-when="TEXT" class="HTML">
+                <div ng-if="widget.formatted"
+                     text-angular
+                     ta-toolbar="[['h1','h2','h3'],
+		['bold','italics','underline','strikeThrough'],
+		['ul','ol'],
+		['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+                       	 ['indent','outdent'],
+		 ['html']]">
+                </div>
+                <input ng-if="!widget.formatted && (!widget.rows || widget.rows===1)"
+                       placeholder="{{widget.placeholder}}"
+                       class="form-control"/>
+
+                <textarea ng-if="!widget.formatted && (widget.rows > 1)"
+                          rows="{{widget.rows}}"
+                          placeholder="{{widget.placeholder}}"
+                          class="form-control">{{widget.text}}</textarea>
+            </div>
             <div ng-switch-default>Unable to render widget</div>
     </div>
         </div>
@@ -97,10 +116,14 @@
     <div class="container">
         <div class="row navbar-text">
             <div class="col-xs-3 text-center">
+                <a href="#/user/{{model.userId}}">
                     <span class="glyphicon glyphicon-play"></span>
+                    </a>
             </div>
             <div class="col-xs-3 text-center">
+                <a href="#/user/{{model.userId}}">
                 <span class="glyphicon glyphicon-eye-open"></span>
+                    </a>
             </div>
             <div class="col-xs-3 text-center">
             </div>

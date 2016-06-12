@@ -9,16 +9,33 @@ module.exports = function () {
         findWidgetById: findWidgetById,
         findAllWidgetsForPage: findAllWidgetsForPage,
         updateWidget:  updateWidget,
-        deleteWidget: deleteWidget
+        deleteWidget: deleteWidget,
+        reorderWidget: reorderWidget
 
     };
     return api;
 
-    function createWidget(pageId, newWidget) {
-        console.log(newWidget);
-        console.log("model");
-        newWidget._page = pageId;
-        return Widget.create(newWidget);
+    function reorderWidget(pageId, widgets) {
+        console.log(widgets);
+        return Widget.update({_page: pageId}, {$set: widgets}, false, true);
+    }
+
+    function createWidget(pageId, widget) {
+       // console.log(newWidget);
+       // console.log("model");
+        widget._page = pageId;
+
+        return Widget
+            .find({_page: pageId})
+            .then(
+                function (widgets) {
+                    console.log(widgets.length);
+                    widget.order = widgets.length;
+                    return Widget.create(widget);
+                },
+            function (error) {
+                return null;
+            });
     }
 
     function findWidgetById(widgetId) {
@@ -30,6 +47,8 @@ module.exports = function () {
     }
 
     function updateWidget(widgetId, newWidget) {
+      //  console.log("in model");
+       // console.log(newWidget);
         delete newWidget._id;
         return Widget
             .update({_id: widgetId},{

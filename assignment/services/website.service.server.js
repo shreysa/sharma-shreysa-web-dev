@@ -20,6 +20,7 @@ module.exports = function (app, models) {
     function createWebsite(req, res) {
         var userId = req.params.userId;
         var newWebsite = req.body;
+        console.log(req.body);
         websiteModel
             .createWebsiteForUser( userId, newWebsite)
             .then(

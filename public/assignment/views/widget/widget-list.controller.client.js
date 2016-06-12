@@ -13,6 +13,7 @@
         vm.getSafeUrl = getSafeUrl;
         vm.navigateToEditWidget = navigateToEditWidget;
         vm.navigateToNewWidget = navigateToNewWidget;
+        vm.reorderWidget = reorderWidget;
 
 
         function init(){
@@ -21,8 +22,8 @@
                 .then(function (response) {
                     vm.widgets = response.data;
                 });
-            $(".container")
-                .sortable({axis: "y"});
+         //   $(".container")
+           //     .sortable({axis: "y"});
         } init();
 
 
@@ -49,6 +50,20 @@
 
         function navigateToPageList(){
             $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+        }
+
+        function reorderWidget(start, end) {
+            console.log(start+ "  " + end);
+            WidgetService
+                .reorderWidget(vm.pageId, start, end)
+                .then(
+                    function (response) {
+                        init();
+                    },
+                    function (error) {
+                        vm.error = "Widgets could not be reordered";
+                    });
+
         }
 
 
