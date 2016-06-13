@@ -34,7 +34,7 @@ module.exports = function () {
                     else if(widget.order > start && widget.order <= end){
                      //   console.log("widget before - 1  " + widget.order);
                         widget.order--;
-                       // widget.order = widget.order -1 ;
+                       
                         widget.save();
                       //  console.log(widget.order);
 
@@ -51,7 +51,7 @@ module.exports = function () {
                     else if(widget.order < start && widget.order >= end){
                       //  console.log("widget before + 1  " + widget.order);
                         widget.order++;
-                      //  widget.order = widget.order +1 ;
+                      
                         widget.save();
                         //console.log(widget.order);
 
