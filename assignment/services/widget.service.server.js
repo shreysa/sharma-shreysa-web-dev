@@ -27,14 +27,11 @@ module.exports = function (app, models) {
         var end =  parseInt(req.query.end);
         start = start;
         end = end;
-       
+
                     widgetModel
                         .reorderWidget( start, end, pageId)
                         .then(
                             function (stats) {
-                              //  console.log("************");
-                               // console.log(response);
-
                                 res.sendStatus(200);
                             },
                         function (error) {

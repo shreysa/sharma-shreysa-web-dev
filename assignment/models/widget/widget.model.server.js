@@ -40,7 +40,7 @@ module.exports = function () {
 
                     }
                     } else{
-                        if(widget.order == start){
+                        if(widget.order === start){
                             //    console.log(widget.order);
                             //   console.log("before end is assigned");
                             widget.order = end;
