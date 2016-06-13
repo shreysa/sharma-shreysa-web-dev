@@ -20,6 +20,10 @@ module.exports = function (app, models) {
     app.get("/api/widget/:widgetId", findWidgetById);
     app.delete("/api/widget/:widgetId", deleteWidget);
     app.put("/page/:pageId/widget", reorderWidget);
+
+    var multer = require('multer');
+    var upload = multer({ dest: __dirname+'/../../public/uploads' });
+    app.post ("/api/upload", upload.single('myFile'), uploadImage);
     
     function reorderWidget(req, res) {
         var pageId = req.params.pageId;
@@ -43,9 +47,7 @@ module.exports = function (app, models) {
                 // });
     }
 
-    var multer = require('multer');
-    var upload = multer({ dest: __dirname+'/../../public/uploads' });
-    app.post ("/api/upload", upload.single('myFile'), uploadImage);
+
 
 
     
