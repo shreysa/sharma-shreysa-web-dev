@@ -23,49 +23,22 @@ module.exports = function (app, models) {
     
     function reorderWidget(req, res) {
         var pageId = req.params.pageId;
-        var start = req.query.start;
-        var end = req.query.end;
+        var start = parseInt(req.query.start);
+        var end =  parseInt(req.query.end);
         start = start;
         end = end;
-       // console.log("in reorder service server");
-       //  widgetModel
-       //      .findAllWidgetsForPage(pageId)
-       //      .then(
-       //          function (widgets) {
-       //              widgets.forEach(function (widget) {
-       //   //               console.log("displaying length of this widget" + widget.name);
-       //     //             console.log(widget.order);
-       //                  delete widget._id;
-       //                  if(widget.order==start){
-       //                      console.log(widget.order);
-       //                      console.log("before end is assigned");
-       //                      widget.order = end;
-       //                      console.log(widget.order);
-       //                  }
-       //                  else if(widget.order> start && widget.order<=end){
-       //                      console.log("widget before - 1  " + widget.order);
-       //                      widget.order = widget.order -1 ;
-       //                      console.log(widget.order);
-       //
-       //                  }
-       //                  else if(widget.order<start && widget.order>=end){
-       //                      console.log("widget before + 1  " + widget.order);
-       //                      widget.order = widget.order +1 ;
-       //                      console.log(widget.order);
-       //
-       //                  }
-       //              });
+       
                     widgetModel
-                        .reorderWidget( start, end)
+                        .reorderWidget( start, end, pageId)
                         .then(
-                            function (response) {
+                            function (stats) {
                               //  console.log("************");
                                // console.log(response);
 
-                                res.json(widgets);
+                                res.sendStatus(200);
                             },
                         function (error) {
-                            res.json({});
+                            res.sendStatus(400);
                         });
                 //             },
                 // function (error) {
