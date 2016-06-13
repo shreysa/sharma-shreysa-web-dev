@@ -59,6 +59,10 @@ p.navbar-text.pull-left{
     border: none;
 }
 
+.validation{
+    background-color: crimson;
+}
+
 .jga-widget-tool {
     position: absolute;
     right: 15px;

@@ -43,13 +43,16 @@
 
 
 
-    <form>
+    <form name="registerForm" ng-app>
         <div class="form-group">
             <label for="Username">Username</label>
             <input ng-model="model.user.username"
+
                    type="text"
                    class="form-control"
                    id="Username" >
+
+
         </div>
         <div class="form-group">
             <label for="Email">Email</label>
@@ -57,7 +60,8 @@
                    type="Email"
                    class="form-control"
                    id="Email"
-                   value="john@gmail.com">
+                   value="john@gmail.com" >
+
         </div>
         <div class="form-group">
             <label for="FirstName">First Name</label>

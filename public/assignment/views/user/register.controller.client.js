@@ -9,7 +9,7 @@
         var vm = this;
         vm.register = register;
         function register(username, password1, password2) {
-            if(username == null){
+            if(username == null ){
                 vm.error = "Username cannot be empty";
             }
             else if(password1 == null){
@@ -17,7 +17,7 @@
             }
             else if(password2 == null){
                 vm.error = "verify password cannot be empty";
-            } else  if (password1 !== password2) {
+            } else if (password1 !== password2) {
                 vm.error = "Passwords don't match";
             }
             else {

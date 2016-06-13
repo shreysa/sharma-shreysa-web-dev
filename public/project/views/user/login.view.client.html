@@ -15,10 +15,9 @@
            name="username"
            class="form-control"
            placeholder="username"
-            required/>
+          required/>
 
-            <span class="help-inline" ng-show="submitted &&
-            loginForm.username.$error.required">Required</span>
+            <span class="help-inline"  ng-show="submitted && loginForm.username.$error.required">Required</span>
             </div>
         <div class="control-group"
              ng-class="{true: 'error'}[submitted && loginForm.password.$error.required]">
@@ -26,7 +25,8 @@
             class="form-control"
            name="password"
            placeholder="password"
-           type="password"/>
+           type="password"
+    required/>
              <span class="help-inline" ng-show="submitted &&
             loginForm.username.$error.required">Required</span>
         </div>
@@ -37,5 +37,5 @@
        href="#/register"
        role="button">Register</a>
 
-
+</form>
 </div>

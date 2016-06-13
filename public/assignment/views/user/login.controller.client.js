@@ -17,11 +17,11 @@
                     .findUserByCredentials(username, password)
                     .then(function (response) {
                         var user = response.data;
-                      //  if (user != null) {
+                     //  if (user != null) {
                             $location.url("/user/" + user._id);
-                     //   }
-                       // else {
-                         //   vm.error = "User not present or incorrect credentials";
+                    //  }
+                      //  else {
+                        //    vm.error = "User not present or incorrect credentials";
                         //}
                     });
           //  }
