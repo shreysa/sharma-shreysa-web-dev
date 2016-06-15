@@ -10,6 +10,7 @@
          vm.updateUser = updateUser;
        vm.unregister = unregister;
         vm.navigateToProfile = navigateToProfile;
+        vm.logout = logout;
         var index = -1;
         var id = $routeParams["userId"];
 
@@ -23,6 +24,19 @@
                     });
         }
         init();
+        
+        function logout() {
+         UserService
+             .logout()
+             .then(
+                 function (response) {
+                     $location.url("/login");
+                 },
+                 function () {
+                     $location.url("/login");
+                 }
+             )
+        }
 
         function navigateToProfile() {
             $location.url("/user/" + vm.userId);

@@ -1,0 +1,47 @@
+
+<div class="container">
+    <div ng-if="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+    <h1>Register</h1>
+    <form name="registerForm" ng-app>
+        <div class="control-group"  ng-class="{true: 'error'}[submitted && registerForm.username.$error.required]">
+            <input ng-model="username"
+                   type="text"
+                   name="username"
+                   class="form-control"
+                    placeholder="username" required/>
+            <span class="help-inline validation"
+                  ng-show="submitted && registerForm.username.$error.required">Username cannot be empty</span>
+            </div>
+        <div class="control-group"  ng-class="{true: 'error'}[submitted && registerForm.password.$error.required]">
+             <input ng-model="password1"
+             class="form-control"
+              placeholder="password"
+                    name="password"
+                type="password" required/>
+            <span class="help-inline validation"
+                  ng-show="submitted && registerForm.password.$error.required">password cannot be empty</span>
+                </div>
+            <div class="control-group"  ng-class="{true: 'error'}[submitted && registerForm.verifyPassword.$error.required]">
+    <input ng-model="password2"
+           class="form-control"
+           placeholder="verify password"
+           name="verifyPassword"
+           type="password" required/>
+            <span class="help-inline validation"
+                  ng-show="submitted && registerForm.verifyPassword.$error.required">verify password cannot be empty</span>
+                </div>
+        <input ng-model="email"
+               class="form-control"
+               placeholder="john@gmail.com"
+               name="email"
+               type="email" required/>
+            <span class="help-inline validation"
+                  ng-show="submitted && registerForm.email.$error.required">email cannot be empty</span>
+</div>
+    <a class="btn btn-primary btn-block"ng-click="model.register(username, password1, password2, email); submitted=true" role="button">Register</a>
+    <a class="btn btn-danger btn-block" href="#/login" role="button">Cancel</a>
+
+</form>
+</div>

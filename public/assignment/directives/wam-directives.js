@@ -10,7 +10,7 @@
             $(".container")
                 .sortable({
                     axis: 'y',
-                    sort: function (event, ui) {
+                    start: function (event, ui) {
                         start = ui.item.index();
                     },
                     stop: function(event, ui){

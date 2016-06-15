@@ -63,7 +63,7 @@ module.exports = function () {
 
     function createWidget(pageId, widget) {
        // console.log(newWidget);
-       // console.log("model");
+       // console.log("models");
         widget._page = pageId;
 
         return Widget
@@ -88,7 +88,7 @@ module.exports = function () {
     }
 
     function updateWidget(widgetId, newWidget) {
-      //  console.log("in model");
+      //  console.log("in models");
        // console.log(newWidget);
         delete newWidget._id;
         return Widget

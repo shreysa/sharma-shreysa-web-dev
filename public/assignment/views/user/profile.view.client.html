@@ -78,7 +78,7 @@
                    id="LastName">
         </div>
         <a class="btn btn-primary btn-block" href="#/user/{{model.user._id}}/website"  role="button">Websites</a>
-        <a class="btn btn-danger btn-block" href="#/login" role="button">Logout</a>
+        <a class="btn btn-danger btn-block" ng-click="model.logout()" role="button">Logout</a>
         <a ng-click="model.unregister()" class="btn btn-danger btn-block"  role="button">Unregister</a>
 
     </form>
