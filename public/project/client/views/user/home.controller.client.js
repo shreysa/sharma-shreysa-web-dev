@@ -9,8 +9,8 @@
 
         vm.findRestaurant = findRestaurant;
 
-        var searchText = "dominoes";
-        var location = "Bolyston street";
+       // var searchText = "dominoes";
+       // var location = "Bolyston street";
 
         function findRestaurant(searchFood,searchLocation) {
             console.log(searchLocation);
@@ -20,8 +20,23 @@
                     console.log("*********************** in client");
                     console.log(response.data);
                     vm.business = response.data;
+                   console.log(vm.business.businesses[0].id);
 
                 });
+        }
+
+        function findRestaurantById(id) {
+            console.log(id);
+            console.log("client rest by id");
+            YelpService
+                .findRestaurantById(id)
+                .then(
+                    function (response) {
+                        vm.restaurant = response.data;
+                    }, function (err) {
+                        vm.error(err);
+                    }
+                );
         }
     }})();
 

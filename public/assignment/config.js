@@ -88,7 +88,7 @@
                 redirectTo: "/login"
             });
         
-        function checkLoggedIn(UserService, $location, $q) {
+        function checkLoggedIn(UserService, $location, $q, $rootScope) {
 
             var deferred = $q.defer();
                 UserService
@@ -98,8 +98,10 @@
                             var user = response.data;
                             console.log(user);
                             if(user== '0'){
+                                $rootScope.currentUser = null;
                                 deferred.reject();
                             }else {
+                                $rootScope.currentUser = user;
                                 deferred.resolve();
                             }
                         },

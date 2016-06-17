@@ -34,7 +34,7 @@
                 oauth_signature_method: "HMAC-SHA1",
                 oauth_timestamp: new Date().getTime(),
                 oauth_nonce: randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
-                term: 'food'
+                term: searchFood
             };
             var consumerSecret = 'x9IeJux2rAi2SWe7vOWpG6HvbzA'; //Consumer Secret
             var tokenSecret = 'mxko16kRw8BO5xSHbJq_MbU5PCA'; //Token Secret
