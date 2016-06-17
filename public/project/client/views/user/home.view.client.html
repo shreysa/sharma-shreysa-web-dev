@@ -1,0 +1,43 @@
+<div class="home-pic back-pic container-fluid">
+
+<div class="container-fluid home-padding">
+    <div class="row">
+        <div class=".col-md-4 col-lg-3 col-sm-4 .hidden-lg">
+        </div>
+        <div class="col-lg-6 container-fluid">
+            <div class="row">
+        <div class="col-md-6 col-sm-6 col-lg-6">
+
+    <input ng-model="model.searchFood"
+           class="form-control text-input center-block"
+           name="searchFood"
+           value=""
+           placeholder="Italian, Thai, Burgers, Pizza .."
+           type="text">
+
+</div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <input ng-model="model.searchLocation"
+                           class="form-control text-input center-block"
+                           name="searchLocation"
+                           value=""
+                           placeholder="Boston, Indiana.."
+                           type="text">
+                    </div>
+<div class="col-sm-3 col-md-3 col-lg-3">
+        <a ng-click="model.findRestaurant(searchFood,model.searchLocation)"
+            class="central-block btn btn-default btn-sm form-control" role="button">
+            <span class="glyphicon glyphicon-search"></span>
+            Search</a>
+
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6">
+            <div ng-repeat="restaurant in model.business">
+{{model.business}}

@@ -1,6 +1,8 @@
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+
+var FacebookStrategy = require('passport-facebook').Strategy;
 var bcrypt = require("bcrypt-nodejs");
 
 
@@ -8,15 +10,15 @@ module.exports = function (app, models) {
 
     var userModel = models.userModel;
 
-    /*var users = [
-        {_id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder"},
-        {_id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley"},
-        {_id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia"},
-        {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose", lastName: "Annunzi"}
-    ];*/
 
+     app.get("/auth/facebook", passport.authenticate('facebook'));
+   // app.get("/auth/facebook",facebookLogin);
+    app.get("/auth/facebook/callback", passport.authenticate('facebook', {
+        successRedirect: '/assignment/#/profile',
+        failureRedirect: '/assignment/#/login'
+    }));
     app.put("/api/user/:userId", updateUser);
-    app.post("/api/login", passport.authenticate('local'), login);
+    app.post("/api/login", passport.authenticate('wam'), login);
     app.post("/api/user", createUser);
     app.get("/api/user", getUsers);
     app.get("/api/user/:userId", findUserById);
@@ -25,9 +27,18 @@ module.exports = function (app, models) {
     app.get("/api/loggedIn", loggedIn);
     app.post("/api/register", register);
 
-    passport.use('local', new LocalStrategy(localStrategy));
+
+
+    passport.use('wam', new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
+
+    var facebookConfig = {
+        clientID     : "1092677927437493",
+        clientSecret : "d5f0180023e1470fcecdcffbe669a4c2",
+        callbackURL  : "http://127.0.0.1:3000/auth/facebook/callback"
+    };
+   passport.use('facebook', new FacebookStrategy(facebookConfig, facebookLogin));
     
     function localStrategy(username, password, done) {
         userModel
@@ -47,7 +58,39 @@ module.exports = function (app, models) {
             );
         
     }
+    
+    function facebookLogin(token, refreshToken, profile, done) {
+        console.log(profile);
+        userModel
+            .findFacebookUser(profile.id)
+            .then(
+                function (facebookUser) {
+                    if(facebookUser){
+                        return done(null, facebookUser);
+                    }else{
+                        facebookUser = {
+                            username: profile.displayName.replace(/ /g, ''),
+                            facebook: {
+                                token: token,
+                                id: profile.id,
+                                displayName: profile.displayName
+                            }
+                        };
+                        userModel
+                            .createUser(facebookUser)
+                            .then(
+                                function (user) {
+                                    done(null, user);
+                                }
+                            );
 
+
+                }
+
+    });
+
+    }
+    
     function serializeUser(user, done) {
         done(null, user);
     }

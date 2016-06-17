@@ -1,3 +1,4 @@
+
 module.exports = function (app, models) {
 
     var userModel = models.userModel;
@@ -9,6 +10,8 @@ module.exports = function (app, models) {
     app.get("/api/projectuser", getUsers);
     app.get("/api/projectuser/:userId", findUserById);
     app.delete("/api/projectuser/:userId", deleteUser);
+
+   
 
     function createUser(req, res) {
         var newUser = req.body;
@@ -52,16 +55,31 @@ module.exports = function (app, models) {
     function getUsers(req, res) {
         var username = req.query['username'];
         var password = req.query['password'];
+        var name = req.query['name'];
         if (username && password) {
             findUserByCredentials(username, password, res);
         }
         else if (username) {
             findUserByUsername(username, res);
         }
+            else if(name){
+            findFriend(name, res);
+        }
         else {
 
-            res.send(users);
+           findAllUsers(req, res);
         }
+    }
+
+    function findFriend(name, res) {
+        userModel
+            .findFriend(name)
+            .then(
+                function (users) {
+                    res.json(users);
+                },function(error) {
+                    res.status(400).send(error);
+                });
     }
 
     function findUserById(req, res) {
@@ -118,6 +136,8 @@ module.exports = function (app, models) {
                 }
             );
     }
+    
+    
 }
 
 

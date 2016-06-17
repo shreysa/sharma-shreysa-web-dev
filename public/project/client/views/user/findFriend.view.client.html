@@ -1,0 +1,63 @@
+<div class="container-fluid">
+    <div ng-if="model.success"
+         class="alert alert-success"
+         role="alert">
+        {{model.success}}
+    </div>
+    <div>
+        <h3> Search your friends</h3>
+
+
+                        <input ng-model="searchFriend"
+                               class="form-control text-input center-block"
+                               name="searchFriend" value="" placeholder="Search Friends" type="text">
+
+
+                    </div>
+                    <div class="col-sm-3 col-md-3 col-lg-3">
+                        <button ng-click="model.findFriend(searchFriend)" class="btn btn-info form-control search center-block " type="button" name="button">
+                            <span class="glyphicon glyphicon-search"></span> Search</button>
+                    </div>
+                    </div>
+                <ul class="list-group">
+                    <li ng-repeat="user in model.friends"
+                        class="list-group-item list-group">
+                        <a href="#"
+                           class="actionlink">{{user.firstName}} {{user.lastName}}</a>
+                        </li>
+                </ul>
+<div>
+    <h2>Friend Suggestions</h2>
+    <ul>
+        <li ng-repeat="user in model.users">
+            class="list-group-item list-group">
+            <a href="#"
+               class="actionlink">{{user.firstName}} {{user.lastName}}</a>
+        </li>
+
+    </ul>
+</div>
+
+
+
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="row navbar-text">
+            <div class="col-xs-3 text-center">
+                <span class="glyphicon glyphicon-play"></span>
+            </div>
+            <div class="col-xs-3 text-center">
+                <span class="glyphicon glyphicon-eye-open"></span>
+            </div>
+            <div class="col-xs-3 text-center">
+            </div>
+            <div class="col-lg-3 bottom-profile  text-center">
+                <a href="#/user/{{model.userId}}">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

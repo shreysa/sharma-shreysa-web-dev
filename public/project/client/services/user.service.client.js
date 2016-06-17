@@ -13,11 +13,22 @@
             updateUser: updateUser,
             deleteUser: deleteUser,
             createUser: createUser,
-            findUserByUsername: findUserByUsername
-
+            findUserByUsername: findUserByUsername,
+            findFriend: findFriend,
+           getUsers: getUsers
         };
 
         return api;
+        
+        function getUsers() {
+            var url = "/api/projectuser";
+            return $http.get(url);
+        }
+        
+        function findFriend(friendName) {
+            var url = "/api/projectuser?name=" + friendName;
+            return $http.get(url);
+        }
 
 
         function createUser(username, password, email) {
