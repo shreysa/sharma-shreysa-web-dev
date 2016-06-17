@@ -34,13 +34,14 @@ module.exports = function (app, models) {
     passport.deserializeUser(deserializeUser);
 
     var facebookConfig = {
-        clientID     : "1092677927437493",
-        clientSecret : "d5f0180023e1470fcecdcffbe669a4c2",
-        callbackURL  : "http://127.0.0.1:3000/auth/facebook/callback"
+        clientID     : "898941666918944",
+        clientSecret : "0ad478b71847e3750485935bc835a4f9",
+        callbackURL  : "http://localhost:3000/auth/facebook/callback"
     };
    passport.use('facebook', new FacebookStrategy(facebookConfig, facebookLogin));
     
     function localStrategy(username, password, done) {
+
         userModel
             .findUserByUsername(username)
             .then(
@@ -60,6 +61,7 @@ module.exports = function (app, models) {
     }
     
     function facebookLogin(token, refreshToken, profile, done) {
+        console.log("in facebook login");
         console.log(profile);
         userModel
             .findFacebookUser(profile.id)
@@ -187,6 +189,9 @@ module.exports = function (app, models) {
         res.send(user);*/
 
     }
+
+ 
+
 
     function updateUser(req, res) {
         var id = req.params.userId;

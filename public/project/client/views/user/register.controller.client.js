@@ -8,8 +8,9 @@
 
         var vm = this;
         vm.register = register;
+
         function register(username, password1, password2, email) {
-            if(username == null){
+            if(username == null ){
                 vm.error = "Username cannot be empty";
             }
             else if(password1 == null){
@@ -17,37 +18,29 @@
             }
             else if(password2 == null){
                 vm.error = "verify password cannot be empty";
-            } else  if (password1 !== password2) {
+            } else if (password1 !== password2) {
                 vm.error = "Passwords don't match";
             }
             else {
                 UserService
-                    .findUserByUsername(username)
+                    .register(username, password1, email)
                     .then(function (response) {
-                        var userExist = response.data;
-                        if (userExist!= null) {
-                            vm.error = "Username already exists";
+                        var user = response.data;
+                        if (user != null) {
+                            $location.url("/user/" + user._id);
+                        } else {
+                            vm.error = "user did not get added";
                         }
-                        else {
-                            UserService
-                                .createUser(username, password1, email)
-                                .then(function (response) {
-                                    var user = response.data;
-                                    if (user!=null) {
-                                        $location.url("/user/" + user._id);
-                                    } else {
-                                        vm.error = "user did not get added";
-                                    }
-
-                                });
-                        }
-
 
                     });
 
             }
+
+
+
+
         }
     }
-    
+
 })();
 

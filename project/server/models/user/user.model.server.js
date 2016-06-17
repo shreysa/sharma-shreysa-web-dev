@@ -1,4 +1,8 @@
-module.exports = function (app, mongoose) {
+
+
+
+
+    module.exports = function (app, mongoose) {
 
     var UserSchema = require("./user.schema.server.js")(mongoose);
     var mongoose = require("mongoose");
@@ -12,11 +16,13 @@ module.exports = function (app, mongoose) {
         findFriend: findFriend,
         findUserByCredentials: findUserByCredentials,
         updateUser: updateUser,
-        deleteUser: deleteUser,
-        findAllUsers: findAllUsers
+        deleteUser: deleteUser
 
     };
     return api;
+
+
+
 
     function findAllUsers() {
         return User.find();
@@ -31,15 +37,11 @@ module.exports = function (app, mongoose) {
 
         
     }
+
+
     
     function findUserById(userId) {
          return User.findById({_id: userId});
-   /* ,function (err,result) {
-
-            console.log("*************************************************");
-            console.log(result);
-             return result;
-        });*/
     }
     
     function findUserByUsername(username) {

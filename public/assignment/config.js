@@ -18,11 +18,16 @@
             .when("/user/:userId", {
             templateUrl: "views/user/profile.view.client.html",
                 controller:"ProfileController",
+                controllerAs: "model"
+        })
+            .when("/user", {
+                templateUrl: "views/user/profile.view.client.html",
+                controller:"ProfileController",
                 controllerAs: "model",
                 resolve: {
                     loggedIn: checkLoggedIn
                 }
-        })
+            })
             .when("/register", {
                 templateUrl: "views/user/register.view.client.html",
                 controller: "RegisterController",

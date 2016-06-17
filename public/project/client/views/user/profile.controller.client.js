@@ -5,13 +5,18 @@
 
 
 
-    function ProfileController($routeParams, UserService, $location) {
+    function ProfileController($routeParams, UserService, $location, $rootScope) {
         var vm = this;
          vm.updateUser = updateUser;
        vm.unregister = unregister;
         vm.navigateToProfile = navigateToProfile;
+        vm.logout = logout;
         var index = -1;
         var id = $routeParams["userId"];
+        //  var id = $rootScope.currentUser._id;
+
+    
+
 
 
         function init() {
@@ -27,6 +32,21 @@
         function navigateToProfile() {
             $location.url("/user/" + vm.userId);
         }
+        
+        function logout() {
+            UserService
+                .logout()
+                .then(
+                    function (response) {
+                        $location.url("/login");
+                    },
+                    function () {
+                        $location.url("/login");
+                    }
+                )
+        }
+
+     
 
 
         function unregister() {

@@ -20,7 +20,12 @@
                     console.log("*********************** in client");
                     console.log(response.data);
                     vm.business = response.data;
-                   console.log(vm.business.businesses[0].id);
+                    vm.id = [];
+                    for (i = 0; i < vm.business.businesses.length; i++) {
+                        //   //  console.log(vm.business.businesses[0].id);
+                        //
+                        vm.id.push(vm.business.businesses[i]);
+                    }
 
                 });
         }

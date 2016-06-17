@@ -17,12 +17,16 @@
 
 
         function init() {
+            if (!id && $rootScope.currentUser) {
+                vm.user = $rootScope.currentUser;
+            } else {
                 UserService
                     .findUserById(id)
                     .then(function (response) {
                         console.log(response.data);
                         vm.user = response.data;
                     });
+            }
         }
         init();
         
