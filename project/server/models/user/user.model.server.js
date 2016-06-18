@@ -11,6 +11,7 @@
 
     var api = {
         createUser: createUser,
+       findAllUsers: findAllUsers,
         findUserById: findUserById,
         findUserByUsername :findUserByUsername,
         findFriend: findFriend,
@@ -22,11 +23,9 @@
     return api;
 
 
-
-
-    function findAllUsers() {
-        return User.find();
-    }
+        function findAllUsers() {
+            return User.find();
+        }
     
     function findFriend(name) {
         return User.find({"firstName": name});
@@ -57,7 +56,8 @@
             .update({_id: userId},{
                 $set: {
                     firstName: user.firstName,
-                    lastName: user.lastName
+                    lastName: user.lastName,
+                    phone: user.phone
                 }
             });
     }

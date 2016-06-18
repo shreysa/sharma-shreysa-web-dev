@@ -12,13 +12,21 @@
         
         
         function init() {
-            console.log("in init of friend");
+
             UserService
-                .getUsers()
+                .findUserById(vm.userId)
                 .then(function (response) {
-                    console.log(response.data);
-                    vm.users = response.data;
+                    vm.user = response.data;
+                    //console.log(vm.user.email);
                 });
+
+            UserService
+                .findUsers()
+                .then(function (response) {
+                    vm.users = response.data;
+                    console.log(vm.users);
+                });
+
         }
         init();     
        

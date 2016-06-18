@@ -31,38 +31,55 @@
                    type="text"
                    name="username"
                    class="form-control"
-                    placeholder="username" required/>
+                   placeholder="username" required/>
             <span class="help-inline validation"
                   ng-show="submitted && registerForm.username.$error.required">Username cannot be empty</span>
-            </div>
+        </div>
         <div class="control-group"  ng-class="{true: 'error'}[submitted && registerForm.password.$error.required]">
-             <input ng-model="password1"
-             class="form-control"
-              placeholder="password"
-                    name="password"
-                type="password" required/>
+            <input ng-model="password1"
+                   class="form-control"
+                   placeholder="password"
+                   name="password"
+                   type="password" required/>
             <span class="help-inline validation"
                   ng-show="submitted && registerForm.password.$error.required">password cannot be empty</span>
-                </div>
-            <div class="control-group"  ng-class="{true: 'error'}[submitted && registerForm.verifyPassword.$error.required]">
-    <input ng-model="password2"
-           class="form-control"
-           placeholder="verify password"
-           name="verifyPassword"
-           type="password" required/>
+        </div>
+        <div class="control-group"  ng-class="{true: 'error'}[submitted && registerForm.verifyPassword.$error.required]">
+            <input ng-model="password2"
+                   class="form-control"
+                   placeholder="verify password"
+                   name="verifyPassword"
+                   type="password" required/>
             <span class="help-inline validation"
                   ng-show="submitted && registerForm.verifyPassword.$error.required">verify password cannot be empty</span>
-                </div>
-        <input ng-model="email"
-               class="form-control"
-               placeholder="john@gmail.com"
-               name="email"
-               type="email" required/>
+        </div>
+        <div class="control-group"  ng-class="{true: 'error'}[submitted && registerForm.email.$error.required]">
+            <input ng-model="email"
+                   class="form-control"
+                   placeholder="john@gmail.com"
+                   name="email"
+                   type="email" required/>
             <span class="help-inline validation"
-                  ng-show="submitted && registerForm.email.$error.required">email cannot be empty</span>
-</div>
-    <a class="btn btn-primary btn-block"ng-click="model.register(username, password1, password2, email); submitted=true" role="button">Register</a>
-    <a class="btn btn-danger btn-block" href="#/login" role="button">Cancel</a>
+                  ng-show="submitted && registerForm.email.$error.required">verify password cannot be empty</span>
+        </div>
+        <a class="btn btn-primary btn-block" ng-click="model.register(username, password1, password2, email); submitted=true" role="button">Register</a>
+        <a class="btn btn-danger btn-block" href="#/login" role="button">Cancel</a>
 
-</form>
+    </form>
 </div>
+
+<nav class="navbar navbar-default footer-back-col navbar-fixed-bottom">
+    <div class="container ">
+        <div class="row  navbar-text">
+            <div class="col-lg-3 col-md-3 col-sm-3 bottom-cut footer-fontcolor ">
+                <span class=" glyphicon glyphicon-cutlery"></span>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3  text-center">
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3  text-center">
+            </div>
+            <div class="col-lg-3 bottom-profile  text-center">
+            </div>
+        </div>
+    </div>
+</nav>

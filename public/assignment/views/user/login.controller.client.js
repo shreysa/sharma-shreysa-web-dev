@@ -14,9 +14,11 @@
         vm.login = function(username, password) {
             //if(username!= null && password !=null) {
                 UserService
-                    .login(username, password)
+                  //  .login(username, password)
+                    .findUserByCredentials(username, password)
                     .then(function (response) {
                         var user = response.data;
+                        console.log(response.data);
                        if (user != null) {
                             $location.url("/user/" + user._id);
                      }

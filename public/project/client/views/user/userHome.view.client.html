@@ -14,16 +14,16 @@
         <div id="headicons" class=" navbar-collapse collapse" >
             <ul class=" nav navbar-nav navbar-right ">
                 <li>
-                    <!--<a href="#/register">Register</a>-->
+                    <a href="#/user/{{model.userId}}/home">Search</a>
                 </li>
                 <li>
-                    <!--<a href="#/login">Login</a>-->
+                    <a href="#/user/{{model.userId}}">Profile</a>
                 </li>
                 <li>
-                    <a href="#/register">Register</a>
+                    <a href="#/user/{{model.userId}}/findPeople">Find People</a>
                 </li>
                 <li>
-                    <a href="#/login">Login</a>
+                    <a href="#/login">Logout</a>
                 </li>
                 <!--<li>-->
                 <!--<a href="post.html">Logout</a>-->
@@ -82,7 +82,7 @@
                     <div class="container-fluid row res-name">
                         <div class="col-sm-4 col-md-4 col-lg-4 "></div>
                         <div class="col-sm-4 col-md-4 col-lg-4 ">
-                            <h5>{{restaurant.id}}</h5>
+                            <h5><a href="/user/{{model.userId}}/restaurant/{{restaurant.id}}"> {{restaurant.id}}</a></h5>
                             <h6> {{restaurant.phone}} </h6>
                             <h7>Rating: {{restaurant.rating}} </h7>
 

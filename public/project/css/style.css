@@ -4,9 +4,30 @@ input.form-control {
 
 }
 body {
-    padding-top: 60px;
+    padding-top: 50px;
     padding-bottom: 60px;
     }
+
+.box-search{
+    box-shadow: 1px 1px 10px #890
+}
+.frn-page{
+    background-image: url(friendspage.jpg);
+padding: 0 0 0 0;
+}
+
+.res-back-color{
+    background-color: khaki;
+}
+.footer-fontcolor{
+    color: #C6E746;
+
+
+}
+
+.footer-back-col{
+    background-color: #c0a16b;
+}
 .home-pic {
 
     background-size: cover;
@@ -119,12 +140,14 @@ p.navbar-text.pull-left{
     z-index: 2;
 }
 .navbar-header{
+
+
+
     position: absolute;
     width: 100%;
     top:0;
     text-align: center;
-    padding-right: 20px;
-    padding-left: 20px;
+
 }
 
 .bodyhome{
@@ -134,6 +157,21 @@ p.navbar-text.pull-left{
 
 }
 
+.des-foot{
+    width: 100%;
+    height: 100px;
+    bottom:0;
+    position: fixed;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: #c0a16b
+}
 .backgroundFont{
-    color: #5bc0de;
+    color: #C6E746;
+}
+
+.bottom-cut{
+    position: absolute;
+    left: 15px;
 }
