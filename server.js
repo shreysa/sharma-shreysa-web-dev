@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
-app.use(session({ secret: "shreysasharma" }));
+app.use(session({ secret: process.env.SESSION_SECRET }));
 
 
 
