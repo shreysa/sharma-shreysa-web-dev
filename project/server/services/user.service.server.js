@@ -5,6 +5,7 @@
 module.exports = function (app, models) {
 
     var userModel = models.userModel;
+    var likeModel = models.likeModel;
 
     
 
@@ -13,6 +14,7 @@ module.exports = function (app, models) {
     app.get("/api/projectuser", getUsers);
     app.get("/api/projectuser/:userId", findUserById);
     app.delete("/api/projectuser/:userId", deleteUser);
+    app.post("/api/projectuser/:userId", likeRestaurant);
 
     //post authentication
     // app.post("/api/projectuser/login", passport.authenticate('proj'), login);
@@ -167,6 +169,24 @@ module.exports = function (app, models) {
                 }
             );
 
+    }
+    
+    function likeRestaurant(req, res) {
+        var id = req.params.userId;
+        var restaurant = req.body;
+       console.log(req.params.userId);
+        console.log(req.body);
+        userModel
+            .likeRestaurant(id, restaurant)
+            .then(
+                function (likeObj) {
+                    console.log(likeObj);
+                   res.json(likeObj);
+                },
+                function (error) {
+                    res.statusCode(400).send(error);
+                }
+            );
     }
 
 

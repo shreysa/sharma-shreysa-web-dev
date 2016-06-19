@@ -12,7 +12,7 @@
         vm.navigateToProfile = navigateToProfile;
         vm.logout = logout;
         var index = -1;
-        var id = $routeParams["userId"];
+       var id = $routeParams["userId"];
       //  var id = $rootScope.currentUser._id;
 
 
@@ -44,13 +44,13 @@
         }
 
         function navigateToProfile() {
-            $location.url("/user/" + vm.userId);
+            $location.url("/user/" + vm.user._id);
         }
 
 
         function unregister() {
             UserService
-                .deleteUser(id)
+                .deleteUser(vm.user._id)
                 .then(function () {
                         $location.url("/login");
                     },
@@ -63,7 +63,7 @@
 
         function updateUser() {
             UserService
-                .updateUser(id, vm.user)
+                .updateUser(vm.user._id, vm.user)
                 .then(function (response){
                    vm.success= "user was updated successfully";
 

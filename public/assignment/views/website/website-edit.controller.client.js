@@ -37,15 +37,21 @@
         }
 
 
-        function updateWebsite() {
-            WebsiteService
-                .updateWebsite(vm.websiteId, vm.website)
-                .then(function (response) {
-                    vm.success = "Website was successfully updated";
-                $location.url("/user/" + vm.userId + "/website");
-            }, function (error) {
-                vm.error = "Website not updated";
-            });
+        function updateWebsite(website) {
+            if(website.name) {
+                WebsiteService
+                    .updateWebsite(vm.websiteId, website)
+                    .then(function (response) {
+                        vm.success = "Website was successfully updated";
+                        $location.url("/user/" + vm.userId + "/website");
+                    }, function (error) {
+                        vm.error = "Website not updated";
+                    });
+            }
+            else{
+                $("#websiteName").css({'border-color' : 'crimson'});
+                vm.error = "website's name cannot be empty";
+            }
         }
 
         function navigateToWebsite() {

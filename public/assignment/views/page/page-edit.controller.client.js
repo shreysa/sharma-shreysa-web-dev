@@ -46,7 +46,8 @@
             $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
         }
 
-        function updatePage() {
+        function updatePage(page) {
+            if(page.name){
             PageService
                 .updatePage(vm.pageId, vm.page)
                 .then(function (response) {
@@ -55,7 +56,11 @@
                 }, function (error) {
                     vm.error = "page not updated";
                     $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
-                });
+                });}
+            else{
+                $("#PageName").css({'border-color' : 'crimson'});
+                vm.error = "page's name cannot be empty";
+            }
         }
         
     }

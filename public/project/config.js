@@ -17,11 +17,6 @@
                 controllerAs: "model"
             })
 
-            .when("/user/:userId/restaurant/:restaurantId", {
-                templateUrl: "client/views/user/restaurantHome.view.client.html",
-                controller: "RestaurantHomeController",
-                controllerAs: "model"
-            })
             .when("/home", {
                 templateUrl: "client/views/user/home.view.client.html",
                 controller: "HomeController",
@@ -43,7 +38,7 @@
                 controller: "UserHomeController",
                 controllerAs: "model"
             })
-           
+
             .when("/", {
                 templateUrl: "client/views/user/home.view.client.html",
                 controller: "HomeController",
@@ -57,6 +52,12 @@
             .when("/register", {
                 templateUrl: "client/views/user/register.view.client.html",
                 controller: "RegisterController",
+                controllerAs: "model"
+            })
+
+            .when("/user/:userId/restaurant/:restaurantId", {
+                templateUrl: "client/views/user/restaurantHome.view.client.html",
+                controller: "RestaurantHomeController",
                 controllerAs: "model"
             })
 

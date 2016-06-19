@@ -20,18 +20,24 @@
             $location.url("/user/" + vm.userId + "/website");
         }
 
-        function createWebsite() {
-                if(vm.website.name) {
-
+        function createWebsite(website) {
+                if(website) {
                     WebsiteService
-                        .createWebsite(vm.userId, vm.website)
+                        .createWebsite(vm.userId, website)
                         .then(function (response) {
                             var website = response.data;
                             if (website._id) {
                                 $location.url("/user/" + vm.userId + "/website");
                             }
+                            else{
+                                vm.error="Unable to create website";
+                            }
+                        },
+                        function (error) {
+                            vm.error="Unable to create website";
                         });
                 } else{
+                    $("#websiteName").css({'border-color' : 'crimson'});
                     vm.error = "website's name cannot be empty";
                 }
 

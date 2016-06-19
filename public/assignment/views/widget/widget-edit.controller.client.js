@@ -20,18 +20,24 @@
                 });
         } init();
 
-        function updateWidget() {
+        function updateWidget(widget) {
+                if(widget.name) {
+                    WidgetService
+                        .updateWidget(vm.widgetId, widget)
+                        .then(function (response) {
+                            vm.success = "Widget was successfully updated";
+                            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+                        }, function (error) {
+                            vm.error = "Widget not updated";
+                            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+                        });
+                }
+                else{
+                    $("#widgetName").css({'border-color' : 'crimson'});
+                    vm.error = "widget's name cannot be empty";
+                }
 
-                WidgetService
-                    .updateWidget(vm.widgetId, vm.widget)
-                    .then(function (response) {
-                        vm.success = "Widget was successfully updated";
-                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
-                    }, function (error) {
-                        vm.error = "Widget not updated";
-                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
-                    });
-            }
+        }
         
 
 

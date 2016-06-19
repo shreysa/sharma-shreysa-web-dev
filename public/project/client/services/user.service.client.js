@@ -14,13 +14,14 @@
             deleteUser: deleteUser,
             createUser: createUser,
             findUserByUsername: findUserByUsername,
-            findUsers: findUsers
+            findUsers: findUsers,
           //  findFriend: findFriend,
            //getUsers: getUsers,
             //login: login,
             //logout: logout,
             //loggedIn : loggedIn,
             //register: register
+            likeRestaurant: likeRestaurant
         };
 
         return api;
@@ -105,6 +106,11 @@
         function updateUser(id, newUser) {
             var url = "/api/projectuser/" + id;
             return $http.put(url, newUser);
+        }
+
+        function likeRestaurant(userId, restaurant) {
+            return $http.post("/api/projectuser/" + userId, restaurant);
+         
         }
     }
 })();

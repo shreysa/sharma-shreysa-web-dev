@@ -198,7 +198,15 @@ module.exports = function (app, models) {
         var newUser = req.body;
         userModel
             .updateUser(id, newUser)
-            .then()
+            .then(
+                function (stats) {
+                    console.log(stats);
+                    res.send(200);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+                }
+            );
         // for (var i in users) {
         //     if (users[i]._id === id) {
         //         users[i].firstName = newUser.firstName;
@@ -248,7 +256,7 @@ module.exports = function (app, models) {
                     res.send(200);
                 },
                 function (error) {
-                    res.statusCode(404).send(error);
+                    res.statusCode(400).send(error);
                 }
             );
     }

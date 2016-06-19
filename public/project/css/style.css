@@ -17,12 +17,15 @@ padding: 0 0 0 0;
 }
 
 .res-back-color{
-    background-color: khaki;
+    background-color: lightseagreen;
 }
 .footer-fontcolor{
     color: #C6E746;
 
 
+}
+.fontcol{
+    color: #e5e5e5;
 }
 
 .footer-back-col{

@@ -1,8 +1,5 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
-
-
-
         <div class="navbar-header">
             <a ng-click="model.navigateToWebsiteList()">
                 <span class="navbar-text pull-left glyphicon glyphicon-chevron-left"/>
@@ -11,7 +8,7 @@
                 New Website
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click="model.createWebsite()"
+                <a ng-click="model.createWebsite(model.website)"
                    class="navbar-link">
           <span class="glyphicon glyphicon-ok">
           </span>
@@ -22,38 +19,26 @@
 </nav>
 <div class="container">
     <div ng-if="model.success"
-         class="alert alert-success alert dismissible"
+         class="alert alert-success"
          role="alert">
-        <button type="button"
-                class="close"
-                data-dismiss="alert"
-                aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
-        <strong>Success!</strong>
         {{model.success}}
     </div>
 
-    <div ng-if="model.error"
-         class="alert alert-danger alert dismissible"
-         role="alert">
-        <button type="button"
-                class="close"
-                data-dismiss="alert"
-                aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
-        <strong>Error!</strong>
+    <div ng-if="model.error" class="alert alert-danger" role="alert">
         {{model.error}}
     </div>
     <form>
         <div class="form-group">
-            <label  for="Name">Name</label>
+            <!--ng-class="{true: 'error'}[submitted && websiteNewForm.websiteName.$error.required]">-->
+            <label  for="websiteName">Name</label>
             <input type="text"
                    ng-model="model.website.name"
                    class="form-control"
-                   id="Name"
-                   placeholder="Name of website">
+                   id="websiteName"
+                   placeholder="Name of website"
+                   required/>
         </div>
-        <div class="form-group">
+        <div class="control-group">
             <label  for="Description">Description</label>
         <textarea
                 class="form-control"

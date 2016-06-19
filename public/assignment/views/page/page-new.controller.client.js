@@ -13,16 +13,28 @@
         vm.navigateToPageList = navigateToPageList;
         vm.navigateToProfile = navigateToProfile;
 
-        function createPage() {
+        function createPage(page) {
+            if(page){
             PageService
-                .createPage(vm.websiteId, vm.page)
+                .createPage(vm.websiteId, page)
                 .then(function (response) {
                 var page = response.data;
                 if (page._id) {
                     $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
                 }
+                else{
+                    vm.error="Unable to create page";
+                }
+                    },
+                    function (error) {
+                        vm.error="Unable to create page";
+                    });
+            } else{
+                $("#Name").css({'border-color' : 'crimson'});
+                vm.error = "page's name cannot be empty";
+            }
 
-            });
+
         }
 
         function navigateToPageList() {

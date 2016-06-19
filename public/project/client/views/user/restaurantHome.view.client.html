@@ -1,34 +1,68 @@
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" >
-                Eat Hearty
-            </a>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
+            <button type="button" class="navbar-toggle collapsed"  data-toggle="collapse" data-target="#headicons" >
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="container-fluid navbar-brand"
+               href="#/">Eat Hearty <span class="backgroundFont glyphicon glyphicon-cutlery"> </span> </a>
+        </div>
 
-                    <li>
-
-                        <a href="#/login">Already have an account?</a>
-                    </li>
-                    <!--<li>-->
-                    <!--<a href="post.html">Logout</a>-->
-                    <!--</li>-->
-                </ul>
-            </div>
+        <div id="headicons" class=" navbar-collapse collapse" >
+            <ul class=" nav navbar-nav navbar-right ">
+                <li>
+                    <a href="#/user/{{model.userId}}/home">Search</a>
+                </li>
+                <li>
+                    <a href="#/user/{{model.userId}}">Profile</a>
+                </li>
+                <li>
+                    <a href="#/user/{{model.userId}}/findPeople">Find People</a>
+                </li>
+                <li>
+                    <a href="#/login">Logout</a>
+                </li>
+                <!--<li>-->
+                <!--<a href="post.html">Logout</a>-->
+                <!--</li>-->
+            </ul>
         </div>
     </div>
+
 </nav>
 
-<div class="res-back-color box-search">
+<div class="container-fluid res-back-color box-search">
     <div class="container-fluid">
-
         <div class="row">
-            <div class="col-lg-6">
-                <div >
-                    <h2>{{model.restaurant}}</h2>
+            <div class="col-lg-3 pull-right">
+                <img class="img img-responsive img-thumbnail"
+                     ng-src="{{model.restaurant.image_url}}">
+            </div>
+        <div class="col-lg-5 fontcol">
+            <!--<div class="col-lg-6">-->
+                    <h1>{{model.restaurant.name}}</h1>
+                    <h3>Address: {{model.restaurant.location.address[0]}}, {{model.restaurant.location.city}}</h3>
+                    <h4>Phone: {{model.restaurant.display_phone}}</h4>
+                     <h4>Cuisines: {{model.restaurant.categories[0][0]}}, {{model.restaurant.categories[1][0]}}</h4>
+
+
                 </div>
+
+                <div class="col-lg-2 fontcol">
+                   <h6>Rating: {{model.restaurant.rating}}</h6>
+                </div>
+            <div class="col-lg-2 fontcol">
+                <h6>Like this restaurant:</h6>
+                <a class="glyphicon glyphicon-thumbs-up"  role="button"
+                   ng-click="model.likeRestaurant()" ></a>
+            </div>
             </div>
         </div>
     </div>
+</div>
+<div class="container-fluid">
+
 </div>

@@ -1,13 +1,13 @@
+// var q = require("q");
 
 
 
-
-    module.exports = function (app, mongoose) {
-
-    var UserSchema = require("./user.schema.server.js")(mongoose);
-    var mongoose = require("mongoose");
-
+    module.exports = function () {
+        var mongoose = require("mongoose");
+    var UserSchema = require("./user.schema.server.js")();
     var User = mongoose.model("UserProject", UserSchema);
+        var LikeSchema = require("./likes.schema.server.js")();
+        var likeModel= mongoose.model('like', LikeSchema);
 
     var api = {
         createUser: createUser,
@@ -17,7 +17,8 @@
         findFriend: findFriend,
         findUserByCredentials: findUserByCredentials,
         updateUser: updateUser,
-        deleteUser: deleteUser
+        deleteUser: deleteUser,
+        likeRestaurant: likeRestaurant
 
     };
     return api;
@@ -65,4 +66,38 @@
     function deleteUser(userId) {
         return User.remove({_id: userId});
     }
+
+        function likeRestaurant(userId, restaurant) {
+          //  var deferred = q.defer();
+            likeModel
+                .findOne({userId: userId},
+                    function(error, userLike){
+                        if(error) {
+                        //    deferred.reject(error);
+                        }
+                        else{
+                            var restaurantId = restaurant.id;
+                            if(userLike !=null && userLike.restaurantId.indexOf(restaurantId) == -1){
+                                userLike.restaurantIds.push(restaurantId);
+                                userLike.save(function (error, userLikeObj) {
+                                    if(error){
+                                        //deferred.reject(error);
+                                    }
+                                    else{
+                                        addToLikedRestaurant(restaurant);
+                                      //  deferred.resolve(userLikeObj);
+                                    }
+                                    
+                                })
+                            }
+
+
+                        else{
+                           // deferred.resolve(null);
+                        }
+                    }
+            });
+//return deferred.promise;
+
+        }
 };
