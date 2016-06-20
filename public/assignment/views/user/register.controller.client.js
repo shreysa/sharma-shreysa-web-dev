@@ -30,18 +30,20 @@
                         var user = response.data;
                         if (user != null) {
                             $location.url("/user/" + user._id);
-                        } else {
-                            vm.error = "user did not get added";
                         }
+                    },
+            function (error) {
+                vm.error = "Username already present";
+            });
 
-                    });
+                    }
 
             }
 
 
 
 
-        }
+
 
 
         // function register(username, password1, password2, email) {
