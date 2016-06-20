@@ -2,10 +2,6 @@
     angular
         .module("WebAppMaker")
         .controller("LoginController", LoginController);
-       
-
-   
-    
 
     function LoginController($location, UserService) {
 
@@ -25,7 +21,11 @@
                        else {
                            vm.error = "User not present or incorrect credentials";
                         }
+                    },
+                    function (error) {
+                        vm.error = "invalid credentials";
                     });
+
           //  }
             //     else if(username == null && password == null){
             //     vm.error = "Username and password cannot be empty";
