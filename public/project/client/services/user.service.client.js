@@ -16,16 +16,17 @@
             findUserByUsername: findUserByUsername,
             findUsers: findUsers,
           //  findFriend: findFriend,
-           //getUsers: getUsers,
-            //login: login,
-            //logout: logout,
-            //loggedIn : loggedIn,
-            //register: register
+        
+            login: login,
+            logout: logout,
+            loggedIn : loggedIn,
+            register: register,
             likeRestaurant: likeRestaurant
         };
 
         return api;
 
+            
 
 
         
@@ -34,19 +35,21 @@
         //     return $http.get(url);
         // }
 
-        //
-        // function register(username, password, email) {
-        //     var user = {
-        //         username: username,
-        //         password: password,
-        //         email: email
-        //     };
-        //     return $http.post("/api/projectuser/register", user);
-        // }
+        
+        function register(username, password, email) {
+            var user = {
+                username: username,
+                password: password,
+                email: email
+            };
+            return $http.post("/api/projectuser/register", user);
+        }
 
-        // function logout() {
-        //     return $http.post("/api/projectuser/logout");
-        // }
+     
+
+        function logout() {
+            return $http.post("/api/projectuser/logout");
+        }
         //
         // function loggedIn() {
         //     return $http.get("/api/projectuser/loggedIn");
@@ -71,6 +74,8 @@
             };
           return $http.post("/api/projectuser", user);
         }
+
+      
 
 
 

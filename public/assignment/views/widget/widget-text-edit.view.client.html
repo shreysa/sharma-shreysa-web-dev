@@ -18,26 +18,43 @@
     </div>
 </nav>
 <div class="container">
-    Text
-    <input ng-model="model.widget.text" class="form-control"/>
-    Rows
-    <input ng-model="model.widget.rows" class="form-control" type="number" />
-    Placeholder
-    <input ng-model="model.widget.placeholder"
-            class="form-control" />
-    <div class="input-group ">
-        <input type="text"
-        readonly
-        class="form-control"
-               value="Formatted" />
+    <div ng-if="model.success"
+         class="alert alert-success"
+         role="alert">
+        {{model.success}}
+    </div>
+
+    <div ng-if="model.error" class="alert alert-danger" role="alert">
+        {{model.error}}
+    </div>
+    <!--<form class="textEditForm" ng-app>-->
+        <div class="control-group">
+            Text
+            <!--<input ng-class="{true: 'error'}[submitted && textEditForm.name.$error.required]"-->
+              <input     ng-model="model.widget.name" name="widgetName" id="widgetName" class="form-control" required />
+            <!--<span class="help-inline" ng-show="submitted && textEditForm.name.$error.required">Name  cannot be empty</span>-->
+        </div>
+
+        Rows
+        <input ng-model="model.widget.rows" class="form-control" type="number" />
+        Placeholder
+        <input ng-model="model.widget.placeholder"
+               class="form-control" />
+        <div class="input-group ">
+            <input type="text"
+                   readonly
+                   class="form-control"
+                   value="Formatted" />
         <span class="input-group-addon">
             <input ng-model="model.widget.formatted"
-                            type="checkbox" />
+                   type="checkbox" />
         </span>
-    </div>
-    <p></p>
-    <a class="btn btn-danger btn-block" ng-click="model.deleteWidget()" role="button">Delete</a>
+        </div>
+        <p></p>
+        <a class="btn btn-danger btn-block" ng-click="model.deleteWidget()" role="button">Delete</a>
 </div>
+<!--</form>-->
+
 
 
 
