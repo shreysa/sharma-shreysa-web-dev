@@ -21,7 +21,9 @@
             logout: logout,
             loggedIn : loggedIn,
             register: register,
-            likeRestaurant: likeRestaurant
+            likeRestaurant: likeRestaurant,
+            findAllLikedByUserId: findAllLikedByUserId,
+            findAllLikedByRestaurantId: findAllLikedByRestaurantId
         };
 
         return api;
@@ -37,12 +39,14 @@
 
         
         function register(username, password, email) {
+            console.log("register in client service");
             var user = {
                 username: username,
                 password: password,
                 email: email
             };
             return $http.post("/api/projectuser/register", user);
+           
         }
 
      
@@ -50,18 +54,22 @@
         function logout() {
             return $http.post("/api/projectuser/logout");
         }
-        //
-        // function loggedIn() {
-        //     return $http.get("/api/projectuser/loggedIn");
-        // }
-        //
-        // function login(username, password) {
-        //     var user = {
-        //         username: username,
-        //         password: password
-        //     };
-        //     return $http.post("/api/projectuser/login", user);
-        // }
+        
+        function loggedIn() {
+            return $http.get("/api/projectuser/loggedIn");
+        }
+
+       
+        
+        function login(username, password) {
+            var user = {
+                username: username,
+                password: password
+            };
+            return $http.post("/api/projectuser/login", user);
+        }
+
+      
 
 
 
@@ -96,7 +104,9 @@
             return $http.get(url);
         }
 
-       
+      
+
+
 
         function findUserById(id) {
           var url = "/api/projectuser/" + id;
@@ -107,15 +117,27 @@
             var url = "/api/projectuser/";
             return $http.get(url);
         }
+      
         
         function updateUser(id, newUser) {
             var url = "/api/projectuser/" + id;
             return $http.put(url, newUser);
         }
 
-        function likeRestaurant(userId, restaurant) {
-            return $http.post("/api/projectuser/" + userId, restaurant);
+        function likeRestaurant(userId, username, restaurant) {
+            // var restaurantObj = {
+            //     restaurantId: restaurant.id
+            // };
+            return $http.post("/api/projectuser/" + userId  + "/like/" + username, restaurant);
          
+        }
+        
+        function findAllLikedByUserId(userId) {
+            return $http.get("/api/projectuser/" + userId + "/fetchLikedRestaurant");
+        }
+        
+        function findAllLikedByRestaurantId(restaurantId) {
+            return $http.get("/api/projectuser/restaurant/" + restaurantId);
         }
     }
 })();

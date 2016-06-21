@@ -11,14 +11,17 @@ module.exports = function () {
       //  review: [ReviewSchema],
         email: String,
         phone: Number,
+        // facebook: {
+        //     token: String,
+        //     id: String,
+        //     displayName: String
+        // },
         dateCreate: {type: Date, default: Date.now},
         dateUpdated: Date,
-        likes: [String],
+        like: [String], //[{type: mongoose.Schema.Types.ObjectId, ref: 'Restaurant'}],
         friend: [String]      
     }, {collection: "project.user"});
-
-
     return UserSchema;
-
-
 };
+
+

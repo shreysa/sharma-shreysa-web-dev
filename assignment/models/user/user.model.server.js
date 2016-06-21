@@ -31,12 +31,6 @@ module.exports = function () {
     
     function findUserById(userId) {
          return User.findById({_id: userId});
-   /* ,function (err,result) {
-
-            console.log("*************************************************");
-            console.log(result);
-             return result;
-        });*/
     }
     
     function findUserByUsername(username) {

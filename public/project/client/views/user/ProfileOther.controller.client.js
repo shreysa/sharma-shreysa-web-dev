@@ -8,14 +8,17 @@
         var vm = this;
         console.log($routeParams.userId);
         vm.user = {"userId": $routeParams.userId};
-        var username = $routeParams.username;
+        var otherUserId = $routeParams.otherUserId;
 
         function init() {
             UserService
-                .findUserByUsername(username)
+                .findUserById(otherUserId)
                 .then(function (response) {
                     vm.userOther = response.data;
-                    //console.log(vm.user.email);
+                    console.log("on like page");
+                    console.log("logged in user:" + vm.user.userId);
+                   console.log(vm.userOther._id);
+                    console.log(vm.userOther.username);
                 });
         }
         init();

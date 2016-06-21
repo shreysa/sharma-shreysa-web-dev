@@ -2,9 +2,9 @@ module.exports = function () {
     var mongoose = require("mongoose");
     var LikeSchema = mongoose.Schema({
         userId: String,
-        restaurantId: [String]
-
+        restaurantId: String,
+        username: String
     },
-        {collection: "like"});
+        {collection: "project.like"});
     return LikeSchema;
 };

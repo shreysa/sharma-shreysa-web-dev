@@ -31,10 +31,10 @@ app.use(passport.session());
 
 // configure a public directory to host static content
 app.use(express.static(__dirname + '/public'));
-var assignment = require('./assignment/app.js');
+//var assignment = require('./assignment/app.js');
 var project = require('./project/app.js');
 
-assignment(app);
+//assignment(app);
 project(app);
 
 require("./experiments/todos.js")(app);

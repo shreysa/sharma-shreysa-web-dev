@@ -63,6 +63,14 @@
         </div>
     </div>
 </div>
-<div class="container-fluid">
+<div class="container-fluid res-back-color box-search">
+    <h2>This restaurant is liked by:</h2>
+    <div class="container-fluid" ng-repeat="users in model.usersWhoLiked">
+        <div class="col-lg-6 pull-left" >
+            <h4><a href="#/user/{{model.userId}}/{{users.userId}}/profile">{{users.username}}</a></h4>
+            </div>
+        <div class="col-lg-6 pull-right">
+            </div>
 
 </div>
+    </div>

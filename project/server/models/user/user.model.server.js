@@ -1,27 +1,31 @@
 // var q = require("q");
-
-
-
     module.exports = function () {
         var mongoose = require("mongoose");
     var UserSchema = require("./user.schema.server.js")();
     var User = mongoose.model("UserProject", UserSchema);
-        var LikeSchema = require("./likes.schema.server.js")();
-        var likeModel= mongoose.model('like', LikeSchema);
+        // var LikeSchema = require("./like.schema.server.js")();
+        // var likeModel= mongoose.model('like', LikeSchema);
 
     var api = {
         createUser: createUser,
        findAllUsers: findAllUsers,
         findUserById: findUserById,
         findUserByUsername :findUserByUsername,
+       // findFacebookUser: findFacebookUser,
         findFriend: findFriend,
         findUserByCredentials: findUserByCredentials,
         updateUser: updateUser,
         deleteUser: deleteUser,
-        likeRestaurant: likeRestaurant
+       likeRestaurant: likeRestaurant,
+        addToLikedRestaurant: addToLikedRestaurant
 
     };
     return api;
+        //
+        // function findFacebookUser(id) {
+        //     return User.findOne({"facebook.id" : id});
+        // }
+
 
 
         function findAllUsers() {
@@ -34,8 +38,6 @@
 
     function createUser(user) {
        return User.create(user);
-
-        
     }
 
 
@@ -58,7 +60,8 @@
                 $set: {
                     firstName: user.firstName,
                     lastName: user.lastName,
-                    phone: user.phone
+                    phone: user.phone,
+                    email: user.email
                 }
             });
     }
@@ -77,7 +80,7 @@
                         }
                         else{
                             var restaurantId = restaurant.id;
-                            if(userLike !=null && userLike.restaurantId.indexOf(restaurantId) == -1){
+                            if(userLike !=null && userLike.restaurantIds.indexOf(restaurantId) == -1){
                                 userLike.restaurantIds.push(restaurantId);
                                 userLike.save(function (error, userLikeObj) {
                                     if(error){
@@ -87,7 +90,7 @@
                                         addToLikedRestaurant(restaurant);
                                       //  deferred.resolve(userLikeObj);
                                     }
-                                    
+
                                 })
                             }
 
@@ -99,5 +102,44 @@
             });
 //return deferred.promise;
 
+        }
+
+
+        function addToLikedRestaurant(restaurant) {
+            //var deferred = q.defer();
+            RestaurantModel.findOne({restaurantId: restaurant.id},
+            
+            function (error, restau) {
+                if(error){
+                  //  deferred.reject(error);
+                }
+                else{
+                    console.log("***********");
+                    console.log(restau);
+                    if(restau==null){
+                        RestaurantModel.create({
+                            restaurantId: restaurant.id,
+                            name: restaurant.name,
+                            image: restaurant.image_url,
+                            location: restaurant.location.address[0],
+                            city: restaurant.city,
+                            rating: restaurant.rating,
+                        }, 
+                        function (error, restaurant) {
+                            if(error){
+                              //  deferred.reject(error);
+                            } else{
+                                console.log("after saving the restaurant");
+                                console.log(restaurant);
+                              //  deferred.resolve(restaurant);
+                            }
+                        });
+                    }
+                    else{
+                      //  deferred.resolve(restaurant);
+                    }
+                }
+            });
+            //return deferred.promise;
         }
 };

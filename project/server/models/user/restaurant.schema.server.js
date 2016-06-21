@@ -1,13 +1,15 @@
 module.exports = function () {
-    var mongoose = require("mongoose");
+   var mongoose = require("mongoose");
     var RestaurantSchema = mongoose.Schema({
-        id: String,
+        restaurantId: String,        
         name: String,
-        image_url: String,
-      //  location: String,
+        image: String,
+        location: String,
         city: String,
-        rating: Number
-    }, {collection: 'restaurant'
+        phone: String,
+        rating: Number,
+        like: [String]
+    }, {collection: 'project.restaurant'
     });
     return RestaurantSchema;
 };

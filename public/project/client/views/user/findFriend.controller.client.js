@@ -24,7 +24,7 @@
                 .findUsers()
                 .then(function (response) {
                     vm.users = response.data;
-                    console.log(vm.users);
+                    console.log(vm.users[0]._id);
                 });
 
         }

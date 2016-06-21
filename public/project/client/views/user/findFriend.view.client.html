@@ -55,7 +55,7 @@
                 <li ng-repeat="user in model.friends"
                     class="list-group-item list-group">
                     <a href="#"
-                       class="actionlink">{{user.username}</a>
+                       class="actionlink">{{user.username}}</a>
                 </li>
             </ul>
             <div >
@@ -63,7 +63,7 @@
                 <ul >
                     <li class="box-search" ng-repeat="user in model.users"
                         class="list-group-item list-group">
-                        <a href="#/user/{{model.userId}}/{{user.username}}/profile"
+                        <a href="#/user/{{model.userId}}/{{user._id}}/profile"
                            class="actionlink">{{user.username}}</a>
                     </li>
 

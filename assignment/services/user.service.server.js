@@ -12,7 +12,6 @@ module.exports = function (app, models) {
 
 
      app.get("/auth/facebook", passport.authenticate('facebook'));
-   // app.get("/auth/facebook",facebookLogin);
     app.get("/auth/facebook/callback", passport.authenticate('facebook', {
         successRedirect: '/assignment/#/user',
         failureRedirect: '/assignment/#/login'
@@ -184,9 +183,7 @@ module.exports = function (app, models) {
                 }
         
             );
-        /*user._id = (new Date()).getTime().toString();
-        users.push(user);
-        res.send(user);*/
+       
 
     }
 
@@ -207,15 +204,6 @@ module.exports = function (app, models) {
                     res.statusCode(404).send(error);
                 }
             );
-        // for (var i in users) {
-        //     if (users[i]._id === id) {
-        //         users[i].firstName = newUser.firstName;
-        //         users[i].lastName = newUser.lastName;
-        //         res.send(newUser);
-        //         return;
-        //     }
-        // }
-        // res.send(400);
     }
 
 

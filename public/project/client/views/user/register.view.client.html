@@ -21,7 +21,14 @@
 </nav>
 
 <div class="container">
-    <div ng-if="model.error" class="alert alert-danger">
+    <div ng-if="model.success"
+         class="alert alert-success"
+         role="alert">
+        {{model.success}}
+    </div>
+    <div ng-if="model.error"
+         class="alert alert-danger"
+         role="alert">
         {{model.error}}
     </div>
     <h1>Register</h1>

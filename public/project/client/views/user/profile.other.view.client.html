@@ -71,8 +71,7 @@
             <input ng-model="model.userOther.email"
                    type="email"
                    class="form-control"
-                   id="email"
-            >
+                   id="email">
 
         </div>
         <div class="form-group">
@@ -96,8 +95,17 @@
                    class="form-control"
                    id="phone">
         </div>
+        <div>
+            <a href="#/user/{{model.user.userId}}/{{model.userOther._id}}/likes"> View the restaurants liked by : {{model.userOther.username}}></a>
+        </div>
+
     </form>
 </div>
+
+<div>
+   <a href="#/user/{{model.user.userId}}/{{model.userOther._id}}/likes"> View the restaurants liked by : {{model.userOther.username}}</a>
+</div>
+
 
 <!--<nav class="navbar navbar-default navbar-fixed-bottom">-->
     <!--<div class="container-fluid">-->
