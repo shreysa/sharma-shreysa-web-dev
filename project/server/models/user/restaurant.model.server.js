@@ -23,37 +23,7 @@ module.exports = function () {
             return findOne({restaurantId: restaurantId, like : userId})
         }
 
-        function addUserId(userId, restaurantId) {
-
-        }
-
-    // function findRestaurant(restaurantId, userId, restaurant) {
-    //   return  Restaurant.findOne({restaurantId: restaurantId}),
-    //         function (error, restObj) {
-    //             if(error){
-    //                 // deferred.reject(error);
-    //             }
-    //             else {
-    //                 if(restObj !=null && restObj.likes.indexOf(userId) == -1){
-    //                     restObj.likes.push(userId);
-    //                     restObj.save(function(error, restUserObj){
-    //                         if(error){
-    //                         //    deferred.reject(error);
-    //                         }
-    //                         else{
-    //                            addRestaurant(restaurant);
-    //                             //deferred.resolve(restUserObj);
-    //                         }
-    //                     })
-    //
-    //                 }
-    //                 else{
-    //                    // deferred.resolve(null);
-    //                 }
-    //             }
-    //         }
-    //
-    // }
+  
 };
     
     

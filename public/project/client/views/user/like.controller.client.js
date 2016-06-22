@@ -15,13 +15,23 @@
                 .then
                     (function (response) {
                     vm.likedRestaurant = response.data;
-                        console.log(vm.likedRestaurant);
-                        console.log(vm.likedRestaurant[0]);
-                    //console.log(vm.user.email);
+                       console.log(vm.likedRestaurant);
+                       console.log(vm.likedRestaurant[0]._restaurant.name);
+                // console.log(vm.user.email);
                 }, function (error) {
-                        vm.error = error
+                        vm.error = error;
                     }
                 );
+            UserService
+                .findUserById(otherUserId)
+                .then(
+                    function (response) {
+                        vm.otherUser = response.data;
+                        console.log(vm.otherUser.username);
+                    }, function (error) {
+                        vm.error = error;
+                    }
+                )
         }
         init();
         

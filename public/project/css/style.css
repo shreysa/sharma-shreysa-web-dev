@@ -16,6 +16,10 @@ body {
 padding: 0 0 0 0;
 }
 
+.paddingfromtop{
+    padding-top: 60px;
+}
+
 .res-back-color{
     background-color: lightseagreen;
 }

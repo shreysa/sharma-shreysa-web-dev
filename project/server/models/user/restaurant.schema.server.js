@@ -7,8 +7,7 @@ module.exports = function () {
         location: String,
         city: String,
         phone: String,
-        rating: Number,
-        like: [String]
+        rating: Number
     }, {collection: 'project.restaurant'
     });
     return RestaurantSchema;

@@ -21,7 +21,9 @@ module.exports = function () {
     }
 
     function findWebsiteById(websiteId) {
-        return Website.findById({_id: websiteId});
+        return Website.findById({_id: websiteId})
+            .populate('_user', 'username email');
+
     }
 
     function findAllWebsitesForUser(userId) {

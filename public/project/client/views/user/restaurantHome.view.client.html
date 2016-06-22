@@ -54,10 +54,15 @@
                 <div class="col-lg-2 fontcol">
                    <h6>Rating: {{model.restaurant.rating}}</h6>
                 </div>
-            <div class="col-lg-2 fontcol">
+            <div class="col-lg-2 fontcol" ng-if!="model.thisUserLikes">
                 <h6>Like this restaurant:</h6>
                 <a class="glyphicon glyphicon-thumbs-up"  role="button"
                    ng-click="model.likeRestaurant()" ></a>
+            </div>
+            <div class="col-lg-2 fontcol" ng-if="model.thisUserLikes">
+                <h6>Unlike this restaurant:</h6>
+                <a class="glyphicon glyphicon-thumbs-down"  role="button"
+                   ng-click="model.unlikeRestaurant()" ></a>
             </div>
             </div>
         </div>
@@ -67,7 +72,7 @@
     <h2>This restaurant is liked by:</h2>
     <div class="container-fluid" ng-repeat="users in model.usersWhoLiked">
         <div class="col-lg-6 pull-left" >
-            <h4><a href="#/user/{{model.userId}}/{{users.userId}}/profile">{{users.username}}</a></h4>
+            <h4><a href="#/user/{{model.userId}}/{{users._user._id}}/profile">{{users._user.username}}</a></h4>
             </div>
         <div class="col-lg-6 pull-right">
             </div>

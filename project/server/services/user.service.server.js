@@ -14,14 +14,25 @@ module.exports = function (app, models) {
     var likeModel = models.likeModel;
 
 
-
+    // User related api calls
     app.put("/api/projectuser/:userId", updateUser);
     app.post("/api/projectuser", createUser);
     app.get("/api/projectuser", getUsers);
-    app.post("/api/projectuser/:userId/like/:username", likeRestaurant);
+    app.post("/api/projectuser/login", passport.authenticate('proj'), login);
+    app.post("/api/projectuser/logout", logout);
+    app.get("/api/projectuser/loggedIn", loggedIn);
+    app.post("/api/projectuser/:userId/like", likeRestaurant);
     app.get("/api/projectuser/:userId", findUserById);
     app.delete("/api/projectuser/:userId", deleteUser);
     app.post("/api/projectuser/register", register);
+
+    app.get("/api/projectuser/checkLike/:userId/restaurant/:restaurantId", findThisLikedByUserId);
+    app.delete("/api/projectuser/:userId/removeLike/:restaurantId", unlikeRestaurant);
+
+    //restaurant related api calls
+   app.get("/api/projectuser/restaurant/:restaurantId/restaurantYelpId", findRestaurant);
+    app.get("/api/projectuser/fetchLikedRestaurant/:userId", findAllLikedByUserId);
+    app.get("/api/projectuser/restaurant/:restaurantId", findAllLikedByRestaurantId);
 
 
 
@@ -32,20 +43,7 @@ module.exports = function (app, models) {
     // }));
 
 
-
-    //post authentication
-    app.get("/api/projectuser/:userId/fetchLikedRestaurant", findAllLikedByUserId);
-    app.get("/api/projectuser/restaurant/:restaurantId", findAllLikedByRestaurantId);
-    app.post("/api/projectuser/login", passport.authenticate('proj'), login);
-    app.post("/api/projectuser/logout", logout);
-    app.get("/api/projectuser/loggedIn", loggedIn);
-
-    
-
-
-
-
-    passport.use('proj', new LocalStrategy(localStrategy));
+   passport.use('proj', new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
@@ -231,39 +229,12 @@ module.exports = function (app, models) {
 
     function likeRestaurant(req, res) {
         var userId = req.params.userId;
-       var username = req.params.username;
+     //  var username = req.params.username;
         var restaurant = req.body;
-        var like ={
-            userId: userId,
-            restaurantId: restaurant.restaurantId,
-           username: username
-        }
-        var restaurantId= restaurant.restaurantId;
-      //  console.log(req.params.username);
-        console.log(restaurantId);
-        console.log("in like resturant");
-        likeModel
-            .findLike(userId, restaurantId)
-            .then(
-                function (likeObj, error) {
-                    if (likeObj == null) {
-                        likeModel
-                            .addLike(like)
-                            .then(
-                                function (addLikeObj) {
-                                    res.json(addLikeObj);
-                                },
-                                function (err) {
-                                    res.status(400).send(err);
-                                }
-                            );
-
-                    } else {
-                        res.json(likeObj);
-                    }
-                });
+        var restaurantId = restaurant.restaurantId;
+        var restDbId = "";
         restaurantModel
-            .findRestaurant(restaurantId) //, userId, restaurant)
+            .findRestaurant(restaurantId)
             .then(
                 function (restObj, error) {
                     if (restObj == null) {
@@ -271,6 +242,34 @@ module.exports = function (app, models) {
                             .addRestaurant(restaurant)
                             .then(
                                 function (addRestObj) {
+                                    restDbId = addRestObj._id;
+                                    console.log(restDbId);
+                                    var like ={
+                                        _user: userId,
+                                        _restaurant: restDbId
+                                    }
+
+                                    likeModel
+                                        .findLike(userId, restDbId)
+                                        .then(
+                                            function (likeObj, error) {
+                                                if (likeObj == null) {
+                                                    likeModel
+                                                        .addLike(like)
+                                                        .then(
+                                                            function (addLikeObj) {
+                                                                res.json(addLikeObj);
+                                                            },
+                                                            function (err) {
+                                                                res.status(400).send(err);
+                                                            }
+                                                        );
+
+                                                } else {
+                                                    res.json(likeObj);
+                                                }
+                                            });
+
                                     res.json(addRestObj);
                                 },
                                 function (err) {
@@ -278,60 +277,38 @@ module.exports = function (app, models) {
                                 }
                             );
 
-                   } else {
-                    //     restaurantModel
-                    //         .findUserIdExists(userId, restaurantId)
-                    //         .then(
-                    //             function (restUserIdObj, error) {
-                    //                 if (restUserIdObj == null) {
-                    //                     restaurantModel
-                    //                         .addUserId(userId, restaurantId)
-                    //                         .then(
-                    //                             function (addUserObj) {
-                    //                                 console.log(addUserObj);
-                    //                                 res.json(addUserObj);
-                    //                             }, function (error) {
-                    //                                 res.status(400).send(error);
-                    //                             }
-                    //                         );
-                    //                 }
-                    //                 else {
-                    //                     res.json(restUserIdObj);
-                    //                 }
-                    //             }
-                    //         )
-                    // }
+                    } else {
+                        restDbId = restObj._id;
+                        console.log(restDbId);
+                        var like ={
+                            _user: userId,
+                            _restaurant: restDbId
+                        }
+
+                        likeModel
+                            .findLike(userId, restDbId)
+                            .then(
+                                function (likeObj, error) {
+                                    if (likeObj == null) {
+                                        likeModel
+                                            .addLike(like)
+                                            .then(
+                                                function (addLikeObj) {
+                                                    res.json(addLikeObj);
+                                                },
+                                                function (err) {
+                                                    res.status(400).send(err);
+                                                }
+                                            );
+
+                                    } else {
+                                        res.json(likeObj);
+                                    }
+                                });
 
                         res.json(restObj);
                     }
                 });
-        // userModel
-        //     .findLikedRestaurant(userId)
-        //     .then(function (restUserObj, error) {
-        //         forEach(restau in restUserObj.like){
-        //             if(restau === restaurantId){
-        //                 res.json(restUserObj);
-        //             }
-        //             else{
-        //                 restUserObj.likes.push(restaurantId);
-        //             }
-        //         }
-        //         if (restUserObj.likes == null) {
-        //             restaurantModel
-        //                 .addRestaurant(restaurant)
-        //                 .then(
-        //                     function (addRestObj) {
-        //                         res.json(addRestObj);
-        //                     },
-        //                     function (err) {
-        //                         res.status(400).send(err);
-        //                     }
-        //                 );
-        //
-        //         } else {
-        //             res.json(restObj);
-        //         }
-        //     });
 
     }
 
@@ -349,6 +326,7 @@ module.exports = function (app, models) {
     }
 
     function findAllLikedByRestaurantId(req, res) {
+        console.log(req.params.restaurantId);
         likeModel
             .findAllLikedByRestaurantId(req.params.restaurantId)
             .then(
@@ -459,6 +437,46 @@ module.exports = function (app, models) {
                 },
                 function (error) {
                     res.status(400).send(error);
+                }
+            );
+    }
+    
+    function findRestaurant(req, res) {
+        restaurantModel
+            .findRestaurant(req.params.restaurantId)
+            .then(
+                function (restObj) {
+                    res.json(restObj);
+                },
+                function (error) {
+                    res.status(400).send(error);
+                }
+            );
+    }
+
+    function findThisLikedByUserId(req, res) {
+        likeModel
+            .findLike(req.params.userId, req.params.restaurantId)
+            .then(
+                function (userObj) {
+                    res.json(userObj);
+                },
+                function (error) {
+                    res.status(400).send(error);
+                }
+            )
+    }
+    
+    function unlikeRestaurant(req, res) {
+        likeModel
+            .unlikeRestaurant(req.params.userId, req.params.restaurantId)
+            .then(
+                function (stats) {
+                    console.log(stats);
+                    res.send(200);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
                 }
             );
     }

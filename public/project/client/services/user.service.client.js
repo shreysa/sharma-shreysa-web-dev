@@ -15,8 +15,10 @@
             createUser: createUser,
             findUserByUsername: findUserByUsername,
             findUsers: findUsers,
+            findRestaurant: findRestaurant,
           //  findFriend: findFriend,
-        
+            findThisLikedByUserId: findThisLikedByUserId,
+            unlikeRestaurant: unlikeRestaurant,
             login: login,
             logout: logout,
             loggedIn : loggedIn,
@@ -124,20 +126,36 @@
             return $http.put(url, newUser);
         }
 
-        function likeRestaurant(userId, username, restaurant) {
+        function likeRestaurant(userId, restaurant) {
             // var restaurantObj = {
             //     restaurantId: restaurant.id
             // };
-            return $http.post("/api/projectuser/" + userId  + "/like/" + username, restaurant);
+            return $http.post("/api/projectuser/" + userId  + "/like", restaurant);
          
         }
         
+        function findRestaurantByName(restaurantId) {
+            return $http.get("/api/projectuser/" + restaurantId);
+        }
+        
         function findAllLikedByUserId(userId) {
-            return $http.get("/api/projectuser/" + userId + "/fetchLikedRestaurant");
+            return $http.get("/api/projectuser/fetchLikedRestaurant/" + userId);
         }
         
         function findAllLikedByRestaurantId(restaurantId) {
             return $http.get("/api/projectuser/restaurant/" + restaurantId);
+        }
+        
+        function findRestaurant(restaurantId) {
+            return $http.get("/api/projectuser/restaurant/" +restaurantId + "/restaurantYelpId");
+        }
+        
+        function findThisLikedByUserId(userId, restaurantId) {
+            return $http.get("/api/projectuser/checkLike/" + userId + "/restaurant/" + restaurantId);
+        }
+        
+        function unlikeRestaurant(userId, restaurantId) {
+            return $http.delete("/api/projectuser/" + userId + "/removeLike/" + restaurantId);
         }
     }
 })();

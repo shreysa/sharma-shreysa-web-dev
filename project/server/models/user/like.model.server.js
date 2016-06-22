@@ -8,12 +8,13 @@ module.exports = function () {
         findLike: findLike,
         addLike: addLike,
         findAllLikedByUserId: findAllLikedByUserId,
-        findAllLikedByRestaurantId: findAllLikedByRestaurantId
+        findAllLikedByRestaurantId: findAllLikedByRestaurantId,
+        unlikeRestaurant: unlikeRestaurant
     };
     return api;
     
     function findLike(userId, restaurantId) {
-      return  Like.findOne({userId: userId, restaurantId: restaurantId});
+      return  Like.findOne({"_user": userId, "_restaurant": restaurantId});
     }  
     
     function addLike(like) {
@@ -21,11 +22,17 @@ module.exports = function () {
     }
 
     function findAllLikedByUserId(userId) {
-        return Like.find({userId: userId});
+        return Like.find({_user: userId})
+            .populate('_restaurant', 'restaurantId name' );
     }
     
     function findAllLikedByRestaurantId(restaurantId) {
-        return Like.find({restaurantId: restaurantId});
+        return Like.find({_restaurant: restaurantId})
+            .populate('_user', 'username');
+    }
+
+    function unlikeRestaurant(userId, restaurantId) {
+        return Like.remove({"_user": userId, "_restaurant": restaurantId});
     }
     
     

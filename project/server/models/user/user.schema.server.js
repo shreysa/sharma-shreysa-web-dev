@@ -17,9 +17,7 @@ module.exports = function () {
         //     displayName: String
         // },
         dateCreate: {type: Date, default: Date.now},
-        dateUpdated: Date,
-        like: [String], //[{type: mongoose.Schema.Types.ObjectId, ref: 'Restaurant'}],
-        friend: [String]      
+        dateUpdated: Date
     }, {collection: "project.user"});
     return UserSchema;
 };
