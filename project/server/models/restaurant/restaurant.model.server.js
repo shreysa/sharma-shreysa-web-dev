@@ -6,8 +6,7 @@ module.exports = function () {
 
         var api = {
             findRestaurant: findRestaurant,
-            addRestaurant: addRestaurant,
-            findUserIdExists: findUserIdExists
+            addRestaurant: addRestaurant
         };
         return api;
 
@@ -17,10 +16,6 @@ module.exports = function () {
 
         function addRestaurant(restaurant) {
             return Restaurant.create(restaurant);
-        }
-
-        function findUserIdExists(userId, restaurantId) {
-            return findOne({restaurantId: restaurantId, like : userId})
         }
 
   

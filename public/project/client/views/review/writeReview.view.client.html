@@ -33,7 +33,6 @@
     </div>
 
 </nav>
-
 <div class="container-fluid res-back-color box-search">
     <div class="container-fluid">
         <div class="row">
@@ -41,19 +40,19 @@
                 <img class="img img-responsive img-thumbnail"
                      ng-src="{{model.restaurant.image_url}}">
             </div>
-        <div class="col-lg-5 fontcol">
-            <!--<div class="col-lg-6">-->
-                    <h1>{{model.restaurant.name}}</h1>
-                    <h3>Address: {{model.restaurant.location.address[0]}}, {{model.restaurant.location.city}}</h3>
-                    <h4>Phone: {{model.restaurant.display_phone}}</h4>
-                     <h4>Cuisines: {{model.restaurant.categories[0][0]}}, {{model.restaurant.categories[1][0]}}</h4>
+            <div class="col-lg-5 fontcol">
+                <!--<div class="col-lg-6">-->
+                <h1>{{model.restaurant.name}}</h1>
+                <h3>Address: {{model.restaurant.location.address[0]}}, {{model.restaurant.location.city}}</h3>
+                <h4>Phone: {{model.restaurant.display_phone}}</h4>
+                <h4>Cuisines: {{model.restaurant.categories[0][0]}}, {{model.restaurant.categories[1][0]}}</h4>
 
 
-                </div>
+            </div>
 
-                <div class="col-lg-2 fontcol">
-                   <h6>Rating: {{model.restaurant.rating}}</h6>
-                </div>
+            <div class="col-lg-2 fontcol">
+                <h6>Rating: {{model.restaurant.rating}}</h6>
+            </div>
             <div class="col-lg-2 fontcol" ng-if!="model.thisUserLikes">
                 <h6>Like this restaurant:</h6>
                 <a class="glyphicon glyphicon-thumbs-up"  role="button"
@@ -64,18 +63,30 @@
                 <a class="glyphicon glyphicon-thumbs-down"  role="button"
                    ng-click="model.unlikeRestaurant()" ></a>
             </div>
-            </div>
         </div>
     </div>
 </div>
-<div class="container-fluid res-back-color box-search">
-    <h2>This restaurant is liked by:</h2>
-    <div class="container-fluid" ng-repeat="users in model.usersWhoLiked">
-        <div class="col-lg-6 pull-left" >
-            <h4><a href="#/user/{{model.userId}}/{{users._user._id}}/profile">{{users._user.username}}</a></h4>
-            </div>
-        <div class="col-lg-6 pull-right">
-            </div>
-
 </div>
+<div class="container-fluid ">
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 pad">
+        <ul class="nav nav-tabs">
+            <li role="presentation"><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/likes">Liked By</a></li>
+            <li role="presentation" class="active">Reviews</li>
+            <li role="presentation"> <a href="#/user/{{model.userId}}/{{model.yelpRestId}}/writeReview">Write a review</a></li>
+        </ul>
+
+        <div class="container">
+                <div class="form-group">
+                    <label for="review">WriteReview</label>
+            <textarea ng-model="model.review.text"
+                      rows="6"
+                      class="form-control"
+                      id="review"  ></textarea>
+                </div>
+
+
+                <a  ng-click="model.addReview(model.review)" class="btn btn-primary">Submit Review</a>
+
+        </div>
     </div>
+</div>

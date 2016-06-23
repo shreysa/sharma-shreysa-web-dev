@@ -4,14 +4,14 @@
         .controller("LikeController", LikeController);
 
 
-    function LikeController($location, UserService, $routeParams) {
+    function LikeController($location, UserService, $routeParams, LikeService) {
         var vm = this;
         vm.user = {"userId": $routeParams.userId};
-        var otherUserId = $routeParams.otherUserId;
+        vm.otherUser = {"otherUserId" : $routeParams.otherUserId};
         
         function init() {
-            UserService
-                .findAllLikedByUserId(otherUserId)
+            LikeService
+                .findAllLikedByUserId(vm.otherUser.otherUserId)
                 .then
                     (function (response) {
                     vm.likedRestaurant = response.data;
@@ -23,7 +23,7 @@
                     }
                 );
             UserService
-                .findUserById(otherUserId)
+                .findUserById(vm.otherUser.otherUserId)
                 .then(
                     function (response) {
                         vm.otherUser = response.data;

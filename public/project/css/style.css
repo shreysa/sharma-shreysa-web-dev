@@ -75,6 +75,10 @@ padding: 0 0 0 0;
 
 }
 
+.pad{
+    padding: 30px;
+}
+
 .img-box{
     height: 75px;
     width: 75px;

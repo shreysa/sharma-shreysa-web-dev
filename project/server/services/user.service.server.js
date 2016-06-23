@@ -2,6 +2,7 @@
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 //var FacebookStrategy = require('passport-facebook').Strategy;
 var bcrypt = require("bcrypt-nodejs");
@@ -12,6 +13,7 @@ module.exports = function (app, models) {
     var userModel = models.userModel;
     var restaurantModel = models.restaurantModel;
     var likeModel = models.likeModel;
+    var followModel = models.followModel;
 
 
     // User related api calls
@@ -21,26 +23,27 @@ module.exports = function (app, models) {
     app.post("/api/projectuser/login", passport.authenticate('proj'), login);
     app.post("/api/projectuser/logout", logout);
     app.get("/api/projectuser/loggedIn", loggedIn);
-    app.post("/api/projectuser/:userId/like", likeRestaurant);
+    
     app.get("/api/projectuser/:userId", findUserById);
     app.delete("/api/projectuser/:userId", deleteUser);
     app.post("/api/projectuser/register", register);
+    
 
-    app.get("/api/projectuser/checkLike/:userId/restaurant/:restaurantId", findThisLikedByUserId);
-    app.delete("/api/projectuser/:userId/removeLike/:restaurantId", unlikeRestaurant);
 
-    //restaurant related api calls
-   app.get("/api/projectuser/restaurant/:restaurantId/restaurantYelpId", findRestaurant);
-    app.get("/api/projectuser/fetchLikedRestaurant/:userId", findAllLikedByUserId);
-    app.get("/api/projectuser/restaurant/:restaurantId", findAllLikedByRestaurantId);
+    app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
 
 
 
     // app.get("/auth/facebook", passport.authenticate('facebook'));
     // app.get("/auth/facebook/callback", passport.authenticate('facebook', {
     //     successRedirect: '/project/#/user',
-    //     failureRedirect: '/project/#/home'
+    //     failureRedirect: '/project/#/review'
     // }));
+    app.get('/auth/google/callback',
+        passport.authenticate('google', {
+            successRedirect: '/project/#/user',
+            failureRedirect: 'project/#/review'
+        }));
 
 
    passport.use('proj', new LocalStrategy(localStrategy));
@@ -48,13 +51,19 @@ module.exports = function (app, models) {
     passport.deserializeUser(deserializeUser);
 
 
-    // var facebookConfig = {
-    //     clientID     : process.env.FACEBOOK_CLIENT_ID,
-    //     clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-    //     callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+    // var googleConfig = {
+    //     clientID     : "1021090604010-8r131lpp2p17sv6qoh91ffopqg80vfd1.apps.googleusercontent.com",
+    //     clientSecret : "4AJLPG3hhM0SOdHDOtY_NOw6",
+    //     callbackURL  : "http://localhost:3000/auth/google/callback"
     // };
-    // passport.use('facebook', new FacebookStrategy(facebookConfig, facebookLogin));
 
+    var googleConfig = {
+        clientID     : process.env.GOOGLE_CLIENT_ID,
+        clientSecret : process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL  : process.env.GOOGLE_CALLBACK_URL
+    };
+    // passport.use('facebook', new FacebookStrategy(facebookConfig, facebookLogin));
+    passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 
     function localStrategy(username, password, done) {
         userModel
@@ -108,6 +117,43 @@ module.exports = function (app, models) {
     //
     // }
     //
+
+    function googleStrategy(token, refreshToken, profile, done) {
+        userModel
+            .findUserByGoogleId(profile.id)
+            .then(
+                function(user) {
+                    if(user) {
+                        return done(null, user);
+                    } else {
+                        var email = profile.emails[0].value;
+                        var emailParts = email.split("@");
+                        var newGoogleUser = {
+                            username:  emailParts[0],
+                            firstName: profile.name.givenName,
+                            lastName:  profile.name.familyName,
+                            email:     email,
+                            google: {
+                                id:    profile.id,
+                                token: token
+                            }
+                        };
+                        return userModel.createUser(newGoogleUser);
+                    }
+                },
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            )
+            .then(
+                function(user){
+                    return done(null, user);
+                },
+                function(err){
+                    if (err) { return done(err); }
+                }
+            );
+    }
 
     function serializeUser(user, done) {
         done(null, user);
@@ -227,120 +273,6 @@ module.exports = function (app, models) {
 
     }
 
-    function likeRestaurant(req, res) {
-        var userId = req.params.userId;
-     //  var username = req.params.username;
-        var restaurant = req.body;
-        var restaurantId = restaurant.restaurantId;
-        var restDbId = "";
-        restaurantModel
-            .findRestaurant(restaurantId)
-            .then(
-                function (restObj, error) {
-                    if (restObj == null) {
-                        restaurantModel
-                            .addRestaurant(restaurant)
-                            .then(
-                                function (addRestObj) {
-                                    restDbId = addRestObj._id;
-                                    console.log(restDbId);
-                                    var like ={
-                                        _user: userId,
-                                        _restaurant: restDbId
-                                    }
-
-                                    likeModel
-                                        .findLike(userId, restDbId)
-                                        .then(
-                                            function (likeObj, error) {
-                                                if (likeObj == null) {
-                                                    likeModel
-                                                        .addLike(like)
-                                                        .then(
-                                                            function (addLikeObj) {
-                                                                res.json(addLikeObj);
-                                                            },
-                                                            function (err) {
-                                                                res.status(400).send(err);
-                                                            }
-                                                        );
-
-                                                } else {
-                                                    res.json(likeObj);
-                                                }
-                                            });
-
-                                    res.json(addRestObj);
-                                },
-                                function (err) {
-                                    res.status(400).send(err);
-                                }
-                            );
-
-                    } else {
-                        restDbId = restObj._id;
-                        console.log(restDbId);
-                        var like ={
-                            _user: userId,
-                            _restaurant: restDbId
-                        }
-
-                        likeModel
-                            .findLike(userId, restDbId)
-                            .then(
-                                function (likeObj, error) {
-                                    if (likeObj == null) {
-                                        likeModel
-                                            .addLike(like)
-                                            .then(
-                                                function (addLikeObj) {
-                                                    res.json(addLikeObj);
-                                                },
-                                                function (err) {
-                                                    res.status(400).send(err);
-                                                }
-                                            );
-
-                                    } else {
-                                        res.json(likeObj);
-                                    }
-                                });
-
-                        res.json(restObj);
-                    }
-                });
-
-    }
-
-    function findAllLikedByUserId(req, res) {
-        likeModel
-            .findAllLikedByUserId(req.params.userId)
-            .then(
-                function (restaurants) {
-                    res.json(restaurants);
-                },
-                function (error) {
-                    res.status(400).send(error);
-                }
-            )
-    }
-
-    function findAllLikedByRestaurantId(req, res) {
-        console.log(req.params.restaurantId);
-        likeModel
-            .findAllLikedByRestaurantId(req.params.restaurantId)
-            .then(
-                function (users) {
-
-                    res.json(users);
-                },
-                function (error) {
-                    res.status(400).send(error);
-                }
-            )
-    }
-
-
 
 
 
@@ -440,47 +372,9 @@ module.exports = function (app, models) {
                 }
             );
     }
-    
-    function findRestaurant(req, res) {
-        restaurantModel
-            .findRestaurant(req.params.restaurantId)
-            .then(
-                function (restObj) {
-                    res.json(restObj);
-                },
-                function (error) {
-                    res.status(400).send(error);
-                }
-            );
-    }
 
-    function findThisLikedByUserId(req, res) {
-        likeModel
-            .findLike(req.params.userId, req.params.restaurantId)
-            .then(
-                function (userObj) {
-                    res.json(userObj);
-                },
-                function (error) {
-                    res.status(400).send(error);
-                }
-            )
-    }
-    
-    function unlikeRestaurant(req, res) {
-        likeModel
-            .unlikeRestaurant(req.params.userId, req.params.restaurantId)
-            .then(
-                function (stats) {
-                    console.log(stats);
-                    res.send(200);
-                },
-                function (error) {
-                    res.statusCode(404).send(error);
-                }
-            );
-    }
-}
+
+};
 
 
 

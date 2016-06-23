@@ -1,0 +1,85 @@
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"  data-toggle="collapse" data-target="#headicons" >
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="container-fluid navbar-brand"
+               href="#/">Eat Hearty <span class="backgroundFont glyphicon glyphicon-cutlery"> </span> </a>
+        </div>
+
+        <div id="headicons" class=" navbar-collapse collapse" >
+            <ul class=" nav navbar-nav navbar-right ">
+                <li>
+                    <a href="#/user/{{model.userId}}/home">Search</a>
+                </li>
+                <li>
+                    <a href="#/user/{{model.userId}}">Profile</a>
+                </li>
+                <li>
+                    <a href="#/user/{{model.userId}}/findPeople">Find People</a>
+                </li>
+                <li>
+                    <a href="#/login">Logout</a>
+                </li>
+                <!--<li>-->
+                <!--<a href="post.html">Logout</a>-->
+                <!--</li>-->
+            </ul>
+        </div>
+    </div>
+
+</nav>
+<div class="container-fluid res-back-color box-search">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 pull-right">
+                <img class="img img-responsive img-thumbnail"
+                     ng-src="{{model.restaurant.image_url}}">
+            </div>
+            <div class="col-lg-5 fontcol">
+                <!--<div class="col-lg-6">-->
+                <h1>{{model.restaurant.name}}</h1>
+                <h3>Address: {{model.restaurant.location.address[0]}}, {{model.restaurant.location.city}}</h3>
+                <h4>Phone: {{model.restaurant.display_phone}}</h4>
+                <h4>Cuisines: {{model.restaurant.categories[0][0]}}, {{model.restaurant.categories[1][0]}}</h4>
+
+
+            </div>
+
+            <div class="col-lg-2 fontcol">
+                <h6>Rating: {{model.restaurant.rating}}</h6>
+            </div>
+            <div class="col-lg-2 fontcol" ng-if!="model.thisUserLikes">
+                <h6>Like this restaurant:</h6>
+                <a class="glyphicon glyphicon-thumbs-up"  role="button"
+                   ng-click="model.likeRestaurant()" ></a>
+            </div>
+            <div class="col-lg-2 fontcol" ng-if="model.thisUserLikes">
+                <h6>Unlike this restaurant:</h6>
+                <a class="glyphicon glyphicon-thumbs-down"  role="button"
+                   ng-click="model.unlikeRestaurant()" ></a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="container-fluid ">
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 pad">
+        <ul class="nav nav-tabs">
+            <li role="presentation"><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/likes">Liked By</a></li>
+            <li role="presentation"><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/reviews">Reviews</a></li>
+            <li role="presentation" class="active">Write a review</li>
+        </ul>
+<div class="container">
+    <div class="panel panel-info"
+        ng-repeat="review in model.reviews">
+        <div class="panel-heading"><a href="#/user/{{model.userId}}/{{review._user._id}}/profile">{{review._user.username}}</a></div>
+        <div class="panel-body">{{review.reviewText}}</div>
+    </div>
+</div>
+        </div>
+    </div>

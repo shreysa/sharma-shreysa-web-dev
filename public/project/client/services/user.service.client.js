@@ -15,17 +15,10 @@
             createUser: createUser,
             findUserByUsername: findUserByUsername,
             findUsers: findUsers,
-            findRestaurant: findRestaurant,
-          //  findFriend: findFriend,
-            findThisLikedByUserId: findThisLikedByUserId,
-            unlikeRestaurant: unlikeRestaurant,
             login: login,
             logout: logout,
             loggedIn : loggedIn,
-            register: register,
-            likeRestaurant: likeRestaurant,
-            findAllLikedByUserId: findAllLikedByUserId,
-            findAllLikedByRestaurantId: findAllLikedByRestaurantId
+            register: register            
         };
 
         return api;
@@ -34,10 +27,10 @@
 
 
         
-        // function findFriend(friendName) {
-        //     var url = "/api/projectuser?name=" + friendName;
-        //     return $http.get(url);
-        // }
+        function addFollow(userId, otherUserId) {
+            var url = "/api/projectuser/" + userId + "/follow/" + otherUserId;
+            return $http.post(url);
+        }
 
         
         function register(username, password, email) {
@@ -126,37 +119,6 @@
             return $http.put(url, newUser);
         }
 
-        function likeRestaurant(userId, restaurant) {
-            // var restaurantObj = {
-            //     restaurantId: restaurant.id
-            // };
-            return $http.post("/api/projectuser/" + userId  + "/like", restaurant);
-         
-        }
-        
-        function findRestaurantByName(restaurantId) {
-            return $http.get("/api/projectuser/" + restaurantId);
-        }
-        
-        function findAllLikedByUserId(userId) {
-            return $http.get("/api/projectuser/fetchLikedRestaurant/" + userId);
-        }
-        
-        function findAllLikedByRestaurantId(restaurantId) {
-            return $http.get("/api/projectuser/restaurant/" + restaurantId);
-        }
-        
-        function findRestaurant(restaurantId) {
-            return $http.get("/api/projectuser/restaurant/" +restaurantId + "/restaurantYelpId");
-        }
-        
-        function findThisLikedByUserId(userId, restaurantId) {
-            return $http.get("/api/projectuser/checkLike/" + userId + "/restaurant/" + restaurantId);
-        }
-        
-        function unlikeRestaurant(userId, restaurantId) {
-            return $http.delete("/api/projectuser/" + userId + "/removeLike/" + restaurantId);
-        }
     }
 })();
 

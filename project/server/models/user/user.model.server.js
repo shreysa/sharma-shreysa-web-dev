@@ -1,10 +1,10 @@
 // var q = require("q");
     module.exports = function () {
+        var UserSchema = require("./user.schema.server.js")();
         var mongoose = require("mongoose");
-    var UserSchema = require("./user.schema.server.js")();
+   
     var User = mongoose.model("UserProject", UserSchema);
-        // var LikeSchema = require("./like.schema.server.js")();
-        // var likeModel= mongoose.model('like', LikeSchema);
+       
 
     var api = {
         createUser: createUser,
@@ -25,6 +25,12 @@
         // function findFacebookUser(id) {
         //     return User.findOne({"facebook.id" : id});
         // }
+
+
+
+        function findUserByGoogleId(id) {
+            return User.findOne({"google.id" : id});
+        }
 
 
 

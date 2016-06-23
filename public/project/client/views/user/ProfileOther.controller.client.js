@@ -3,12 +3,14 @@
         .module("EatHeartyApp")
         .controller("ProfileOtherController", ProfileOtherController);
 
-    function ProfileOtherController($routeParams, UserService, $location) {//, $rootScope) {
+    function ProfileOtherController($routeParams, UserService, $location, FollowService) {//, $rootScope) {
 
         var vm = this;
         console.log($routeParams.userId);
         vm.user = {"userId": $routeParams.userId};
         var otherUserId = $routeParams.otherUserId;
+        vm.addFollow = addFollow;
+        vm.unfollowUser = unfollowUser;
 
         function init() {
             UserService
@@ -22,6 +24,32 @@
                 });
         }
         init();
+        
+        function addFollow() {
+            FollowService
+                    .addFollow(vm.user.userId, vm.userOther._id )
+                .then(
+                    function (response) {
+                        vm.success = "You started following" + vm.otherUser.username;
+                    },
+                    function (error) {
+                        vm.error = "Could not follow" + vm.otherUser.username + "due to some internal error";
+                    }
+                );
+        }
+
+        function unfollowUser() {
+            FollowService
+                .unfollowUser(vm.user.userId, vm.userOther._id )
+                .then(
+                    function (response) {
+                        vm.success = "You no more follow" + vm.otherUser.username;
+                    },
+                    function (error) {
+                        vm.error = "Could not follow" + vm.otherUser.username + "due to some internal error";
+                    }
+                );
+        }
 
     }
 })();

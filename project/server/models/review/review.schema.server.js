@@ -1,16 +1,13 @@
 module.exports = function () {
     var mongoose = require("mongoose");
     var ReviewSchema = mongoose.Schema({
-            userId: String,
-            restaurantId: String,
-            restaurantName: String,
-            userName: String,
+            _user: {type: mongoose.Schema.ObjectId, ref: "UserProject"},
+            _restaurant: {type: mongoose.Schema.ObjectId, ref: "Restaurant"},
             reviewText: String,
-            rating: Number,
             dateCreate: {type: Date, default: Date.now},
             dateUpdated: Date
     },
-        {collection: "review"});
+        {collection: "project.review"});
     return ReviewSchema;
 };
 

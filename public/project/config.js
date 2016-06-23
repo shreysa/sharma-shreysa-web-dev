@@ -6,8 +6,34 @@
     function Config($routeProvider) {
         $routeProvider
 
+            .when("/user/:userId/restaurant/:restaurantId/reviews", {
+                templateUrl: "client/views/review/showReview.view.client.html",
+                controller: "RestaurantHomeController",
+                controllerAs: "model"
+            })
+            .when("/user/:userId/:restaurantId/writeReview", {
+                templateUrl: "client/views/review/writeReview.view.client.html",
+                controller: "RestaurantHomeController",
+                controllerAs: "model"
+            })
+            
+            .when("/user/:userId/:otherUserId/follows", {
+                templateUrl: "client/views/follow/otherFollow.view.client.html",
+                controller: "OtherFollowController",
+                controllerAs: "model"
+            })
+            .when("/user/:userId/followedBy/:otherUserId", {
+                templateUrl: "client/views/follow/otherFollower.view.client.html",
+                controller: "OtherFollowerController",
+                controllerAs: "model"
+            })
+            .when("/user/:userId/restaurant/:restaurantId/likes", {
+                templateUrl: "client/views/restaurant/restaurantLikedByUser.view.client.html",
+                controller: "RestaurantHomeController",
+                controllerAs: "model"
+            })
             .when("/user/:userId/:otherUserId/likes", {
-                templateUrl: "client/views/user/like.view.client.html",
+                templateUrl: "client/views/restaurant/like.view.client.html",
                 controller: "LikeController",
                 controllerAs: "model"
             })
@@ -74,7 +100,7 @@
             })
 
             .when("/user/:userId/restaurant/:restaurantId", {
-                templateUrl: "client/views/user/restaurantHome.view.client.html",
+                templateUrl: "client/views/restaurant/restaurantHome.view.client.html",
                 controller: "RestaurantHomeController",
                 controllerAs: "model"
             })

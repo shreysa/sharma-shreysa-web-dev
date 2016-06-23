@@ -3,22 +3,23 @@
         .module("EatHeartyApp")
         .controller("RestaurantHomeController", RestaurantHomeController);
 
-    function RestaurantHomeController($location, YelpService, $routeParams, UserService) {
+    function RestaurantHomeController($location, YelpService, $routeParams, UserService, LikeService,ReviewService) {
         var vm = this;
 
         // vm.findRestaurantById = findRestaurantById;
         vm.likeRestaurant = likeRestaurant;
         vm.unlikeRestaurant = unlikeRestaurant;
+        vm.addReview = addReview;
 
         vm.userId = $routeParams.userId;
         var username = "";
-        var restaurantId = $routeParams.restaurantId;
+        vm.yelpRestId = $routeParams.restaurantId;
         var usernamesOfWhoLiked = [];
         var restId = "";
 
         function init() {
             YelpService
-                .findRestaurantById(restaurantId)
+                .findRestaurantById( vm.yelpRestId)
                 .then(
                     function (response) {
                         vm.restaurant = response.data;
@@ -26,18 +27,18 @@
                         vm.error = error
                     }
                 );
-            UserService
-                .findUserById(vm.userId)
-                .then(
-                    function (response) {
-                        vm.thisUser = response.data;
-                        username = vm.thisUser.username;
-                    }, function (error) {
-                        vm.error = error;
-                    }
-                );
-            UserService
-                .findRestaurant(restaurantId)
+            // UserService
+            //     .findUserById(vm.userId)
+            //     .then(
+            //         function (response) {
+            //             vm.thisUser = response.data;
+            //             username = vm.thisUser.username;
+            //         }, function (error) {
+            //             vm.error = error;
+            //         }
+            //     );
+            LikeService
+                .findRestaurant( vm.yelpRestId)
                 .then(
                     function (response) {
                         if (response.data != null) {
@@ -45,7 +46,7 @@
                             console.log(vm.restId + "  this is the restId");
                             console.log(response.data);
 
-                            UserService
+                            LikeService
                                 .findAllLikedByRestaurantId(vm.restId)
                                 .then(
                                     function (response) {
@@ -55,7 +56,7 @@
                                     }, function (error) {
                                         vm.error = error
                                     });
-                            UserService
+                            LikeService
                                 .findThisLikedByUserId(vm.userId, vm.restId)
                                 .then(
                                     function (response) {
@@ -70,7 +71,26 @@
                                     }, function (error) {
                                         vm.error = error
                                     });
+
+                            ReviewService
+                                .findAllReviewsByRestaurantId(vm.restId)
+                                .then(
+                                    function (response) {
+                                        vm.reviews = response.data;
+                                        console.log("this is the review data");
+                                        console.log(vm.reviews);
+                                    }, function (error) {
+                                        vm.error = error;
+                                    }
+                                );
                         }
+                        else {
+                            vm.restId = null;
+                            vm.vm.thisUserLikes = false;
+                        }
+                    },
+             function (error) {
+                        vm.error = "some error ocurred";
                     }
                 );
 
@@ -91,14 +111,16 @@
                 phone: vm.restaurant.display_phone,
                 rating: vm.restaurant.rating
             };
-            UserService
+            LikeService
                 .likeRestaurant(vm.userId, restaurant)
                 .then(
                     function (response) {
                         console.log("success added");
                         vm.success = "Thank you for liking" + vm.restaurant.name;
                         console.log(response.data);
-                        UserService
+                        console.log("this is the rest id after liking the restaurant");
+                        vm.restId = response.data._id;
+                        LikeService
                             .findAllLikedByRestaurantId(vm.restId)
                             .then(
                                 function (response) {
@@ -119,13 +141,13 @@
 
 
         function unlikeRestaurant() {
-            UserService
+            LikeService
                 .unlikeRestaurant(vm.userId, vm.restId)
                 .then(
                     function (response) {
                         console.log("successfully removed");
                         console.log(response.data);
-                        UserService
+                        LikeService
                             .findAllLikedByRestaurantId(vm.restId)
                             .then(
                                 function (response) {
@@ -142,6 +164,30 @@
                     });
             vm.thisUserLikes = false;
 
+        }
+
+
+        function addReview(review) {
+            var restaurant = {
+                restaurantId: vm.restaurant.id,
+                name: vm.restaurant.name,
+                image: vm.restaurant.image_url,
+                location: vm.restaurant.location.address[0],
+                city: vm.restaurant.location.city,
+                phone: vm.restaurant.display_phone,
+                rating: vm.restaurant.rating,
+                reviewText : vm.review.text
+            };
+            ReviewService
+                .addReview(vm.userId, vm.yelpRestId, restaurant )
+                .then(
+                    function (response) {
+                        console.log("review added");
+                        console.log(response.data);
+                    }, function (error) {
+                        vm.error = "some error ocurred";
+                    }
+                )
         }
 
 
