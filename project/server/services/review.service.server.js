@@ -2,11 +2,44 @@ module.exports = function (app, models) {
 
     var reviewModel = models.reviewModel;
     var restaurantModel = models.restaurantModel;
+    var categoryModel = models.categoryModel;
 
     app.post("/api/projectuser/:userId/review/:restaurantId", addReview);
     app.get("/api/projectuser/user/:userId", findAllReviewsByUserId);
     app.get("/api/projectuser/:restaurantId/reviews", findAllReviewsByRestaurantId);
-  
+    app.delete("/api/projectuser/:reviewId", deleteReview);
+    app.put("/api/projectuser/:reviewId", updateReview);
+
+
+    function updateReview(req, res){
+        reviewModel
+            .updateReview(req.params.reviewId, req.body)
+            .then(
+                function (stats) {
+                    console.log(stats);
+                    res.send(200);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+                }
+            );
+    }
+
+
+    function deleteReview(req, res) {
+        reviewModel
+            .deleteReview(req.params.reviewId)
+            .then(
+                function (stats) {
+                    console.log(stats);
+                    res.send(200);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+                }
+            );
+    }
+
 
 
 
@@ -42,6 +75,12 @@ module.exports = function (app, models) {
                                         _restaurant: restDbId,
                                         reviewText: restaurant.reviewText
                                     };
+                                    var catData = {
+                                        _restaurant: restDbId,
+                                        category : restaurant.category,
+                                        _user: userId,
+                                        rating: restaurant.rating
+                                    };
 
                                     reviewModel
                                         .addReview(review)
@@ -52,6 +91,27 @@ module.exports = function (app, models) {
                                                 res.status(400).send(err);
                                             }
                                         );
+                                    categoryModel
+                                        .findRestaurant(restDbId)
+                                        .then(
+                                            function (restObj, error) {
+                                                if (restObj == null) {
+                                                    categoryModel
+                                                        .addCategoryRestaurant(catData)
+                                                        .then(
+                                                            function (addCatObj) {
+                                                                res.json(addCatObj);
+                                                            },
+                                                            function (err) {
+                                                                res.status(400).send(err);
+                                                            }
+                                                        );
+
+                                                } else {
+                                                    res.json(restObj);
+                                                }
+                                            });
+
                                 },
                                 function (error) {
                                     res.status(400).send(err);
@@ -65,6 +125,12 @@ module.exports = function (app, models) {
                             _restaurant: restDbId,
                             reviewText: restaurant.reviewText
                         };
+                        var catData = {
+                            _restaurant: restDbId,
+                            category : restaurant.category,
+                            _user: userId,
+                            rating: restaurant.rating
+                        };
 
                         reviewModel
                             .addReview(review)
@@ -74,7 +140,28 @@ module.exports = function (app, models) {
                                 }, function (err) {
                                     res.status(400).send(err);
                                 }
-                            )
+                            );
+                        categoryModel
+                            .findRestaurant(restDbId)
+                            .then(
+                                function (restObj, error) {
+                                    if (restObj == null) {
+                                        categoryModel
+                                            .addCategoryRestaurant(catData)
+                                            .then(
+                                                function (addCatObj) {
+                                                    res.json(addCatObj);
+                                                },
+                                                function (err) {
+                                                    res.status(400).send(err);
+                                                }
+                                            );
+
+                                    } else {
+                                        res.json(restObj);
+                                    }
+                                });
+
                     }
                 },
                 function(error) {
@@ -97,7 +184,7 @@ module.exports = function (app, models) {
             );
     }
 
-    function findAllReviewsByUserId(userId) {
+    function findAllReviewsByUserId(req, res) {
         reviewModel
             .findAllReviewsByUserId(req.params.userId)
             .then( function (restReviewObj) {

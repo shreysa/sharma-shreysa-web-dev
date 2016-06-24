@@ -18,7 +18,8 @@
             login: login,
             logout: logout,
             loggedIn : loggedIn,
-            register: register            
+            register: register,
+            findFriend: findFriend
         };
 
         return api;
@@ -84,6 +85,12 @@
 
         function findUserByUsername(username){
             var url = "/api/projectuser?username=" + username;
+            return $http.get(url);
+        }
+
+
+        function findFriend(username){
+            var url = "/api/projectuser?name=" + username;
             return $http.get(url);
         }
         

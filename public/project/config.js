@@ -11,6 +11,17 @@
                 controller: "RestaurantHomeController",
                 controllerAs: "model"
             })
+            .when("/user/:userId/:otherUserId/restaurant/reviewsByUser", {
+                templateUrl: "client/views/review/reviewByUser.view.client.html",
+                controller: "ReviewController",
+                controllerAs: "model"
+            })
+            .when("/user/:userId/restaurant/category/:restaurantId", {
+                templateUrl: "client/views/restaurant/categoryRestaurant.view.client.html",
+                controller: "RestaurantHomeController",
+                controllerAs: "model"
+            })
+
             .when("/user/:userId/:restaurantId/writeReview", {
                 templateUrl: "client/views/review/writeReview.view.client.html",
                 controller: "RestaurantHomeController",

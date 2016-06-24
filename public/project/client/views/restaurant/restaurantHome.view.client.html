@@ -54,7 +54,7 @@
             <div class="col-lg-2 fontcol">
                 <h6>Rating: {{model.restaurant.rating}}</h6>
             </div>
-            <div class="col-lg-2 fontcol" ng-if!="model.thisUserLikes">
+            <div class="col-lg-2 fontcol" ng-if="!model.thisUserLikes">
                 <h6>Like this restaurant:</h6>
                 <a class="glyphicon glyphicon-thumbs-up"  role="button"
                    ng-click="model.likeRestaurant()" ></a>
@@ -71,34 +71,38 @@
 <div class="container-fluid ">
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 pad">
         <ul class="nav nav-tabs">
-            <li role="presentation"  class="active"> Users who liked</li>
+            <li role="presentation" class="active">Similar cuisine restaurants that other users liked</li>
+            <li role="presentation"><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/likes">Liked By</a></li>
             <li role="presentation"><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/reviews">Reviews</a></li>
-            <li role="presentation"><a href="#/user/{{model.userId}}/{{model.yelpRestId}}/writeReview">Write a review</a></li>
+            <li role="presentation" ><a href="#/user/{{model.userId}}/{{model.yelpRestId}}/writeReview">Write a review</a></li>
         </ul>
-
-        <div class="container" ng-repeat="users in model.usersWhoLiked">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6">
-                    <button type="button" class="btn btn-info ribbon">
-                        <a href="#/user/{{model.userId}}/{{users._user._id}}/profile">{{users._user.username}}</a> </button>
+                <div class="col-lg-3 col-md-3 col-sm-3">
                 </div>
+                <!--{{model.ratingRestaurant._restaurant.name}}-->
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="box-search"     ng-repeat="restaurant in model.ratingRestaurant">
+                        <div class="center-block">
+                            <div class="container-fluid row res-name">
+                                 <!--ng-if="!model.restaurant.name">-->
+                                <div class="col-sm-4 col-md-4 col-lg-4 "></div>
+                                <div class="col-sm-4 col-md-4 col-lg-4 ">
+                                    <h5><a href="#/user/{{model.userId}}/restaurant/{{restaurant._restaurant.restaurantId}}"> {{restaurant._restaurant.name}}</a></h5>
+                                    <h7>Address: {{restaurant._restaurant.location}} </h7>
+
+                                </div>
+                                <div class="col-sm-4 col-md-4 col-lg-4 ">
+                                    <img class="img img-box img-responsive" ng-src={{restaurant._restaurant.image}} alt="No image provided">
+                                </div>
+                                <!--<img ng-src="restaurant.image_url" width="100%">-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3"></div>
             </div>
         </div>
-
-
-
-        <!--<div class="container-fluid" ng-repeat="users in model.usersWhoLiked">-->
-        <!--<div class="col-lg-6 pull-left" >-->
-        <!--<h2>This restaurant is liked by:</h2>-->
-        <!--<h4><a href="#/user/{{model.userId}}/{{users._user._id}}/profile">{{users._user.username}}</a></h4>-->
-        <!--</div>-->
-        <!--<div class="col-lg-6 pull-right">-->
-        <!--<h4>Reviews:</h4>-->
-        <!--<div class="panel panel-warning">-->
-        <!--<div class="panel-heading">shreysa sharma</div>-->
-        <!--<div class="panel-body">this is awesome food</div>-->
-        <!--</div>-->
-        <!--</div>-->
 
     </div>
 </div>

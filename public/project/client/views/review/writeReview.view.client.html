@@ -53,7 +53,7 @@
             <div class="col-lg-2 fontcol">
                 <h6>Rating: {{model.restaurant.rating}}</h6>
             </div>
-            <div class="col-lg-2 fontcol" ng-if!="model.thisUserLikes">
+            <div class="col-lg-2 fontcol" ng-if="!model.thisUserLikes">
                 <h6>Like this restaurant:</h6>
                 <a class="glyphicon glyphicon-thumbs-up"  role="button"
                    ng-click="model.likeRestaurant()" ></a>
@@ -70,23 +70,34 @@
 <div class="container-fluid ">
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 pad">
         <ul class="nav nav-tabs">
+            <li role="presentation"><a href="#/user/{{model.userId}}/restaurant/category/{{model.yelpRestId}}">Similar Restaurants</a></li>
             <li role="presentation"><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/likes">Liked By</a></li>
-            <li role="presentation" class="active">Reviews</li>
-            <li role="presentation"> <a href="#/user/{{model.userId}}/{{model.yelpRestId}}/writeReview">Write a review</a></li>
+            <li role="presentation" ><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/reviews">Reviews</a></li>
+            <li role="presentation" class="active"> Write a review</li>
         </ul>
-
-        <div class="container">
-                <div class="form-group">
-                    <label for="review">WriteReview</label>
+        <div class="container" >
+            <div ng-if="model.error" class="alert alert-danger" role="alert">
+                {{model.error}}
+            </div>
+            <form name="reviewForm" ng-app>
+                <div class="control-group form-group">
+                     <!--ng-class="{true: 'error'}[submitted && reviewForm.review.$error.required]">-->
+                    <label for="review">{{model.restaurant.name}}</label>
             <textarea ng-model="model.review.text"
                       rows="6"
                       class="form-control"
-                      id="review"  ></textarea>
+                      type="text"
+                      name="review"
+                      id="review"
+                      required></textarea>
+                    <!--<span class="help-inline validation"-->
+                          <!--ng-show="submitted && reviewForm.review.$error.required">Cannot submit a blank review!!</span>-->
                 </div>
 
 
-                <a  ng-click="model.addReview(model.review)" class="btn btn-primary">Submit Review</a>
-
+                <a  ng-click="model.addReview(model.review)"
+                    class="btn btn-primary">Submit Review</a>
+            </form>
         </div>
     </div>
 </div>

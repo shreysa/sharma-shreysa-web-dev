@@ -1,42 +1,27 @@
-// var passport = require('passport');
-// var LocalStrategy = require('passport-local').Strategy;
-// var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-//
-//
-// var bcrypt = require("bcrypt-nodejs");
-
-
 module.exports = function (app, models) {
 
     var followModel = models.followModel;
 
+    app.get("/api/projectuser/follow/:userId/check/:otherUserId", findFollow);
     app.post("/api/projectuser/:userId/addfollow/:otherUserId", addFollow);
     app.get("/api/projectuser/:userId/following", findAllFollowedByUserId);
     app.delete("/api/projectuser/:userId/unfollow/:otherUserId", unfollowUser);
     app.get("/api/projectuser/following/:userId", findAllFollowingUserId);
+    
   
+        function findFollow(req, res) {
+            followModel
+                .findFollow(req.params.userId, req.params.otherUserId)
+                .then(
+                    function (checkFollowObj) {
+                        res.json(checkFollowObj);
+                    }, function (error) {
+                        res.statusCode(400).send(error);
+                    }
+                );
+        }
 
-
-    // function localStrategy(username, password, done) {
-    //     userModel
-    //         .findUserByUsername(username)
-    //         .then(
-    //             function (user) {
-    //                 if(user && bcrypt.compareSync(password, user.password)){
-    //                     done(null, user);
-    //                 }else{
-    //                     done(null, false);
-    //                 }
-    //
-    //             },
-    //             function (error) {
-    //                 done(error);
-    //             }
-    //         );
-    //
-    // }
-    //
-
+   
     function addFollow(req, res) {
         var follow = {
             _user: req.params.userId,

@@ -27,6 +27,7 @@
                 .then(
                     function (response) {
                         vm.otherUser = response.data;
+                        console.log(vm.otherUser._id);
                         console.log(vm.otherUser.username);
                     }, function (error) {
                         vm.error = error;

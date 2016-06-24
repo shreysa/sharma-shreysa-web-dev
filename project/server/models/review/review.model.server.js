@@ -27,7 +27,7 @@ module.exports = function () {
         return Review
             .update({_id: reviewId}, {
                 $set: {
-                    reviewText: review.text
+                    reviewText: review.reviewText
                 }
             });
     }
@@ -41,8 +41,8 @@ module.exports = function () {
         return Review.create(review);
     }
 
-    function deleteReview(userId, restaurantId) {
-        return Review.remove({_user: userId, _restaurant: restaurantId});
+    function deleteReview(reviewId) {
+        return Review.remove({_id: reviewId});
     }
 
 };

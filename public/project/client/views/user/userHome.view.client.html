@@ -1,18 +1,24 @@
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed"  data-toggle="collapse" data-target="#headicons" >
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="container-fluid navbar-brand"
+            <a class="navbar-brand page-scroll"
                href="#/">Eat Hearty <span class="backgroundFont glyphicon glyphicon-cutlery"> </span> </a>
         </div>
 
-        <div id="headicons" class=" navbar-collapse collapse" >
-            <ul class=" nav navbar-nav navbar-right ">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#"></a>
+                </li>
                 <li>
                     <a href="#/user/{{model.userId}}/home">Search</a>
                 </li>
@@ -25,14 +31,47 @@
                 <li>
                     <a href="#/login">Logout</a>
                 </li>
-                <!--<li>-->
-                <!--<a href="post.html">Logout</a>-->
-                <!--</li>-->
-            </ul>
+                </ul>
         </div>
+        <!-- /.navbar-collapse -->
     </div>
-
+    <!-- /.container-fluid -->
 </nav>
+<!--<nav class="navbar navbar-default navbar-custom navbar-fixed-top">-->
+    <!--<div class="container-fluid">-->
+        <!--<div class="navbar-header">-->
+            <!--<button type="button" class="navbar-toggle collapsed"  data-toggle="collapse" data-target="#headicons" >-->
+                <!--<span class="sr-only">Toggle navigation</span>-->
+                <!--<span class="icon-bar"></span>-->
+                <!--<span class="icon-bar"></span>-->
+                <!--<span class="icon-bar"></span>-->
+            <!--</button>-->
+            <!--<a class="container-fluid navbar-brand"-->
+               <!--href="#/">Eat Hearty <span class="backgroundFont glyphicon glyphicon-cutlery"> </span> </a>-->
+        <!--</div>-->
+
+        <!--<div id="headicons" class=" navbar-collapse collapse" >-->
+            <!--<ul class=" nav navbar-nav navbar-right ">-->
+                <!--<li>-->
+                    <!--<a href="#/user/{{model.userId}}/home">Search</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href="#/user/{{model.userId}}">Profile</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href="#/user/{{model.userId}}/findPeople">Find People</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href="#/login">Logout</a>-->
+                <!--</li>-->
+                <!--&lt;!&ndash;<li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<a href="post.html">Logout</a>&ndash;&gt;-->
+                <!--&lt;!&ndash;</li>&ndash;&gt;-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</div>-->
+
+<!--</nav>-->
 
 <div class="home-pic back-pic container-fluid">
 
@@ -88,7 +127,8 @@
 
                         </div>
                         <div class="col-sm-4 col-md-4 col-lg-4 ">
-                            <img class="img img-box img-responsive" ng-src={{restaurant.image_url}} alt="No image provided">
+                            <img ng-src="{{restaurant.image_url}}" class="img-thumbnail pull-right" alt="The image is not available" >
+                            <!--<img class="img img-box img-responsive" ng-src={{restaurant.image_url}} alt="No image provided">-->
                         </div>
                         <!--<img ng-src="restaurant.image_url" width="100%">-->
                     </div>

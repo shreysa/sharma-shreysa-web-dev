@@ -23,10 +23,15 @@ module.exports = function (app, models) {
     app.post("/api/projectuser/login", passport.authenticate('proj'), login);
     app.post("/api/projectuser/logout", logout);
     app.get("/api/projectuser/loggedIn", loggedIn);
+    //app.get("/api/projectuser/findFriend/:username", findFriend)
     
     app.get("/api/projectuser/:userId", findUserById);
     app.delete("/api/projectuser/:userId", deleteUser);
     app.post("/api/projectuser/register", register);
+    var multer = require('multer');
+    var uploadProPic = multer ({ dest: __dirname+'/../../public/uploads' });
+
+    app.post("/api/uploadPic",uploadProPic.single('myFile'),uploadImage);
     
 
 
@@ -372,6 +377,47 @@ module.exports = function (app, models) {
                 }
             );
     }
+
+    function uploadImage(req, res) {
+       var userId = req.body.userId;
+
+        var myFile        = req.file;
+        if(myFile == null)
+        {
+            res.redirect("/project/#/user/" + userId);
+            return;
+        }
+
+        //var width         = req.body.width;
+
+        var originalname  = myFile.originalname; // file name on user's computer
+        var filename      = myFile.filename;     // new file name in upload folder
+        var path          = myFile.path;         // full path of uploaded file
+        var destination   = myFile.destination;  // folder where file is saved to
+        var size          = myFile.size;
+        var mimetype      = myFile.mimetype;
+
+
+
+        var userPhoto = {photo: "/uploads/" + filename};
+
+        userModel
+            .updateUser(userId, userPhoto)
+            .then(
+                function (stats) {
+                    // console.log(stats);
+                    res.redirect("/project/index.html#/user");
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+
+                }
+            );
+
+
+
+    }
+
 
 
 };

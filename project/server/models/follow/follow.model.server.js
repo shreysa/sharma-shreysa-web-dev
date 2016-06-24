@@ -12,6 +12,8 @@ module.exports = function () {
         unfollowUser: unfollowUser
     };
     return api;
+    
+   
 
 
     function findFollow(userId, OtherUserId) {

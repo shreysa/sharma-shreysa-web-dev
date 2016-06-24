@@ -12,6 +12,7 @@ module.exports = function (app, mongoose) {
     var followService =  require("./server/services/follow.service.server.js")(app, models);
     var likeService = require("./server/services/like.service.server.js")(app, models);
     var reviewService = require("./server/services/review.service.server.js")(app, models);
+    var categoryService = require("./server/services/category.service.server.js")(app, models);
     
    // var LikeSchema = require("./models/like/like.schema.server.js")(app, models);
    //  var ReviewSchema = require("./models/review/review.schema.server.js")(app, models);

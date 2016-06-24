@@ -11,11 +11,12 @@ module.exports = function () {
       //  review: [ReviewSchema],
         email: String,
         phone: Number,
-        // facebook: {
-        //     token: String,
-        //     id: String,
+        photo: String,
+        google: {
+            token: String,
+            id: String
         //     displayName: String
-        // },
+        },
         dateCreate: {type: Date, default: Date.now},
         dateUpdated: Date
     }, {collection: "project.user"});

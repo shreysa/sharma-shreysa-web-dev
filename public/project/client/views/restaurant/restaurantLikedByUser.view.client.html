@@ -53,7 +53,7 @@
             <div class="col-lg-2 fontcol">
                 <h6>Rating: {{model.restaurant.rating}}</h6>
             </div>
-            <div class="col-lg-2 fontcol" ng-if!="model.thisUserLikes">
+            <div class="col-lg-2 fontcol" ng-if="!model.thisUserLikes">
                 <h6>Like this restaurant:</h6>
                 <a class="glyphicon glyphicon-thumbs-up"  role="button"
                    ng-click="model.likeRestaurant()" ></a>
@@ -70,6 +70,7 @@
 <div class="container-fluid ">
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 pad">
         <ul class="nav nav-tabs">
+            <li role="presentation"><a href="#/user/{{model.userId}}/restaurant/category/{{model.yelpRestId}}">Similar restaurants</a></li>
             <li role="presentation" class="active">Liked By</li>
             <li role="presentation"><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/reviews">Reviews</a></li>
             <li role="presentation" ><a href="#/user/{{model.userId}}/{{model.yelpRestId}}/writeReview">Write a review</a></li>

@@ -8,30 +8,25 @@
     
         var vm = this;
         vm.user = {"userId" : $routeParams.userId};
-        vm.restaurant = {"restaurantId" : $routeParams.restaurantId};
-        vm.addReview  = addReview;
+     //   vm.restaurant = {"restaurantId" : $routeParams.restaurantId};
+        vm.otherUser = {"userId" : $routeParams.otherUserId};
+
 
 
         function init() {
             ReviewService
-                .findAllReviewsByRestaurantId(vm.restaurant.restaurantId)
+                .findAllReviewsByUserId(vm.otherUser.userId)
                 .then(
                     function (response) {
-                        vm.reviewsForRestaurant = response.data;
-                        console.log("here are the reviews");
-                        console.log(vm.reviewsForRestaurant);
-                    },
-                    function (error) {
-                        vm.error = "some error ocurred";
-                    }
-                );
-            ReviewService
-                .findAllReviewsByUserId(vm.user.userId)
-                .then(
-                    function (response) {
-                        vm.reviewsByUser = response.data;
-                        console.log("here are the reviews");
-                        console.log(vm.reviewsByUser);
+                        if(response.data !=null) {
+                            vm.reviewsByUser = response.data;
+                            console.log("here are the reviews");
+                            console.log(vm.reviewsByUser);
+                            vm.reviewsPresent = true;
+                        }else{
+                            vm.reviewsPresent = false;
+                        }
+                        
                     },
                     function (error) {
                         vm.error = "some error ocurred";

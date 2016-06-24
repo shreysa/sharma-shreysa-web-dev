@@ -2,6 +2,7 @@ module.exports = function (app, models) {
 
     var likeModel = models.likeModel;
     var restaurantModel = models.restaurantModel;
+    var categoryModel = models.categoryModel;
 
 
 
@@ -11,7 +12,7 @@ module.exports = function (app, models) {
     app.get("/api/projectuser/restaurant/:restaurantId/restaurantYelpId", findRestaurant);
     app.get("/api/projectuser/fetchLikedRestaurant/:userId", findAllLikedByUserId);
     app.get("/api/projectuser/restaurant/:restaurantId", findAllLikedByRestaurantId);
-   
+
 
 
     function likeRestaurant(req, res) {
@@ -20,13 +21,22 @@ module.exports = function (app, models) {
         var restaurant = req.body;
         var restaurantId = restaurant.restaurantId;
         var restDbId = "";
+        var restForDb = {
+            restaurantId: restaurant.restaurantId,
+            name: restaurant.name,
+            image: restaurant.image,
+            location: restaurant.location,
+            city: restaurant.city,
+            phone: restaurant.phone,
+            rating: restaurant.rating
+        }
         restaurantModel
             .findRestaurant(restaurantId)
             .then(
                 function (restObj, error) {
                     if (restObj == null) {
                         restaurantModel
-                            .addRestaurant(restaurant)
+                            .addRestaurant(restForDb)
                             .then(
                                 function (addRestObj) {
                                     restDbId = addRestObj._id;
@@ -34,12 +44,20 @@ module.exports = function (app, models) {
                                     var like = {
                                         _user: userId,
                                         _restaurant: restDbId
-                                    }
+                                    };
+                                    var catData = {
+                                        _restaurant: restDbId,
+                                        category : restaurant.category,
+                                        _user: userId,
+                                        rating: restaurant.rating
+                                    };
+
+
 
                                     likeModel
                                         .findLike(userId, restDbId)
                                         .then(
-                                            function (likeObj, error) {
+                                            function (likeObj) {
                                                 if (likeObj == null) {
                                                     likeModel
                                                         .addLike(like)
@@ -55,7 +73,33 @@ module.exports = function (app, models) {
                                                 } else {
                                                     res.json(likeObj);
                                                 }
+                                            }, function (error) {
+                                                res.status(400).send(error);
                                             });
+
+                                    categoryModel
+                                        .findRestaurant(restDbId)
+                                        .then(
+                                            function (catRestObj) {
+                                                if (catRestObj == null) {
+                                                    categoryModel
+                                                        .addCategoryRestaurant(catData)
+                                                        .then(
+                                                            function (addCatObj) {
+                                                                res.json(addCatObj);
+                                                            },
+                                                            function (err) {
+                                                                res.status(400).send(err);
+                                                            }
+                                                        );
+
+                                                } else {
+                                                    res.json(catRestObj);
+                                                }
+                                            },
+                                        function (error) {
+                                            res.status(400).send(err);
+                                        });
 
                                     res.json(addRestObj);
                                 },
@@ -70,7 +114,13 @@ module.exports = function (app, models) {
                         var like = {
                             _user: userId,
                             _restaurant: restDbId
-                        }
+                        };
+                        var catData = {
+                            _restaurant: restDbId,
+                            category : restaurant.category,
+                            _user: userId,
+                            rating: restaurant.rating
+                        };
 
                         likeModel
                             .findLike(userId, restDbId)
@@ -92,6 +142,29 @@ module.exports = function (app, models) {
                                         res.json(likeObj);
                                     }
                                 });
+                        categoryModel
+                            .findRestaurant(restDbId)
+                            .then(
+                                function (catRestObj) {
+                                    if (catRestObj == null) {
+                                        categoryModel
+                                            .addCategoryRestaurant(catData)
+                                            .then(
+                                                function (addCatObj) {
+                                                    res.json(addCatObj);
+                                                },
+                                                function (err) {
+                                                    res.status(400).send(err);
+                                                }
+                                            );
+
+                                    } else {
+                                        res.json(catRestObj);
+                                    }
+                                }, function (error) {
+                                    res.status(400).send(err);
+                                });
+
 
                         res.json(restObj);
                     }
@@ -167,8 +240,8 @@ module.exports = function (app, models) {
                 }
             );
     }
-    
-    
+
+
 
 
 

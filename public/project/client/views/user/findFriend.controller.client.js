@@ -24,6 +24,12 @@
                 .findUsers()
                 .then(function (response) {
                     vm.users = response.data;
+
+                    for(i = 0; i< vm.users.length; i++){
+                        if(vm.users[i]._id == vm.userId){
+                            vm.users.splice(i, 1);
+                        }
+                    }
                     console.log(vm.users[0]._id);
                 });
 
@@ -39,7 +45,7 @@
                 .then(function (response) {
                     vm.friends = response.data;
                     console.log(response.data);
-                    console.log(vm.friends.firstName);
+                    console.log(vm.friends.username + "yahi hai");
                 });
 
                

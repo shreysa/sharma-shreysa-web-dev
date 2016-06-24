@@ -11,10 +11,15 @@
             addFollow: addFollow,
             findAllFollowedByUserId: findAllFollowedByUserId,
             unfollowUser: unfollowUser,
-            findAllFollowingUserId: findAllFollowingUserId
+            findAllFollowingUserId: findAllFollowingUserId,
+            findFollow: findFollow
         };
 
         return api;
+        
+        function findFollow(userId, otherUserId) {
+            return $http.get("/api/projectuser/follow/" + userId + "/check/" + otherUserId);
+        }
 
 
         function addFollow(userId, otherUserId) {
