@@ -1,84 +1,73 @@
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+<nav class="navbar navbar-inverse  navbar-fixed-top">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed"  data-toggle="collapse" data-target="#headicons" >
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="container-fluid navbar-brand"
-               href="#/">Eat Hearty <span class="backgroundFont glyphicon glyphicon-cutlery"> </span> </a>
-        </div>
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <!--<div class="navbar-header page-scroll">-->
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="#navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand page-scroll">Eat Hearty <span class="backgroundFont glyphicon glyphicon-cutlery"> </span> </a>
+    </div>
 
-        <div id="headicons" class=" navbar-collapse collapse" >
-            <ul class=" nav navbar-nav navbar-right ">
-                <li>
-                    <a href="#/user/{{model.userId}}/home">Search</a>
-                </li>
-                <li>
-                    <a href="#/user/{{model.userId}}">Profile</a>
-                </li>
-                <li>
-                    <a href="#/user/{{model.userId}}/findPeople">Find People</a>
-                </li>
-                <li>
-                    <a href="#/login">Logout</a>
-                </li>
-                <!--<li>-->
-                <!--<a href="post.html">Logout</a>-->
-                <!--</li>-->
-            </ul>
-        </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="navbar-collapse collapse " id="navbar">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="#/user/{{model.user.userId}}/home">Search Restaurants</a>
+            </li>
+            <li>
+                <a href="#/user/{{model.user.userId}}">Profile</a>
+            </li>
+            <li>
+                <a href="#/user/{{model.user.userId}}/findPeople">Find People</a>
+            </li>
+            <li>
+                <a href="#/login">Logout</a>
+            </li>
+            <!--<li>-->
+            <!--<a href="post.html">Logout</a>-->
+            <!--</li>-->
+        </ul>
+    </div>
     </div>
 
 </nav>
-
-<div class="container-fluid">
-
+<div class="pad-top">
+    <div ng-if="model.success"
+         class="alert alert-success"
+         role="alert">
+        {{model.success}}
+    </div>
+    <div ng-if="model.error"
+         class="alert alert-danger"
+         role="alert">
+        {{model.error}}
+    </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 pad">
         <ul class="nav nav-tabs">
-            <li role="presentation"> <a href="#/user/{{model.user.userId}}/{{model.otherUser.userId}}/profile">Profile</a></li>
-            <li role="presentation"> <a href="#/user/{{model.user.userId}}/{{model.otherUser.userId}}/likes"> Likes</a></li>
-            <li role="presentation" class="active">Reviews</a></li>
-            <li role="presentation"><a href="#/user/{{model.user.userId}}/followedBy/{{model.otherUser.userId}}">Followers</a></li>
-            <li role="presentation"><a href="#/user/{{model.user.userId}}/{{model.otherUser.userId}}/follows">Follows</a></li>
+            <li class=""><a href="#/user/{{model.user.userId}}/{{model.otherUser.userId}}/profile"  data-toggle="tab" aria-expanded="false">Profile</a></li>
+            <li class="">  <a href="#/user/{{model.user.userId}}/{{model.otherUser.userId}}/likes" data-toggle="tab" aria-expanded="false">Likes</a></li>
+            <li class="active"> <a href="#review"  data-toggle="tab" aria-expanded="true">Reviews</a></li>
+            <li class=""> <a href="#/user/{{model.user.userId}}/followedBy/{{model.otherUser.userId}}" data-toggle="tab" aria-expanded="false">Followers</a></li>
+            <li class=""> <a href="#/user/{{model.user.userId}}/{{model.otherUser.userId}}/follows" data-toggle="tab" aria-expanded="false">Follows</a></li>
         </ul>
-        <div class="container-fluid">
-            <div ng-if="model.success"
-                 class="alert alert-success"
-                 role="alert">
-                {{model.success}}
-            </div>
-            <div ng-if="model.error"
-                 class="alert alert-danger"
-                 role="alert">
-                {{model.error}}
-            </div>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="review">
+                <div class="row">
 
-            <div class="row">
-
-                <div class="col-lg-3 hidden-lg col-md-3 hidden-md col-sm-3 hidden-sm">
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6" ng-if="!model.reviewsPresent" >
-                    <div       ng-repeat="review in model.reviewsByUser">
-                        <div class="container-fluid pad box-search res-name">
-                            <!--<div class="col-sm-4 col-md-4 col-lg-4 "></div>-->
-                            <div class="col-sm-12 col-md-12  col-lg-12">
-                                <h5><a href="#/user/{{model.user.userId}}/restaurant/{{restaurant._restaurant.restaurantId}}">
-                                    {{restaurant._restaurant.name}}</a></h5>
+                    <div class="col-lg-3 hidden-lg col-md-3 hidden-md col-sm-3 hidden-sm">
+                    </div>
+                    <div  class="col-lg-6 col-md-6 col-sm-6 paddingfromtop" ng-if="model.reviewsPresent" >
+                        <div       ng-repeat="review in model.reviewsByUser">
+                            <div class="well well-sm ">
+                                <h5><a href="#/user/{{model.user.userId}}/restaurant/{{review._restaurant.restaurantId}}">
+                                    {{review.reviewText}}</a></h5>
                             </div>
-                            <!--<div class="col-sm-4 col-md-4 col-lg-4 ">-->
-                            <!--&lt;!&ndash;<img class="img img-box img-responsive" ng-src={{restaurant.image_url}} alt="No image provided">&ndash;&gt;-->
-                            <!--</div>-->
-                            <!--&lt;!&ndash;<img ng-src="restaurant.image_url" width="100%">&ndash;&gt;-->
                         </div>
-                        <!--<div ng-if!="model.follows">-->
-                        <!--<h4>{{model.otherUser.username}} is not following anyone!!</h4>-->
-                        <!--</div>-->
                     </div>
-                    </div>
-                <div class="col-lg-6 col-md-6 col-sm-6" ng-if="model.reviewsPresent" >
+                    <div class="col-lg-6 col-md-6 col-sm-6" ng-if="!model.reviewsPresent" >
                         <h3> No reviews made!</h3>
                     </div>
 

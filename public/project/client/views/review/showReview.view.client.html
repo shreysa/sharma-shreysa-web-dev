@@ -1,18 +1,19 @@
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+<nav class="navbar navbar-inverse  navbar-fixed-top">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed"  data-toggle="collapse" data-target="#headicons" >
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="container-fluid navbar-brand"
-               href="#/">Eat Hearty <span class="backgroundFont glyphicon glyphicon-cutlery"> </span> </a>
-        </div>
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <!--<div class="navbar-header page-scroll">-->
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="#navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand page-scroll">Eat Hearty <span class="backgroundFont glyphicon glyphicon-cutlery"> </span> </a>
+    </div>
 
-        <div id="headicons" class=" navbar-collapse collapse" >
-            <ul class=" nav navbar-nav navbar-right ">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="navbar-collapse collapse " id="navbar">
+        <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="#/user/{{model.userId}}/home">Search</a>
                 </li>
@@ -33,7 +34,8 @@
     </div>
 
 </nav>
-<div class="container-fluid res-back-color box-search">
+<!--<div class="container-fluid res-back-color box-search">-->
+<div class="container-fluid restaurant-detail pad-top">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-3 pull-right">
@@ -54,12 +56,12 @@
                 <h6>Rating: {{model.restaurant.rating}}</h6>
             </div>
             <div class="col-lg-2 fontcol" ng-if="!model.thisUserLikes">
-                <h6>Like this restaurant:</h6>
+                <h5>Like this restaurant:</h5>
                 <a class="glyphicon glyphicon-thumbs-up"  role="button"
                    ng-click="model.likeRestaurant()" ></a>
             </div>
             <div class="col-lg-2 fontcol" ng-if="model.thisUserLikes">
-                <h6>Unlike this restaurant:</h6>
+                <h5>Unlike this restaurant:</h5>
                 <a class="glyphicon glyphicon-thumbs-down"  role="button"
                    ng-click="model.unlikeRestaurant()" ></a>
             </div>
@@ -69,18 +71,44 @@
 </div>
 <div class="container-fluid ">
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 pad">
-        <ul class="nav nav-tabs">
-            <li role="presentation"><a href="#/user/{{model.userId}}/restaurant/category/{{model.yelpRestId}}">Similar Restaurants</a></li>
-            <li role="presentation"><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/likes">Liked By</a></li>
-            <li role="presentation" class="active">Reviews</li>
-            <li role="presentation"><a href="#/user/{{model.userId}}/{{model.yelpRestId}}/writeReview">Write a review</a></li>
-        </ul>
-<div class="container">
-    <div class="panel panel-info"
-        ng-repeat="review in model.reviews">
-        <div class="panel-heading"><a href="#/user/{{model.userId}}/{{review._user._id}}/profile">{{review._user.username}}</a></div>
-        <div class="panel-body">{{review.reviewText}}</div>
-    </div>
-</div>
+            <ul class="nav nav-tabs">
+                <div ng-if="model.success"
+                     class="alert alert-success"
+                     role="alert">
+                    {{model.success}}
+                </div>
+                <div ng-if="model.error"
+                     class="alert alert-danger"
+                     role="alert">
+                    {{model.error}}
+                </div>
+
+                <li class=""> <a href="#/user/{{model.userId}}/restaurant/category/{{model.yelpRestId}}" data-toggle="tab" aria-expanded="false">Similar Rating</a></li>
+                <li class=""><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/likes" data-toggle="tab" aria-expanded="false">Liked By</a></li>
+                <li class="active"> <a href="#reviews" data-toggle="tab" aria-expanded="true">Reviews</a></li>
+                <li class=""> <a href="#/user/{{model.userId}}/{{model.yelpRestId}}/writeReview" data-toggle="tab" aria-expanded="false">Write a Review</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade active in" id="reviews">
+                    <div class="row">
+                        <div class="col-lg-1 hidden-lg col-md-1 hidden-md col-sm-1 hidden-sm">
+                        </div>
+                        <div  class="col-lg-10 col-md-10 col-sm-10 paddingfromtop"  ng-if="model.hasBeenReviewed" >
+                            <div        ng-repeat="review in model.reviews">
+                                <div class="well well-sm ">
+
+                                    <h5> <a href="#/user/{{model.userId}}/{{review._user._id}}/profile">
+                                        {{review._user.username}} wrote: {{review.reviewText}}
+                                    </a> </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-10" ng-if="!model.hasBeenReviewed" >
+                            <h3> No reviews yet!!</h3>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1"></div>
+                </div>
+            </div>
         </div>
-    </div>
+</div>

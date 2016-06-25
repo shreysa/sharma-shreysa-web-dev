@@ -14,8 +14,8 @@
         return api;
         
         function findRestaurantByCategory(restaurantId, category) {
-            return $http.get("/api/projectuser/category/" + restaurantId + "/restaurant/" + category);
-            // return $http.get("/api/projectuser/category/" + restaurantId + "/restaurant",  category);
+            return $http.put("/api/projectuser/category/" + restaurantId + "/restaurant/", category);
+            
         }
         
         function findRestaurantByRating(rating) {

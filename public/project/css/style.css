@@ -14,14 +14,21 @@ body {
 }
 .frn-page{
     background-image: url(friendspage.jpg);
-padding: 0 0 0 0;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    position: fixed;
 }
 .pad-top{
-    padding: 5px;
+    padding-top: 70px;
+}
+.pad-toponprofile{
+    padding-top: 50px;
 }
 
 .paddingfromtop{
-    padding-top: 60px;
+    padding-top: 10px;
 }
 
 .res-back-color{
@@ -37,7 +44,7 @@ padding: 0 0 0 0;
 }
 
 .footer-back-col{
-    background-color: #c0a16b;
+    background-color: orange;
 }
 .home-pic {
 
@@ -49,6 +56,25 @@ padding: 0 0 0 0;
 }
 .back-pic{
     background-image: url(restaurant2.jpg);
+    background-size: cover;
+    width: 100%;
+    height: auto;
+    background-position: center;
+    position: relative;
+}
+
+.restaurant-detail{
+    background-color: #b4a4ff;
+    background-size: cover;
+    width: 100%;
+    height: auto;
+    background-position: center;
+    position: relative;
+}
+
+
+.pad-left{
+    padding-left: 15px;
 }
 
 .home-padding{
@@ -77,6 +103,15 @@ padding: 0 0 0 0;
     font-size: medium;
 
 
+}
+
+.home-box-pad{
+    padding: 20px 20px 10px 20px
+}
+
+
+.box-search2{
+    box-shadow: 0px 0px 0px #999;
 }
 
 .pad{

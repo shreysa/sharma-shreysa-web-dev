@@ -20,7 +20,7 @@ module.exports = function () {
 
     function findAllReviewsByUserId(userId) {
         return Review.find({_user: userId})
-          .populate('_restaurant', '_id name' );
+          .populate('_restaurant', '_id name restaurantId' );
     }
 
     function updateReview(reviewId, review) {

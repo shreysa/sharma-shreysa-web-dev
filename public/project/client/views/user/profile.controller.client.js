@@ -10,7 +10,7 @@
         vm.updateUser = updateUser;
         vm.unregister = unregister;
         vm.navigateToProfile = navigateToProfile;
-        // vm.logout = logout;
+       vm.logout = logout;
         var index = -1;
         var id = $routeParams["userId"];
 

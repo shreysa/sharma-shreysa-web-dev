@@ -14,9 +14,14 @@
                 .findAllLikedByUserId(vm.otherUser.otherUserId)
                 .then
                     (function (response) {
-                    vm.likedRestaurant = response.data;
-                       console.log(vm.likedRestaurant);
-                       console.log(vm.likedRestaurant[0]._restaurant.name);
+                        if(response.data!= null) {
+                            vm.likedRestaurant = response.data;
+                            console.log(vm.likedRestaurant);
+                            console.log(vm.likedRestaurant[0]._restaurant.name);
+                            vm.hasLiked = true;
+                        }else{
+                            vm.hasLiked=false;
+                        }
                 // console.log(vm.user.email);
                 }, function (error) {
                         vm.error = error;

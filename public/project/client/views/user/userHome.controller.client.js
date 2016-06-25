@@ -3,11 +3,17 @@
         .module("EatHeartyApp")
         .controller("UserHomeController", UserHomeController);
 
-    function UserHomeController(YelpService, $location, $routeParams) {
+    function UserHomeController(YelpService, $location, $routeParams, $rootScope) {
         var vm = this;
 
         vm.userId = $routeParams.userId;
 // vm.userId = $routeParams.userId;
+
+        function init() {
+            if (!$rootScope.currentUser) {
+            }
+        }
+            init();
 
         vm.findRestaurant = findRestaurant;
         vm.findRestaurantById = findRestaurantById;

@@ -22,6 +22,7 @@
                             vm.reviewsByUser = response.data;
                             console.log("here are the reviews");
                             console.log(vm.reviewsByUser);
+                            console.log(vm.reviewsByUser[0]._restaurant.name);
                             vm.reviewsPresent = true;
                         }else{
                             vm.reviewsPresent = false;

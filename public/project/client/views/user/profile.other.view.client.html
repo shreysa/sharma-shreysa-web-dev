@@ -1,36 +1,42 @@
-<nav class="navbar navbar-default footer-back-col navbar-custom navbar-fixed-top">
+<nav class="navbar navbar-inverse  navbar-fixed-top">
     <div class="container-fluid">
-        <div class="navbar-header footer-color">
-            <button type="button" class="navbar-toggle collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#/">Eat Hearty <span class="backgroundFont glyphicon glyphicon-cutlery"> </span> </a>
-        </div>
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <!--<div class="navbar-header page-scroll">-->
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="#navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand page-scroll">Eat Hearty <span class="backgroundFont glyphicon glyphicon-cutlery"> </span> </a>
+    </div>
 
-        <div class="collapse navbar-collapse" >
-            <ul class="nav navbar-nav navbar-right">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="navbar-collapse collapse " id="navbar">
+        <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#/user/{{model.user.userId}}">Home</a>
+                    <a href="#/user/{{model.user.userId}}/home">Search Restaurants</a>
                 </li>
                 <li>
-                <a ng-if="!model.userFollows" ng-click="model.addFollow()">Follow {{model.userOther.username}}</a>
+                    <a ng-if="!model.userFollows" ng-click="model.addFollow()">Follow {{model.userOther.username}}</a>
                 </li>
                 <li>
                     <a ng-if="model.userFollows" ng-click="model.unfollowUser()">Unfollow {{model.userOther.username}}</a>
                 </li>
                 <li>
-                    <a href="#/login">Logout</a>
+                    <a href="#/user/{{model.user.userId}}/findPeople">Find People</a>
                 </li>
-                <!--<li>-->
-                <!--<a href="post.html">Logout</a>-->
-                <!--</li>-->
+            <li>
+                <a href="#/user/{{model.user.userId}}">Profile</a>
+            </li>
             </ul>
         </div>
+        <!-- /.navbar-collapse -->
     </div>
+    <!-- /.container-fluid -->
 </nav>
+
+
 <div class="pad-top">
 <div ng-if="model.success"
      class="alert alert-success"
@@ -44,17 +50,14 @@
 </div>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 pad">
     <ul class="nav nav-tabs">
-        <li role="presentation" class="active">Profile</li>
-        <li role="presentation"> <a href="#/user/{{model.user.userId}}/{{model.userOther._id}}/likes">Likes</a></li>
-        <li role="presentation"><a href="#/user/{{model.user.userId}}/{{model.userOther._id}}/restaurant/reviewsByUser">Reviews</a></li>
-        <li role="presentation"><a href="#/user/{{model.user.userId}}/followedBy/{{model.userOther._id}}">Followers</a></li>
-        <li role="presentation"> <a href="#/user/{{model.user.userId}}/{{model.userOther._id}}/follows" >Follows</a></li>
-    </ul>
-<div class="container">
-
-
-
-
+    <li class="active"><a href="#profile" data-toggle="tab" aria-expanded="true">Profile</a></li>
+    <li class=""> <a href="#/user/{{model.user.userId}}/{{model.userOther._id}}/likes" data-toggle="tab" aria-expanded="false">Likes</a></li>
+        <li class=""> <a href="#/user/{{model.user.userId}}/{{model.userOther._id}}/restaurant/reviewsByUser" data-toggle="tab" aria-expanded="false">Reviews</a></li>
+        <li class=""> <a href="#/user/{{model.user.userId}}/followedBy/{{model.userOther._id}}" data-toggle="tab" aria-expanded="false">Followers</a></li>
+        <li class=""> <a href="#/user/{{model.user.userId}}/{{model.userOther._id}}/follows" data-toggle="tab" aria-expanded="false">Follows</a></li>
+        </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade active in" id="profile">
     <form>
         <div class="form-group">
             <label for="Username">Username</label>

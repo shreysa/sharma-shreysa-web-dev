@@ -1,18 +1,19 @@
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+<nav class="navbar navbar-inverse  navbar-fixed-top">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed"  data-toggle="collapse" data-target="#headicons" >
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="container-fluid navbar-brand"
-               href="#/">Eat Hearty <span class="backgroundFont glyphicon glyphicon-cutlery"> </span> </a>
-        </div>
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <!--<div class="navbar-header page-scroll">-->
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="#navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand page-scroll">Eat Hearty <span class="backgroundFont glyphicon glyphicon-cutlery"> </span> </a>
+    </div>
 
-        <div id="headicons" class=" navbar-collapse collapse" >
-            <ul class=" nav navbar-nav navbar-right ">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="navbar-collapse collapse " id="navbar">
+        <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="#/user/{{model.userId}}/home">Search</a>
                 </li>
@@ -33,7 +34,8 @@
     </div>
 
 </nav>
-<div class="container-fluid res-back-color box-search">
+<!--<div class="container-fluid res-back-color box-search">-->
+<div class="container-fluid restaurant-detail pad-top">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-3 pull-right">
@@ -54,12 +56,12 @@
                 <h6>Rating: {{model.restaurant.rating}}</h6>
             </div>
             <div class="col-lg-2 fontcol" ng-if="!model.thisUserLikes">
-                <h6>Like this restaurant:</h6>
+                <h5>Like this restaurant:</h5>
                 <a class="glyphicon glyphicon-thumbs-up"  role="button"
                    ng-click="model.likeRestaurant()" ></a>
             </div>
             <div class="col-lg-2 fontcol" ng-if="model.thisUserLikes">
-                <h6>Unlike this restaurant:</h6>
+                <h5>Unlike this restaurant:</h5>
                 <a class="glyphicon glyphicon-thumbs-down"  role="button"
                    ng-click="model.unlikeRestaurant()" ></a>
             </div>
@@ -67,18 +69,61 @@
     </div>
 </div>
 </div>
-<div class="container-fluid ">
+<!--<div class="container-fluid res-back-color box-search">-->
+    <!--<div class="container-fluid">-->
+        <!--<div class="row">-->
+            <!--<div class="col-lg-3 pull-right">-->
+                <!--<img class="img img-responsive img-thumbnail"-->
+                     <!--ng-src="{{model.restaurant.image_url}}">-->
+            <!--</div>-->
+            <!--<div class="col-lg-5 fontcol">-->
+                <!--&lt;!&ndash;<div class="col-lg-6">&ndash;&gt;-->
+                <!--<h1>{{model.restaurant.name}}</h1>-->
+                <!--<h3>Address: {{model.restaurant.location.address[0]}}, {{model.restaurant.location.city}}</h3>-->
+                <!--<h4>Phone: {{model.restaurant.display_phone}}</h4>-->
+                <!--<h4>Cuisines: {{model.restaurant.categories[0][0]}}, {{model.restaurant.categories[1][0]}}</h4>-->
+
+
+            <!--</div>-->
+
+            <!--<div class="col-lg-2 fontcol">-->
+                <!--<h6>Rating: {{model.restaurant.rating}}</h6>-->
+            <!--</div>-->
+            <!--<div class="col-lg-2 fontcol" ng-if="!model.thisUserLikes">-->
+                <!--<h6>Like this restaurant:</h6>-->
+                <!--<a class="glyphicon glyphicon-thumbs-up"  role="button"-->
+                   <!--ng-click="model.likeRestaurant()" ></a>-->
+            <!--</div>-->
+            <!--<div class="col-lg-2 fontcol" ng-if="model.thisUserLikes">-->
+                <!--<h6>Unlike this restaurant:</h6>-->
+                <!--<a class="glyphicon glyphicon-thumbs-down"  role="button"-->
+                   <!--ng-click="model.unlikeRestaurant()" ></a>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<div class="container-fluid">
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 pad">
         <ul class="nav nav-tabs">
-            <li role="presentation"><a href="#/user/{{model.userId}}/restaurant/category/{{model.yelpRestId}}">Similar Restaurants</a></li>
-            <li role="presentation"><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/likes">Liked By</a></li>
-            <li role="presentation" ><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/reviews">Reviews</a></li>
-            <li role="presentation" class="active"> Write a review</li>
-        </ul>
-        <div class="container" >
-            <div ng-if="model.error" class="alert alert-danger" role="alert">
+            <div ng-if="model.success"
+                 class="alert alert-success"
+                 role="alert">
+                {{model.success}}
+            </div>
+            <div ng-if="model.error"
+                 class="alert alert-danger"
+                 role="alert">
                 {{model.error}}
             </div>
+
+            <li class=""> <a href="#/user/{{model.userId}}/restaurant/category/{{model.yelpRestId}}" data-toggle="tab" aria-expanded="false">Similar Rating</a></li>
+            <li class=""> <a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/likes" data-toggle="tab" aria-expanded="false">Liked By</a></li>
+            <li class=""> <a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/reviews" data-toggle="tab" aria-expanded="false">Reviews</a></li>
+            <li class="active"> <a href="#writeReview" data-toggle="tab" aria-expanded="true">Write a Review</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="writeReview">
             <form name="reviewForm" ng-app>
                 <div class="control-group form-group">
                      <!--ng-class="{true: 'error'}[submitted && reviewForm.review.$error.required]">-->
@@ -98,6 +143,7 @@
                 <a  ng-click="model.addReview(model.review)"
                     class="btn btn-primary">Submit Review</a>
             </form>
+                </div>
         </div>
     </div>
 </div>

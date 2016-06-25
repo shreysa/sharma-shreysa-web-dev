@@ -10,10 +10,6 @@ module.exports = function () {
         findRestaurant: findRestaurant,
         findRestaurantByCategory: findRestaurantByCategory,
         findRestaurantByRating: findRestaurantByRating
-        // addFollow: addFollow,
-        // findAllFollowedByUserId: findAllFollowedByUserId,
-        // findAllFollowingUserId: findAllFollowingUserId,
-        // unfollowUser: unfollowUser
     };
     return api;
 

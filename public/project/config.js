@@ -59,6 +59,7 @@
                 controllerAs: "model"
             })
 
+            
             .when("/home", {
                 templateUrl: "client/views/user/home.view.client.html",
                 controller: "HomeController",

@@ -38,9 +38,14 @@
                                 .findAllLikedByRestaurantId(vm.restId)
                                 .then(
                                     function (response) {
+                                        if(response.data.length>0){
                                         console.log("*******who liked is next");
                                         vm.usersWhoLiked = response.data;
                                         console.log(response.data);
+                                        vm.hasLiked = true;
+                                    }else{
+                                vm.hasLiked= false;
+                            }
                                     }, function (error) {
                                         vm.error = error
                                     });
@@ -64,41 +69,55 @@
                                 .findAllReviewsByRestaurantId(vm.restId)
                                 .then(
                                     function (response) {
+                                        if(response.data != null){
                                         vm.reviews = response.data;
                                         console.log("this is the review data");
                                         console.log(vm.reviews);
+                                        vm.hasBeenReviewed = true;
+                                    }else{
+                                vm.hasBeenReviewed = false;
+                            }
                                     }, function (error) {
                                         vm.error = error;
                                     }
                                 );
+                            
                             var ratingForRest = {
                                 rating : vm.restaurant.rating
                             };
-                            CategoryService
-                                .findRestaurantByCategory(vm.yelpRestId, vm.restaurant.categories[0][0])
-                                .then(
-                                    function (response) {
-                                        console.log("category is");
-                                      vm.categoryRestaurant =  response.data;
-                                        console.log(vm.categoryRestaurant);
-                                    }
-                                );
+                            // var category = {
+                            //     category: vm.restaurant.categories[0][0]
+                            // };
+                            // console.log(category.category + " before calling category");
+                            // CategoryService
+                            //     .findRestaurantByCategory(vm.yelpRestId, category)
+                            //     .then(
+                            //         function (response) {
+                            //             console.log("category is");
+                            //           vm.categoryRestaurant =  response.data;
+                            //             console.log(vm.categoryRestaurant);
+                            //         }
+                            //     );
                             CategoryService
                                 .findRestaurantByRating(ratingForRest)
                                 .then(
                                     function (response) {
+                                        if(response.data != null){
                                         console.log("rating is when rest was old");
                                         vm.ratingRestaurant = response.data;
-                                        for(i = 0; i< vm.ratingRestaurant.length; i++){
-                                            if(vm.ratingRestaurant[i]._restaurant.name == vm.restaurant.name){
+                                        for(i = 0; i< vm.ratingRestaurant.length; i++) {
+                                            if (vm.ratingRestaurant[i]._restaurant.name == vm.restaurant.name) {
                                                 vm.ratingRestaurant.splice(i, 1);
                                             }
                                         }
-                                        // vm.ratingRestaurant.splice(vm.restaurant.id)
-                                        console.log(vm.ratingRestaurant);
+                                            vm.hasRatingRestaurant = true;
+
+                                        }else{
+                                            vm.hasRatingRestaurant = false;
+
+                                        }
                                     }
                                 );
-
                         }
                         else {
                             vm.thisUserLikes = false;
@@ -107,22 +126,35 @@
                                 rating : vm.restaurant.rating
                             };
 
-                            CategoryService
-                                .findRestaurantByCategory(vm.yelpRestId, vm.restaurant.categories[0][0])
-                                .then(
-                                    function (response) {
-                                        console.log("category is");
-                                        vm.categoryRestaurant = response.data;
-                                        console.log(vm.categoryRestaurant);
-                                    }
-                                );
+                            // CategoryService
+                            //     .findRestaurantByCategory(vm.yelpRestId, vm.restaurant.categories[0][0])
+                            //     .then(
+                            //         function (response) {
+                            //             console.log("category is");
+                            //             vm.categoryRestaurant = response.data;
+                            //             console.log(vm.categoryRestaurant);
+                            //         }
+                            //     );
                             CategoryService
                                 .findRestaurantByRating(ratingForRest)
                                 .then(
                                     function (response) {
+                                        if(response.data != null){
                                         console.log("rating is when rest was new");
                                         vm.ratingRestaurant = response.data;
                                         console.log(vm.ratingRestaurant);
+                                        console.log(vm.ratingRestaurant[0]._restaurant.name);
+                                        for(i = 0; i< vm.ratingRestaurant.length; i++) {
+                                            if (vm.ratingRestaurant[i]._restaurant.name == vm.restaurant.name) {
+                                                vm.ratingRestaurant.splice(i, 1);
+                                            }
+                                        }
+                                        vm.hasRatingRestaurant = true;
+
+                                    }else{
+                                vm.hasRatingRestaurant = false;
+
+                            }
                                     }
                                 );
                         }
@@ -132,35 +164,11 @@
                         );
 
 
-                            //
-                            // CategoryService
-                            //     .addCategoryRestaurant( vm.restaurant)
-                            //     .then(
-                            //         function (response) {
-                            //             console.log("category added");
-                            //             console.log(response.data);
-                            //         }
-                            //     );
-                            // CategoryService
-                            //     .findAllFromThisCategory(vm.restId)
-                            //     .then(function (response) {
-                            //             vm.categoryRestaurant = response.data;
-                            //             console.log("this is the category data");
-                            //             console.log(vm.categoryRestaurant);
-                            //         }, function (error) {
-                            //             vm.error = error;
-                            //         }
-                            //     );
-
                     },
              function (error) {
                         vm.error = "some error ocurred";
                     }
                 );
-
-
-            
-
         }
         init();
 
@@ -181,7 +189,7 @@
                 .then(
                     function (response) {
                         console.log("success added");
-                        vm.success = "Thank you for liking" + vm.restaurant.name;
+                        vm.success = "Thank you for liking " + vm.restaurant.name;
                         console.log(response.data);
                         console.log("this is the rest id after liking the restaurant");
                         vm.restId = response.data._id;
@@ -189,9 +197,14 @@
                             .findAllLikedByRestaurantId(vm.restId)
                             .then(
                                 function (response) {
+                                    if(response.data.length>0){
                                     vm.usersWhoLiked = response.data;
                                     console.log(response.data);
                                     console.log(vm.usersWhoLiked[0]._user.username);
+                                    vm.hasLiked = true;
+                                }else{
+                            vm.hasLiked = false;
+                        }
                                 }, function (error) {
                                     vm.error = error
                                 });
@@ -216,9 +229,14 @@
                             .findAllLikedByRestaurantId(vm.restId)
                             .then(
                                 function (response) {
-                                    vm.usersWhoLiked = response.data;
-                                    console.log(response.data);
-                                    console.log(vm.usersWhoLiked[0]._user.username);
+                                    if(response.data!= null) {
+                                        vm.usersWhoLiked = response.data;
+                                        console.log(response.data);
+                                        console.log(vm.usersWhoLiked[0]._user.username);
+                                        vm.hasLiked = true;
+                                    }else{
+                                        vm.hasLiked = false;
+                                    }
                                 }, function (error) {
                                     vm.error = error
                                 });
@@ -234,7 +252,7 @@
 
         function addReview(review) {
             if (review) {
-                var restaurant = {
+                var restaurantReview = {
                     restaurantId: vm.restaurant.id,
                     name: vm.restaurant.name,
                     image: vm.restaurant.image_url,
@@ -246,11 +264,12 @@
                     category: vm.restaurant.categories
                 };
                 ReviewService
-                    .addReview(vm.userId, vm.yelpRestId, restaurant)
+                    .addReview(vm.userId, vm.yelpRestId, restaurantReview)
                     .then(
                         function (response) {
                             console.log("review added");
                             console.log(response.data);
+                            vm.success = "Review Submitted!";
                         }, function (error) {
                             vm.error = "some error ocurred";
                         }
