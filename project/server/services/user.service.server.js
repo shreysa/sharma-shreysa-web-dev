@@ -56,7 +56,7 @@ module.exports = function (app, models) {
         callbackURL  : process.env.GOOGLE_CALLBACK_URL
     };
 
-    passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+    passport.use('google',new GoogleStrategy(googleConfig, googleStrategy));
 
     function localStrategy(username, password, done) {
         userModel
