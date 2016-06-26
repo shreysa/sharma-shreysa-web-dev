@@ -70,7 +70,7 @@ body {
     width: 100%;
     height: auto;
     background-position: center;
-    position: relative;
+    position: absolute;
 }
 .back-pic{
     background-image: url(restaurant2.jpg);
