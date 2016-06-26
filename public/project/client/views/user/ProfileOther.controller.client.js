@@ -3,7 +3,7 @@
         .module("EatHeartyApp")
         .controller("ProfileOtherController", ProfileOtherController);
 
-    function ProfileOtherController($routeParams, UserService, $location, FollowService) {//, $rootScope) {
+    function ProfileOtherController($routeParams, UserService, $location, FollowService) {
 
         var vm = this;
         console.log($routeParams.userId);
@@ -11,7 +11,7 @@
         var otherUserId = $routeParams.otherUserId;
         vm.addFollow = addFollow;
         vm.unfollowUser = unfollowUser;
-       vm.userFollows = false;
+       
 
         function init() {
             UserService
