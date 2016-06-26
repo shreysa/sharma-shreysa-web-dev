@@ -12,6 +12,7 @@
         vm.addReview = addReview;
         vm.updateReview = updateReview;
         vm.deleteReview = deleteReview;
+        vm.checkUser = checkUser;
 
         vm.userId = $routeParams.userId;
         var username = "";
@@ -407,6 +408,15 @@
                         vm.error = "review could not be deleted";
                     }
                 );
+        }
+
+        function checkUser(userId) {
+            if(userId == vm.userId){
+                //return true;
+                $location.url("/user/" + vm.userId);
+            }else{
+                $location.url("/user/" + vm.userId + "/" + userId + "/profile");
+            }
         }
 
 

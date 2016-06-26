@@ -97,7 +97,9 @@
                         <div      ng-repeat="users in model.usersWhoLiked">
                             <div class="well well-sm ">
 
-                                <h5>  <a href="#/user/{{model.userId}}/{{users._user._id}}/profile">{{users._user.username}}</a> </h5>
+                                <h5>  <a ng-click="model.checkUser(users._user._id)">
+                                    <!--<a href="#/user/{{model.userId}}/{{users._user._id}}/profile">-->
+                                        {{users._user.username}}</a> </h5>
                             </div>
                         </div>
                     </div>

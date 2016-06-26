@@ -94,7 +94,8 @@
                             <div        ng-repeat="review in model.reviews">
                                 <div class="well well-sm ">
 
-                                    <h5> <a href="#/user/{{model.userId}}/{{review._user._id}}/profile">
+                                    <h5> <a ng-click="model.checkUser(review._user._id)">
+                                        <!--<a href="#/user/{{model.userId}}/{{review._user._id}}/profile">-->
                                         {{review._user.username}} : </a> {{review.reviewText}}
                                   </h5>
                                 </div>
