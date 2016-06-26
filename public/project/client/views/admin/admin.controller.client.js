@@ -3,7 +3,7 @@
         .module("EatHeartyApp")
         .controller("AdminController", AdminController);
 
-    function AdminController(UserService, ReviewService, $location, $routeParams, LikeService, FollowService) {
+    function AdminController(UserService, ReviewService, $location, $routeParams, LikeService, FollowService, $window) {
         var vm = this;
         vm.user = {"userId": $routeParams.userId};
         vm.deleteUser = deleteUser;
@@ -52,7 +52,7 @@
                                     if (response.data != null) {
                                         vm.reviews = response.data;
                                         console.log(vm.reviews);
-                                        console.log(vm.reviews[0]._user.username);
+                                        // console.log(vm.reviews[0]._user.username);
                                         vm.hasReviews = true;
                                     } else {
                                         vm.hasReviews = false;
@@ -67,18 +67,19 @@
                             .getAdmins()
                             .then(
                                 function (response) {
-                                    if (response.data != null) {
-                                        vm.admins = response.data;
-                                        for (i = 0; i <= vm.admins.length; i++) {
-                                            if (vm.admins[i]._id == vm.user.userId) {
-                                                vm.admins.splice(i, 1);
-                                            }
+                                    if (response.data.length >0) {
+                                        vm.allAdmins = response.data;
 
+                                        vm.admins = [];
+
+                                        for (i = 0; i < vm.allAdmins.length; i++) {
+                                            if (vm.allAdmins[i]._id != vm.user._id) {
+                                                vm.admins.push(vm.allAdmins[i]);
+                                            }
                                         }
-                                        if (vm.admins.length > 1) {
+                                        if (vm.admins.length > 0) {
                                             vm.hasAdmin = true;
-                                        }
-                                        else {
+                                        } else {
                                             vm.hasAdmin = false;
                                         }
                                     } else {
@@ -257,19 +258,20 @@
                             .getAdmins()
                             .then(
                                 function (response) {
-                                    if(response.data != null){
-                                        vm.admins = response.data;
-                                        for(i = 0; i <= vm.admins.length; i++){
-                                            if(vm.admins[i]._id == vm.user.userId){
-                                                vm.admins.splice(i, 1);
+                                    if (response.data.length >0) {
+                                        vm.allAdmins = response.data;
+
+                                        vm.admins = [];
+
+                                        for (i = 0; i < vm.allAdmins.length; i++) {
+                                            if (vm.allAdmins[i]._id != vm.user._id) {
+                                                vm.admins.push(vm.allAdmins[i]);
                                             }
-                                          
-                                    }
-                                        if(vm.admins.length > 0){
-                                        vm.hasAdmin = true;
                                         }
-                                        else{
-                                        vm.hasAdmin = false;
+                                        if (vm.admins.length > 0) {
+                                            vm.hasAdmin = true;
+                                        } else {
+                                            vm.hasAdmin = false;
                                         }
                                     }else{
                                         vm.hasAdmin = false;
@@ -324,18 +326,19 @@
                             .getAdmins()
                             .then(
                                 function (response) {
-                                    if (response.data != null) {
-                                        vm.admins = response.data;
-                                        for (i = 0; i <= vm.admins.length; i++) {
-                                            if (vm.admins[i]._id == vm.user.userId) {
-                                                vm.admins.splice(i, 1);
-                                            }
+                                    if (response.data.length >0) {
+                                        vm.allAdmins = response.data;
 
+                                        vm.admins = [];
+
+                                        for (i = 0; i < vm.allAdmins.length; i++) {
+                                            if (vm.allAdmins[i]._id != vm.user._id) {
+                                                vm.admins.push(vm.allAdmins[i]);
+                                            }
                                         }
-                                        if (vm.admins.length > 1) {
+                                        if (vm.admins.length > 0) {
                                             vm.hasAdmin = true;
-                                        }
-                                        else {
+                                        } else {
                                             vm.hasAdmin = false;
                                         }
                                     } else {

@@ -8,6 +8,7 @@
         vm.userId = $routeParams.userId;
 
         vm.findFriend = findFriend;
+        vm.checkUser = checkUser;
 
         
         
@@ -25,17 +26,18 @@
                 .then(function (response) {
                     if (response.data.length > 0) {
                         vm.allUsers = response.data;
-
+                        vm.usersBeforeAdmins = [];
                         for (i = 0; i < vm.allUsers.length; i++) {
-                            if (vm.allUsers[i]._id == vm.userId) {
-                                vm.allUsers.splice(i, 1);
+                            if (vm.allUsers[i]._id != vm.userId) {
+                                vm.usersBeforeAdmins.push(vm.allUsers[i]);
                             }
                         }
+                        
                         vm.users = [];
 
-                        for (j = 0; j < vm.allUsers.length; j++) {
-                            if (!vm.allUsers[j].isAdmin) {
-                                vm.users.push(vm.allUsers[j]);
+                        for (j = 0; j < vm.usersBeforeAdmins.length; j++) {
+                            if (!vm.usersBeforeAdmins[j].isAdmin) {
+                                vm.users.push(vm.usersBeforeAdmins[j]);
                             }
                         }
                         if (vm.users.length > 0) {
@@ -63,11 +65,17 @@
                 .findFriend(findFriend)
                 .then(function (response) {
                     vm.friends = response.data;
-                    console.log(response.data);
-                    console.log(vm.friends.username + "yahi hai");
                 });
 
                
+        }
+
+        function checkUser(userId) {
+            if(userId == vm.userId) {
+                $location.url("/user/" + vm.userId);
+            }else{
+                $location.url("/user/" + vm.userId + "/" + userId + "/profile");
+            }
         }
     }})();
 

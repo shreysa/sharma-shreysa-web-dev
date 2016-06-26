@@ -115,13 +115,19 @@
                                     function (response) {
                                         if (response.data.length >0) {
                                             console.log("category is");
-                                            vm.categoryRestaurant = response.data;
+                                            vm.allCategoryRestaurant = response.data;
+                                            vm.categoryRestaurant = [];
                                             console.log(vm.categoryRestaurant);
-                                            vm.hasCategory = true;
-                                            for(i = 0; i< vm.categoryRestaurant.length; i++) {
-                                                if (vm.categoryRestaurant[i]._restaurant.name == vm.restaurant.name) {
-                                                    vm.categoryRestaurant.splice(i, 1);
+
+                                            for (i = 0; i < vm.allCategoryRestaurant.length; i++) {
+                                                if (vm.allCategoryRestaurant[i]._restaurant.name != vm.restaurant.name) {
+                                                    vm.categoryRestaurant.push(vm.allCategoryRestaurant[i]);
                                                 }
+                                            }
+                                            if (vm.categoryRestaurant.length > 0) {
+                                                vm.hasCategory = true;
+                                            } else {
+                                                vm.hasCategory = false;
                                             }
                                         }
                                         else{
@@ -133,22 +139,29 @@
                                 .findRestaurantByRating(ratingForRest)
                                 .then(
                                     function (response) {
-                                        if(response.data.length >0){
-                                        console.log("rating is when rest was old");
-                                        vm.ratingRestaurant = response.data;
-                                        for(i = 0; i< vm.ratingRestaurant.length; i++) {
-                                            if (vm.ratingRestaurant[i]._restaurant.name == vm.restaurant.name) {
-                                                vm.ratingRestaurant.splice(i, 1);
+                                            if (response.data.length >0) {
+
+                                                vm.allRatingRestaurant = response.data;
+                                                vm.ratingRestaurant = [];
+
+
+                                                for (i = 0; i < vm.allRatingRestaurant.length; i++) {
+                                                    if (vm.allRatingRestaurant[i]._restaurant.name != vm.restaurant.name) {
+                                                        vm.ratingRestaurant.push(vm.allRatingRestaurant[i]);
+                                                    }
+                                                }
+                                                if (vm.ratingRestaurant.length > 0) {
+                                                    vm.hasRatingRestaurant = true;
+                                                } else {
+                                                    vm.hasRatingRestaurant = false;
+                                                }
+                                            }
+                                            else{
+                                                vm.hasRatingRestaurant = false;
                                             }
                                         }
-                                            vm.hasRatingRestaurant = true;
+                                        );
 
-                                        }else{
-                                            vm.hasRatingRestaurant = false;
-
-                                        }
-                                    }
-                                );
 
                             var city = vm.restaurant.location.city;
                             CategoryService
@@ -157,17 +170,21 @@
                                     function (response) {
                                         if(response.data.length >0){
                                             console.log("city is when rest was old");
-                                            vm.cityRestaurant = response.data;
-                                            for(i = 0; i< vm.cityRestaurant.length; i++) {
-                                                if (vm.cityRestaurant[i]._restaurant.name == vm.restaurant.name) {
-                                                    vm.cityRestaurant.splice(i, 1);
+                                            vm.allCityRestaurant = response.data;
+                                            vm.cityRestaurant = [];
+                                            for(i = 0; i< vm.allCityRestaurant.length; i++) {
+                                                if (vm.allCityRestaurant[i]._restaurant.name != vm.restaurant.name) {
+                                                    vm.cityRestaurant.push(vm.allCityRestaurant[i]);
                                                 }
                                             }
-                                            vm.hasCity = true;
-
-                                        }else{
+                                            if (vm.cityRestaurant.length > 0) {
+                                                vm.hasCity = true;
+                                            } else {
+                                                vm.hasCity = false;
+                                            }
+                                        }
+                                        else{
                                             vm.hasCity = false;
-
                                         }
                                     }
                                 );
@@ -187,13 +204,19 @@
                                     function (response) {
                                         if (response.data.length >0) {
                                             console.log("category is");
-                                            vm.categoryRestaurant = response.data;
+                                            vm.allCategoryRestaurant = response.data;
+                                            vm.categoryRestaurant = [];
                                             console.log(vm.categoryRestaurant);
-                                            vm.hasCategory = true;
-                                            for(i = 0; i< vm.categoryRestaurant.length; i++) {
-                                                if (vm.categoryRestaurant[i]._restaurant.name == vm.restaurant.name) {
-                                                    vm.categoryRestaurant.splice(i, 1);
+
+                                            for (i = 0; i < vm.allCategoryRestaurant.length; i++) {
+                                                if (vm.allCategoryRestaurant[i]._restaurant.name != vm.restaurant.name) {
+                                                    vm.categoryRestaurant.push(vm.allCategoryRestaurant[i]);
                                                 }
+                                            }
+                                            if (vm.categoryRestaurant.length > 0) {
+                                                vm.hasCategory = true;
+                                            } else {
+                                                vm.hasCategory = false;
                                             }
                                         }
                                         else{
@@ -205,22 +228,26 @@
                                 .findRestaurantByRating(ratingForRest)
                                 .then(
                                     function (response) {
-                                        if(response.data.length >0){
-                                        console.log("rating is when rest was new");
-                                        vm.ratingRestaurant = response.data;
-                                        console.log(vm.ratingRestaurant);
-                                        console.log(vm.ratingRestaurant[0]._restaurant.name);
-                                        for(i = 0; i< vm.ratingRestaurant.length; i++) {
-                                            if (vm.ratingRestaurant[i]._restaurant.name == vm.restaurant.name) {
-                                                vm.ratingRestaurant.splice(i, 1);
+                                        if (response.data.length >0) {
+
+                                            vm.allRatingRestaurant = response.data;
+                                            vm.ratingRestaurant = [];
+
+
+                                            for (i = 0; i < vm.allRatingRestaurant.length; i++) {
+                                                if (vm.allRatingRestaurant[i]._restaurant.name != vm.restaurant.name) {
+                                                    vm.ratingRestaurant.push(vm.allRatingRestaurant[i]);
+                                                }
+                                            }
+                                            if (vm.ratingRestaurant.length > 0) {
+                                                vm.hasRatingRestaurant = true;
+                                            } else {
+                                                vm.hasRatingRestaurant = false;
                                             }
                                         }
-                                        vm.hasRatingRestaurant = true;
-
-                                    }else{
-                                vm.hasRatingRestaurant = false;
-
-                            }
+                                        else{
+                                            vm.hasRatingRestaurant = false;
+                                        }
                                     }
                                 );
                             var city = vm.restaurant.location.city;
@@ -230,20 +257,25 @@
                                     function (response) {
                                         if(response.data.length >0){
                                             console.log("city is when rest was old");
-                                            vm.cityRestaurant = response.data;
-                                            for(i = 0; i< vm.cityRestaurant.length; i++) {
-                                                if (vm.cityRestaurant[i]._restaurant.name == vm.restaurant.name) {
-                                                    vm.cityRestaurant.splice(i, 1);
+                                            vm.allCityRestaurant = response.data;
+                                            vm.cityRestaurant = [];
+                                            for(i = 0; i< vm.allCityRestaurant.length; i++) {
+                                                if (vm.allCityRestaurant[i]._restaurant.name != vm.restaurant.name) {
+                                                    vm.cityRestaurant.push(vm.allCityRestaurant[i]);
                                                 }
                                             }
-                                            vm.hasCity = true;
-
-                                        }else{
+                                            if (vm.cityRestaurant.length > 0) {
+                                                vm.hasCity = true;
+                                            } else {
+                                                vm.hasCity = false;
+                                            }
+                                        }
+                                        else{
                                             vm.hasCity = false;
-
                                         }
                                     }
                                 );
+
                         }
                     }, function (error) {
                             vm.error = error
