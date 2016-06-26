@@ -14,15 +14,15 @@
             YelpService
                 .findRestaurant(searchFood, searchLocation)
                 .then(function (response) {
-                    console.log("*********************** in client");
-                    console.log(response.data);
-                    vm.business = response.data;
-                    vm.id = [];
-                    // for (i = 0; i < vm.business.businesses.length; i++) {
-                    //     //   //  console.log(vm.business.businesses[0].id);
-                    //     //
-                    //     vm.id.push(vm.business.businesses[i]);
-                    // }
+                    if(response.data != null) {
+                        console.log("*********************** in client");
+                        console.log(response.data);
+                        vm.business = response.data;
+                        vm.hasBusiness = true;
+                        vm.id = [];
+                    }else{
+                        vm.hasBusiness = false;
+                    }
 
                 });
         }
