@@ -26,11 +26,16 @@
             YelpService
                 .findRestaurant(searchFood, searchLocation)
                 .then(function (response) {
-                    console.log("*********************** in client");
-                    console.log(response.data);
-                    vm.business = response.data;
-                    $window.sessionStorage.setItem("Food", searchFood);
-                    $window.sessionStorage.setItem("Location", searchLocation);
+                    if(response.data != null) {
+                        console.log("*********************** in client");
+                        console.log(response.data);
+                        vm.business = response.data;
+                        $window.sessionStorage.setItem("Food", searchFood);
+                        $window.sessionStorage.setItem("Location", searchLocation);
+                        vm.hasBusiness = true;
+                    }else{
+                        vm.hasBusiness = false;
+                    }
 
                 }, function (error) {
                     vm.error = "Incorrect values for search";

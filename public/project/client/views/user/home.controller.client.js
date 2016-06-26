@@ -15,8 +15,6 @@
                 .findRestaurant(searchFood, searchLocation)
                 .then(function (response) {
                     if(response.data != null) {
-                        console.log("*********************** in client");
-                        console.log(response.data);
                         vm.business = response.data;
                         vm.hasBusiness = true;
                         vm.id = [];
