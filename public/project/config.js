@@ -100,7 +100,7 @@
             })
             .when("/user/:userId/:otherUserId/profile", {
                 templateUrl: "client/views/user/profile.other.view.client.html",
-                controller: "ProfileOtherController",
+                controller: "OtherProfileController",
                 controllerAs: "model",
                 resolve: {
                     loggedIn: checkLoggedIn
