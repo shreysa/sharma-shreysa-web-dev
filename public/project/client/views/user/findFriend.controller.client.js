@@ -23,17 +23,36 @@
             UserService
                 .findUsers()
                 .then(function (response) {
-                    vm.users = response.data;
+                    if (response.data.length > 0) {
+                        vm.allUsers = response.data;
 
-                    for(i = 0; i< vm.users.length; i++){
-                        if(vm.users[i]._id == vm.userId){
-                            vm.users.splice(i, 1);
+                        for (i = 0; i < vm.allUsers.length; i++) {
+                            if (vm.allUsers[i]._id == vm.userId) {
+                                vm.allUsers.splice(i, 1);
+                            }
+                        }
+                        vm.users = [];
+
+                        for (j = 0; j < vm.allUsers.length; j++) {
+                            if (!vm.allUsers[j].isAdmin) {
+                                vm.users.push(vm.allUsers[j]);
+                            }
+                        }
+                        if (vm.users.length > 0) {
+                            vm.hasUsers = true;
+                        } else {
+                            vm.hasUsers = false;
                         }
                     }
-                    console.log(vm.users[0]._id);
-                });
+                    else {
+                        vm.hasUsers = false;
+                    }
 
+
+                });
         }
+
+
         init();     
        
 

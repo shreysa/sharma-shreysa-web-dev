@@ -88,11 +88,14 @@ module.exports = function (app, models) {
                     } else {
                         var email = profile.emails[0].value;
                         var emailParts = email.split("@");
+                        var isAdmin = false;
                         var newGoogleUser = {
                             username:  emailParts[0],
                             firstName: profile.name.givenName,
                             lastName:  profile.name.familyName,
                             email:     email,
+                            isAdmin : isAdmin,
+
                             google: {
                                 id:    profile.id,
                                 token: token

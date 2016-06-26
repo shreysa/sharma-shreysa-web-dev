@@ -48,12 +48,13 @@
         }
 
         
-        function register(username, password, email) {
+        function register(username, password, email, isAdmin) {
             console.log("register in client service");
             var user = {
                 username: username,
                 password: password,
-                email: email
+                email: email,
+                isAdmin : isAdmin
             };
             return $http.post("/api/projectuser/register", user);
            
@@ -83,13 +84,14 @@
 
 
 
-        function createUser(username, password, email) {
+        function createUser(username, password, email, isAdmin) {
 
             var user = {
                 username: username,
                 password: password,
                 email: email,
-                isAdmin: false
+                isAdmin : isAdmin
+               
             };
           return $http.post("/api/projectuser", user);
         }

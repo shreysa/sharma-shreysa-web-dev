@@ -25,8 +25,9 @@
             else  if (email == null) {
                 vm.error = "email cannot be empty";
             } else {
+                var isAdmin = false;
                             UserService
-                                .register(username, password1, email)
+                                .register(username, password1, email, isAdmin)
                                 .then(function (response) {
                                     var user = response.data;
                                     if (user!=null) {

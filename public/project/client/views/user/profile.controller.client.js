@@ -68,61 +68,7 @@
 
         init();
 
-        // function loadData(userId) {
-        //     LikeService
-        //         .findAllLikedByUserId(userId)
-        //         .then(
-        //             function (response) {
-        //                 if(response.data != null){
-        //                     vm.hasLiked = true;
-        //                     vm.likes = response.data;
-        //                 }else{
-        //                     vm.hasLiked = false;
-        //                 }
-        //             }, function error() {
-        //                 vm.error = "some error ocurred while fetching like data";
-        //             }
-        //     ReviewService
-        //         .findAllReviewsByUserId(userId)
-        //         .then(
-        //             function (response) {
-        //                 if(response.data != null){
-        //                     vm.hasReviewed = true;
-        //                     vm.reviews = response.data;
-        //                 }else{
-        //                     vm.hasReviewed = false;
-        //                 }
-        //             }, function error() {
-        //                 vm.error = "some error ocurred while fetching review data";
-        //             })
-        //     FollowService
-        //         .findAllFollowingUserId(userId)
-        //         .then(
-        //             function (response) {
-        //                 if(response.data != null){
-        //                     vm.hasFollowers = true;
-        //                     vm.followers = response.data;
-        //                 }else{
-        //                     vm.hasFollowers = false;
-        //                 }
-        //             }, function error() {
-        //                 vm.error = "some error ocurred while fetching review data";
-        //             })
-        //     FollowService
-        //         .findAllFollowedByUserId(userId)
-        //         .then(
-        //             function (response) {
-        //                 if(response.data != null){
-        //                     vm.isFollowing = true;
-        //                     vm.following = response.data;
-        //                 }else{
-        //                     vm.isFollowing = false;
-        //                 }
-        //             }, function error() {
-        //                 vm.error = "some error ocurred while fetching review data";
-        //             })
-        // );
-        // }
+
 
         function navigateToProfile() {
             $location.url("/user/" + vm.user._id);
@@ -142,13 +88,52 @@
         }
 
         function unregister() {
-            UserService
-                .deleteUser(vm.user._id)
-                .then(function () {
-                        $location.url("/login");
-                    },
-                    function () {
-                        vm.error = "Not able to delete";
+            LikeService
+                .deleteLikeByUserId(vm.user._id)
+                .then(
+                    function (response) {
+                        console.log("Like removed");
+
+
+                        ReviewService
+                            .deleteReviewByUserId(vm.user._id)
+                            .then(
+                                function (response) {
+                                    console.log("Review removed");
+                                },
+                                function (error) {
+                                    console.log("error ocurred in removing review");
+                                }
+                            );
+                        FollowService
+                            .deleteFollowing(vm.user._id)
+                            .then(
+                                function (response) {
+                                    console.log("Unfollowed");
+                                },
+                                function (error) {
+                                    console.log("error ocurred in removing follow");
+                                }
+                            );
+                        FollowService
+                            .deleteFollowedBy(vm.user._id)
+                            .then(
+                                function (response) {
+                                    console.log("Unfollowed");
+                                },
+                                function (error) {
+                                    console.log("error ocurred in removing follow");
+                                }
+                            );
+                        UserService
+                            .deleteUser(vm.user._id)
+                            .then(function () {
+                                    $location.url("/login");
+                                },
+                                function () {
+                                    vm.error = "Not able to delete";
+                                })
+
                     });
         }
 
