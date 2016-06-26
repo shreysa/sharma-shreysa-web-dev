@@ -70,15 +70,16 @@ body {
     width: 100%;
     height: auto;
     background-position: center;
-    position: absolute;
+    background-size: cover;
+    position: relative;
 }
 .back-pic{
     background-image: url(restaurant2.jpg);
-    background-size: cover;
-    width: 100%;
-    height: auto;
-    background-position: center;
-    position: relative;
+    /*background-size: cover;*/
+    /*width: 100%;*/
+    /*height: auto;*/
+    /*background-position: center;*/
+    /*position: relative;*/
 }
 
 .restaurant-detail{
