@@ -9,12 +9,21 @@ module.exports = function () {
         addLike: addLike,
         findAllLikedByUserId: findAllLikedByUserId,
         findAllLikedByRestaurantId: findAllLikedByRestaurantId,
-        unlikeRestaurant: unlikeRestaurant
+        unlikeRestaurant: unlikeRestaurant,
+        deleteLike : deleteLike
+        
         
         
         
     };
     return api;
+    
+    
+   
+
+    function deleteLike(userId) {
+        return Like.remove({"_user" : userId});
+    }
     
     function findLike(userId, restaurantId) {
       return  Like.findOne({"_user": userId, "_restaurant": restaurantId});

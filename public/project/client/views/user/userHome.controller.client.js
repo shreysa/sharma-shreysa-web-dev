@@ -3,14 +3,17 @@
         .module("EatHeartyApp")
         .controller("UserHomeController", UserHomeController);
 
-    function UserHomeController(YelpService, $location, $routeParams, $rootScope) {
+    function UserHomeController(YelpService, $location, $routeParams, $window) {
         var vm = this;
 
         vm.userId = $routeParams.userId;
 // vm.userId = $routeParams.userId;
 
         function init() {
-            if (!$rootScope.currentUser) {
+            var food = $window.sessionStorage.getItem("Food");
+            var location = $window.sessionStorage.getItem("Location");
+            if(food){
+                findRestaurant(food, location);
             }
         }
             init();
@@ -26,13 +29,11 @@
                     console.log("*********************** in client");
                     console.log(response.data);
                     vm.business = response.data;
-                  //  vm.id = [];
-                    // for (i = 0; i < vm.business.businesses.length; i++) {
-                    //     //   //  console.log(vm.business.businesses[0].id);
-                    //     //
-                    //     vm.id.push(vm.business.businesses[i]);
-                    // }
+                    $window.sessionStorage.setItem("Food", searchFood);
+                    $window.sessionStorage.setItem("Location", searchLocation);
 
+                }, function (error) {
+                    vm.error = "Incorrect values for search";
                 });
         }
 

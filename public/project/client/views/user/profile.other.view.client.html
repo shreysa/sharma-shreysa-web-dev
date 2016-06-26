@@ -37,20 +37,20 @@
 </nav>
 
 
-<div class="pad-top">
-<div ng-if="model.success"
-     class="alert alert-success"
-     role="alert">
-    {{model.success}}
-</div>
-<div ng-if="model.error"
-     class="alert alert-danger"
-     role="alert">
-    {{model.error}}
-</div>
+<div class="container-fluid pad-top">
+    <div ng-if="model.success"
+         class="alert alert-success form-group"
+         role="alert">
+        {{model.success}}
+    </div>
+    <div ng-if="model.error"
+         class="alert alert-danger form-group"
+         role="alert">
+        {{model.error}}
+    </div>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 pad">
     <ul class="nav nav-tabs">
-    <li class="active"><a href="#profile" data-toggle="tab" aria-expanded="true">Profile</a></li>
+    <li class="active"><a href="#/user/{{model.user.userId}}/{{model.userOther._id}}/profile" data-toggle="tab" aria-expanded="true">Profile</a></li>
     <li class=""> <a href="#/user/{{model.user.userId}}/{{model.userOther._id}}/likes" data-toggle="tab" aria-expanded="false">Likes</a></li>
         <li class=""> <a href="#/user/{{model.user.userId}}/{{model.userOther._id}}/restaurant/reviewsByUser" data-toggle="tab" aria-expanded="false">Reviews</a></li>
         <li class=""> <a href="#/user/{{model.user.userId}}/followedBy/{{model.userOther._id}}" data-toggle="tab" aria-expanded="false">Followers</a></li>
@@ -102,6 +102,7 @@
 </div>
     </div>
 </div>
+    </div>
 
 
 

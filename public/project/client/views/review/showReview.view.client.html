@@ -23,12 +23,7 @@
                 <li>
                     <a href="#/user/{{model.userId}}/findPeople">Find People</a>
                 </li>
-                <li>
-                    <a href="#/login">Logout</a>
-                </li>
-                <!--<li>-->
-                <!--<a href="post.html">Logout</a>-->
-                <!--</li>-->
+
             </ul>
         </div>
     </div>
@@ -83,9 +78,11 @@
                     {{model.error}}
                 </div>
 
-                <li class=""> <a href="#/user/{{model.userId}}/restaurant/category/{{model.yelpRestId}}" data-toggle="tab" aria-expanded="false">Similar Rating</a></li>
+
+
+                <li class=""> <a href="#/user/{{model.userId}}/restaurant/rating/{{model.yelpRestId}}" data-toggle="tab" aria-expanded="false">Similar Rating</a></li>
                 <li class=""><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/likes" data-toggle="tab" aria-expanded="false">Liked By</a></li>
-                <li class="active"> <a href="#reviews" data-toggle="tab" aria-expanded="true">Reviews</a></li>
+                <li class="active"> <a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/reviews" data-toggle="tab" aria-expanded="true">Reviews</a></li>
                 <li class=""> <a href="#/user/{{model.userId}}/{{model.yelpRestId}}/writeReview" data-toggle="tab" aria-expanded="false">Write a Review</a></li>
             </ul>
             <div id="myTabContent" class="tab-content">
@@ -98,8 +95,8 @@
                                 <div class="well well-sm ">
 
                                     <h5> <a href="#/user/{{model.userId}}/{{review._user._id}}/profile">
-                                        {{review._user.username}} wrote: {{review.reviewText}}
-                                    </a> </h5>
+                                        {{review._user.username}} : </a> {{review.reviewText}}
+                                  </h5>
                                 </div>
                             </div>
                         </div>

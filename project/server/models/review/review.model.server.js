@@ -10,9 +10,26 @@ module.exports = function () {
         findAllReviewsByRestaurantId : findAllReviewsByRestaurantId,
         updateReview: updateReview,
         addReview: addReview,
-        deleteReview: deleteReview
+        deleteReview: deleteReview,
+        getReviewByUserId: getReviewByUserId,
+        getAllReviews: getAllReviews,
+        deleteReviewByUserId : deleteReviewByUserId
     };
     return api;
+
+    function deleteReviewByUserId(userId) {
+        return Review.remove({"_user" : userId});
+    }
+    
+    function getAllReviews() {
+        return Review.find()
+            .populate('_restaurant', '_id name restaurantId' )
+            .populate('_user', '_id username');
+    }
+    
+    function getReviewByUserId(userId, restaurantId) {
+        return Review.findOne({_user: userId, _restaurant: restaurantId});
+    }
     
     function findReview(userId, reviewId) {
         return Review.findOne({_user: userId, _id: reviewId});
@@ -27,10 +44,12 @@ module.exports = function () {
         return Review
             .update({_id: reviewId}, {
                 $set: {
-                    reviewText: review.reviewText
+                    reviewText:review
                 }
             });
     }
+    
+    
 
     function findAllReviewsByRestaurantId(restaurantId) {
         return Review.find({_restaurant: restaurantId})

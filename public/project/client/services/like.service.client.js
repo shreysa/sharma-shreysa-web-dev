@@ -12,13 +12,27 @@
             unlikeRestaurant: unlikeRestaurant,
             likeRestaurant: likeRestaurant,
             findAllLikedByUserId: findAllLikedByUserId,
-            findAllLikedByRestaurantId: findAllLikedByRestaurantId
+            findAllLikedByRestaurantId: findAllLikedByRestaurantId,
+            getCategory: getCategory,
+            deleteLikeByUserId: deleteLikeByUserId
+        //    findLikeByUserId : findLikeByUserId
         };
 
         return api;
+        
+        
+        // function findLikeByUserId(userId) {
+        //     return $http.get("/api/findLike/Restaurant/user/" + userId);
+        // }
+        
+        function deleteLikeByUserId(userId) {
+            return $http.delete("/api/unlike/user/restaurant/" + userId);
+        }
 
 
-
+        function getCategory(category) {
+            return $http.get("/api/projectuser/restaurant/category/type/" + category);
+        }
         function likeRestaurant(userId, restaurant) {
             // var restaurantObj = {
             //     restaurantId: restaurant.id

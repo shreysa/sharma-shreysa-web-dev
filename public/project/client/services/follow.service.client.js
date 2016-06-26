@@ -12,10 +12,21 @@
             findAllFollowedByUserId: findAllFollowedByUserId,
             unfollowUser: unfollowUser,
             findAllFollowingUserId: findAllFollowingUserId,
-            findFollow: findFollow
-        };
+            findFollow: findFollow,
+            deleteFollowedBy: deleteFollowedBy,
+            deleteFollowing : deleteFollowing
+
+    };
 
         return api;
+
+        function deleteFollowedBy(userId) {
+           return $http.delete("/api/unfollowedBy/user/" + userId, deleteFollowedBy);
+        }
+
+        function deleteFollowing(userId) {
+            return $http.delete("/api/unfollowing/" + userId + "/deleteUser", deleteFollowing);
+        }
         
         function findFollow(userId, otherUserId) {
             return $http.get("/api/projectuser/follow/" + userId + "/check/" + otherUserId);

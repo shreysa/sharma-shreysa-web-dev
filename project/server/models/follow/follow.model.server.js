@@ -9,10 +9,19 @@ module.exports = function () {
         addFollow: addFollow,
         findAllFollowedByUserId: findAllFollowedByUserId,
         findAllFollowingUserId: findAllFollowingUserId,
-        unfollowUser: unfollowUser
+        unfollowUser: unfollowUser,
+        deleteFollowedBy : deleteFollowedBy,
+        deleteFollowing : deleteFollowing
     };
     return api;
-    
+
+function deleteFollowing(userId) {
+    return Follow.remove({"_userFollow" : userId});
+}
+
+    function deleteFollowedBy(userId) {
+        return Follow.remove({"_user" : userId});
+    }
    
 
 

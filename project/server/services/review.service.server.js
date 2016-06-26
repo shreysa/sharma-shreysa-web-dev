@@ -3,17 +3,62 @@ module.exports = function (app, models) {
     var reviewModel = models.reviewModel;
     var restaurantModel = models.restaurantModel;
     var categoryModel = models.categoryModel;
-
+    app.delete("/api/review/remove/usersReview/:userId", deleteReviewByUserId);
     app.post("/api/projectuser/:userId/review/:restaurantId", addReview);
+    app.get("/api/projectuser/user/:userId/restaurant/review/:restaurantId", getReviewByUserId);
     app.get("/api/projectuser/user/:userId", findAllReviewsByUserId);
     app.get("/api/projectuser/:restaurantId/reviews", findAllReviewsByRestaurantId);
     app.delete("/api/projectuser/:reviewId", deleteReview);
-    app.put("/api/projectuser/:reviewId", updateReview);
+    app.put("/api/projectuser/review/:reviewId/restaurant/:reviewText", updateReview);
+    app.get("/api/projectuser/review/restaurant", getAllReviews);
+
+    
+    
+    function deleteReviewByUserId(req, res) {
+        reviewModel
+            .deleteReviewByUserId(req.params.userId)
+            .then(
+                function (stats) {
+                    console.log(stats);
+                    res.send(200);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+                }
+            );
+    }
+        
+    
+
+        function getAllReviews(req, res) {
+            reviewModel
+                .getAllReviews()
+                .then(
+                    function (reviewObj) {
+                        res.json(reviewObj);
+                    },
+                    function (error) {
+                        res.statusCode(400).send(error);
+                    }
+                );
+        }
+    function getReviewByUserId(req, res) {
+        reviewModel
+            .getReviewByUserId(req.params.userId, req.params.restaurantId)
+            .then(
+                function (reviewObj) {
+                    res.json(reviewObj);
+                },
+                function (error) {
+                    res.statusCode(400).send(error);
+                }
+            )
+    }
 
 
     function updateReview(req, res){
         reviewModel
-            .updateReview(req.params.reviewId, req.body)
+            .updateReview(req.params.reviewId, req.params.reviewText)
             .then(
                 function (stats) {
                     console.log(stats);

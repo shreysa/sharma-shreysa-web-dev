@@ -19,12 +19,26 @@
             logout: logout,
             loggedIn : loggedIn,
             register: register,
-            findFriend: findFriend
+            findFriend: findFriend,
+            makeAdmin : makeAdmin,
+            getAdmins : getAdmins,
+            deleteAdmin : deleteAdmin
         };
 
         return api;
+        
+        function deleteAdmin(userId) {
+            return $http.put("/api/projectuser/admin/" + userId + "/delete/user");
+        }
+        
+        
+        function makeAdmin(userId) {
+            return $http.put("/api/projectuser/admin/user/" + userId);
+        }
 
-            
+            function getAdmins() {
+                return $http.get("/api/projectuser/admin/users");
+            }
 
 
         
@@ -74,7 +88,8 @@
             var user = {
                 username: username,
                 password: password,
-                email: email
+                email: email,
+                isAdmin: false
             };
           return $http.post("/api/projectuser", user);
         }
@@ -95,7 +110,7 @@
         }
         
         function deleteUser(userId) {
-            var url = "/api/projectuser/" + userId;
+            var url = "/api/projectuser/user/" + userId;
             return $http.delete(url);
         }
          

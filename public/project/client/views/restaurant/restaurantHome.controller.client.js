@@ -10,6 +10,7 @@
         vm.likeRestaurant = likeRestaurant;
         vm.unlikeRestaurant = unlikeRestaurant;
         vm.addReview = addReview;
+        vm.updateReview = updateReview;
 
         vm.userId = $routeParams.userId;
         var username = "";
@@ -85,19 +86,42 @@
                             var ratingForRest = {
                                 rating : vm.restaurant.rating
                             };
-                            // var category = {
-                            //     category: vm.restaurant.categories[0][0]
-                            // };
-                            // console.log(category.category + " before calling category");
-                            // CategoryService
-                            //     .findRestaurantByCategory(vm.yelpRestId, category)
-                            //     .then(
-                            //         function (response) {
-                            //             console.log("category is");
-                            //           vm.categoryRestaurant =  response.data;
-                            //             console.log(vm.categoryRestaurant);
-                            //         }
-                            //     );
+                            
+                            ReviewService
+                                .getReviewByUserId(vm.userId, vm.restId)
+                                .then(
+                                    function (response) {
+                                        if (response.data != null) {
+                                            console.log("this is review for this user");
+                                            console.log(response.data);
+                                            vm.review = response.data;
+                                          //  vm.review.text= response.data.reviewText;
+                                         vm.review.text = response.data.reviewText;
+                                            vm.hasReview = true;
+                                        }
+                                        else{
+                                            vm.hasReview = false;
+                                        }
+                                    }
+                                )
+
+                            var category = vm.restaurant.categories[0][0];
+
+                            LikeService
+                                .getCategory(category)
+                                .then(
+                                    function (response) {
+                                        if (response.data != null) {
+                                            console.log("category is");
+                                            vm.categoryRestaurant = response.data;
+                                            console.log(vm.categoryRestaurant);
+                                            vm.hasCategory = true;
+                                        }
+                                        else{
+                                            vm.hasCategory = false;
+                                        }
+                                    }
+                                );
                             CategoryService
                                 .findRestaurantByRating(ratingForRest)
                                 .then(
@@ -126,15 +150,23 @@
                                 rating : vm.restaurant.rating
                             };
 
-                            // CategoryService
-                            //     .findRestaurantByCategory(vm.yelpRestId, vm.restaurant.categories[0][0])
-                            //     .then(
-                            //         function (response) {
-                            //             console.log("category is");
-                            //             vm.categoryRestaurant = response.data;
-                            //             console.log(vm.categoryRestaurant);
-                            //         }
-                            //     );
+                            var category = vm.restaurant.categories[0][0];
+
+                            LikeService
+                                .getCategory(category)
+                                .then(
+                                    function (response) {
+                                        if (response.data != null) {
+                                            console.log("category is");
+                                            vm.categoryRestaurant = response.data;
+                                            console.log(vm.categoryRestaurant);
+                                            vm.hasCategory = true;
+                                        }
+                                        else{
+                                            vm.hasCategory = false;
+                                        }
+                                    }
+                                );
                             CategoryService
                                 .findRestaurantByRating(ratingForRest)
                                 .then(
@@ -282,6 +314,26 @@
 
 
         }
+
+        function updateReview() {
+            ReviewService
+                .updateReview(vm.review._id, vm.review.text)
+                .then(
+                    function (response) {
+                        vm.success = "review was successfully updated";
+                        alert("review was successfully updated");
+                        $location.url("/user/" + vm.userId + "/restaurant/" +  vm.yelpRestId + "/reviews");
+                    },
+                    function (error) {
+                        vm.error= "review could not be updated";
+                    }
+
+                )
+        }
+
+
+
+
         
         
     }

@@ -16,17 +16,37 @@
         findFriend: findFriend,
         findUserByCredentials: findUserByCredentials,
         updateUser: updateUser,
-        deleteUser: deleteUser
+        deleteUser: deleteUser,
+        getAdmins: getAdmins,
+        makeAdmin : makeAdmin,
+        deleteAdmin : deleteAdmin
 
-       // likeRestaurant: likeRestaurant,
-       //  addToLikedRestaurant: addToLikedRestaurant
 
     };
     return api;
-        //
-        // function findFacebookUser(id) {
-        //     return User.findOne({"facebook.id" : id});
-        // }
+     
+
+        function deleteAdmin(userId) {
+            return User
+                    .update({_id: userId},{
+                        $set: {
+                            isAdmin: false
+                        }
+                    });
+        }
+
+        function getAdmins() {
+            return User.find({"isAdmin" : true});
+        }
+        
+        function makeAdmin(userId) {
+            return User
+                .update({_id: userId},{
+                    $set: {
+                        isAdmin: true
+                    }
+                });
+        }
 
 
 

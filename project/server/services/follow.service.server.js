@@ -7,6 +7,38 @@ module.exports = function (app, models) {
     app.get("/api/projectuser/:userId/following", findAllFollowedByUserId);
     app.delete("/api/projectuser/:userId/unfollow/:otherUserId", unfollowUser);
     app.get("/api/projectuser/following/:userId", findAllFollowingUserId);
+    app.delete("/api/unfollowedBy/user/:userId", deleteFollowedBy);
+    app.delete("/api/unfollowing/:userId/deleteUser", deleteFollowing);
+
+
+    function deleteFollowedBy(req, res) {
+        followModel
+            .deleteFollowedBy(req.params.userId)
+            .then(
+                function (stats) {
+                    console.log(stats);
+                    res.send(200);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+                }
+            );
+    }
+
+    function deleteFollowing(req, res) {
+        followModel
+            .deleteFollowing(req.params.userId)
+            .then(
+                function (stats) {
+                    console.log(stats);
+                    res.send(200);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+                }
+            );
+    }
+    
     
   
         function findFollow(req, res) {

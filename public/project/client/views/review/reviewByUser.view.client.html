@@ -23,25 +23,21 @@
             <li>
                 <a href="#/user/{{model.user.userId}}/findPeople">Find People</a>
             </li>
-            <li>
-                <a href="#/login">Logout</a>
-            </li>
-            <!--<li>-->
-            <!--<a href="post.html">Logout</a>-->
-            <!--</li>-->
+
+
         </ul>
     </div>
     </div>
 
 </nav>
-<div class="pad-top">
+<div class="container-fluid pad-top">
     <div ng-if="model.success"
-         class="alert alert-success"
+         class="alert alert-success form-control"
          role="alert">
         {{model.success}}
     </div>
     <div ng-if="model.error"
-         class="alert alert-danger"
+         class="alert alert-danger form-control"
          role="alert">
         {{model.error}}
     </div>
@@ -49,7 +45,7 @@
         <ul class="nav nav-tabs">
             <li class=""><a href="#/user/{{model.user.userId}}/{{model.otherUser.userId}}/profile"  data-toggle="tab" aria-expanded="false">Profile</a></li>
             <li class="">  <a href="#/user/{{model.user.userId}}/{{model.otherUser.userId}}/likes" data-toggle="tab" aria-expanded="false">Likes</a></li>
-            <li class="active"> <a href="#review"  data-toggle="tab" aria-expanded="true">Reviews</a></li>
+            <li class="active"> <a href="#/user/{{model.user.userId}}/{{model.otherUser.userId}}/restaurant/reviewsByUser"  data-toggle="tab" aria-expanded="true">Reviews</a></li>
             <li class=""> <a href="#/user/{{model.user.userId}}/followedBy/{{model.otherUser.userId}}" data-toggle="tab" aria-expanded="false">Followers</a></li>
             <li class=""> <a href="#/user/{{model.user.userId}}/{{model.otherUser.userId}}/follows" data-toggle="tab" aria-expanded="false">Follows</a></li>
         </ul>
@@ -63,7 +59,7 @@
                         <div       ng-repeat="review in model.reviewsByUser">
                             <div class="well well-sm ">
                                 <h5><a href="#/user/{{model.user.userId}}/restaurant/{{review._restaurant.restaurantId}}">
-                                    {{review.reviewText}}</a></h5>
+                                    {{review._restaurant.name}} : </a> {{review.reviewText}}</h5>
                             </div>
                         </div>
                     </div>

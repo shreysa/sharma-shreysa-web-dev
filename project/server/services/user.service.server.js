@@ -3,30 +3,29 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-
-//var FacebookStrategy = require('passport-facebook').Strategy;
 var bcrypt = require("bcrypt-nodejs");
 
 
 module.exports = function (app, models) {
 
     var userModel = models.userModel;
-    var restaurantModel = models.restaurantModel;
-    var likeModel = models.likeModel;
-    var followModel = models.followModel;
+   // var restaurantModel = models.restaurantModel;
+
+   // var followModel = models.followModel;
 
 
     // User related api calls
+    app.put("/api/projectuser/admin/:userId/delete/user", deleteAdmin);
+    app.put("/api/projectuser/admin/user/:userId", makeAdmin);
+    app.get("/api/projectuser/admin/users", getAdmins);
     app.put("/api/projectuser/:userId", updateUser);
     app.post("/api/projectuser", createUser);
     app.get("/api/projectuser", getUsers);
     app.post("/api/projectuser/login", passport.authenticate('proj'), login);
     app.post("/api/projectuser/logout", logout);
     app.get("/api/projectuser/loggedIn", loggedIn);
-    //app.get("/api/projectuser/findFriend/:username", findFriend)
-    
     app.get("/api/projectuser/:userId", findUserById);
-    app.delete("/api/projectuser/:userId", deleteUser);
+    app.delete("/api/projectuser/user/:userId", deleteUser);
     app.post("/api/projectuser/register", register);
     var multer = require('multer');
     var uploadProPic = multer ({ dest: __dirname+'/../../public/uploads' });
@@ -39,11 +38,7 @@ module.exports = function (app, models) {
 
 
 
-    // app.get("/auth/facebook", passport.authenticate('facebook'));
-    // app.get("/auth/facebook/callback", passport.authenticate('facebook', {
-    //     successRedirect: '/project/#/user',
-    //     failureRedirect: '/project/#/review'
-    // }));
+
     app.get('/auth/google/callback',
         passport.authenticate('google', {
             successRedirect: '/project/#/user',
@@ -55,19 +50,12 @@ module.exports = function (app, models) {
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
-
-    // var googleConfig = {
-    //     clientID     : "1021090604010-8r131lpp2p17sv6qoh91ffopqg80vfd1.apps.googleusercontent.com",
-    //     clientSecret : "4AJLPG3hhM0SOdHDOtY_NOw6",
-    //     callbackURL  : "http://localhost:3000/auth/google/callback"
-    // };
-
     var googleConfig = {
         clientID     : process.env.GOOGLE_CLIENT_ID,
         clientSecret : process.env.GOOGLE_CLIENT_SECRET,
         callbackURL  : process.env.GOOGLE_CALLBACK_URL
     };
-    // passport.use('facebook', new FacebookStrategy(facebookConfig, facebookLogin));
+
     passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 
     function localStrategy(username, password, done) {
@@ -89,39 +77,6 @@ module.exports = function (app, models) {
 
     }
 
-    // function facebookLogin(token, refreshToken, profile, done) {
-    //     console.log("in facebook login");
-    //     console.log(profile);
-    //     userModel
-    //         .findFacebookUser(profile.id)
-    //         .then(
-    //             function (facebookUser) {
-    //                 if(facebookUser){
-    //                     return done(null, facebookUser);
-    //                 }else{
-    //                     facebookUser = {
-    //                         username: profile.displayName.replace(/ /g, ''),
-    //                         facebook: {
-    //                             token: token,
-    //                             id: profile.id,
-    //                             displayName: profile.displayName
-    //                         }
-    //                     };
-    //                     userModel
-    //                         .createUser(facebookUser)
-    //                         .then(
-    //                             function (user) {
-    //                                 done(null, user);
-    //                             }
-    //                         );
-    //
-    //
-    //                 }
-    //
-    //             });
-    //
-    // }
-    //
 
     function googleStrategy(token, refreshToken, profile, done) {
         userModel
@@ -416,6 +371,47 @@ module.exports = function (app, models) {
 
 
 
+    }
+
+    function getAdmins(req, res) {
+        userModel
+            .getAdmins()
+            .then(
+                function (adminObj) {
+                    res.json(adminObj);
+                }, function (error) {
+                    res.statusCode(400).send(error);
+                }
+            );
+    }
+
+
+    function makeAdmin(req, res) {
+        userModel
+            .makeAdmin(req.params.userId)
+            .then(
+                function (stats) {
+                    console.log(stats);
+                    res.send(200);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+
+                }
+            );
+
+    }
+    
+    function deleteAdmin(req, res) {
+        userModel
+            .deleteAdmin(req.params.userId)
+            .then(
+                function (adminRemObj) {
+                    res.json(adminRemObj);
+                }, function (error) {
+                    res.statusCode(400).send(error);
+                }
+            );
     }
 
 

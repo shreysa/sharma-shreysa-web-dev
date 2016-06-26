@@ -3,16 +3,16 @@ module.exports = function (app, models) {
     var categoryModel = models.categoryModel;
     var restaurantModel = models.restaurantModel;
 
-    app.put("api/projectuser/category/:restaurantId/restaurant", findRestaurantByCategory );
+    app.get("/api/projectuser/restaurant/category/type/:category", findRestaurantByCategory );
     app.post("/api/projectuser/rating/for/Restaurant/visited/", findRestaurantByRating);
 
 
     function findRestaurantByCategory(req, res) {
-        console.log(req.body);
-        var category = req.body;
-        var categoryForRest = category.category;
+        console.log(req.params.category);
+        var category = req.params.category;
+      //  var categoryForRest = category.category;
         categoryModel
-            .findRestaurantByCategory(categoryForRest)
+            .findRestaurantByCategory(category)
             .then(
                 function (catRestObj) {
                     res.json(catRestObj);

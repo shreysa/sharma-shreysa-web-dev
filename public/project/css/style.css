@@ -7,7 +7,9 @@ body {
     padding-top: 45px;
     padding-bottom: 60px;
     }
-
+.bodycolr{
+    background-color: #c7ddef;
+}
 .box-search{
     box-shadow: 0px 1px 3px #890;
     padding-bottom: 5px;
@@ -39,10 +41,26 @@ body {
 
 
 }
+.adminfont{
+    font-weight: 500;
+    color: #ff7a5c;
+
+}
+
 .fontcol{
     color: #e5e5e5;
 }
 
+.padddetail-rest{
+    padding-top: 70px;
+}
+
+.font-colr{
+    color: #fdfffd;
+    font-family: monospace;
+    font-weight: 700;
+
+}
 .footer-back-col{
     background-color: orange;
 }
@@ -127,6 +145,10 @@ body {
 
 .HTML {
     padding-top: 15px;
+}
+
+.deletion-colr{
+    color: #ff041c;
 }
 
 .youtube-widget {

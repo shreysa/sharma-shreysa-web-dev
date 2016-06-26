@@ -12,7 +12,36 @@ module.exports = function (app, models) {
     app.get("/api/projectuser/restaurant/:restaurantId/restaurantYelpId", findRestaurant);
     app.get("/api/projectuser/fetchLikedRestaurant/:userId", findAllLikedByUserId);
     app.get("/api/projectuser/restaurant/:restaurantId", findAllLikedByRestaurantId);
+    app.delete("/api/unlike/user/restaurant/:userId", deleteLike);
+    // app.get("/api/findLike/Restaurant/user/:userId", findLikeByUserId);
+    //
+    //
+    //
+    // function findLikeByUserId(req, res) {
+    //     likeModel
+    //         .findLikeByUserId(req.params.userId)
+    //         .then(
+    //         function (likeObj) {
+    //             res.json(likeObj);
+    //         }, function (error) {
+    //                 res.statusCode(400).send(error);
+    //             });
+    // }
 
+
+    function deleteLike(req, res) {
+        likeModel
+            .deleteLike(req.params.userId)
+            .then(
+                function (stats) {
+                    console.log(stats);
+                    res.send(200);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+                }
+            );
+    }
 
 
     function likeRestaurant(req, res) {

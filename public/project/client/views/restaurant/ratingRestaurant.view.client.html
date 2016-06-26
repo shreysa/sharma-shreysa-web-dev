@@ -14,22 +14,21 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="navbar-collapse collapse " id="navbar">
         <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#/user/{{model.userId}}/home">Search</a>
-                </li>
-                <li>
-                    <a href="#/user/{{model.userId}}">Profile</a>
-                </li>
-                <li>
-                    <a href="#/user/{{model.userId}}/findPeople">Find People</a>
-                </li>
+            <li>
+                <a href="#/user/{{model.userId}}/home">Search</a>
+            </li>
+            <li>
+                <a href="#/user/{{model.userId}}">Profile</a>
+            </li>
+            <li>
+                <a href="#/user/{{model.userId}}/findPeople">Find People</a>
+            </li>
 
-            </ul>
-        </div>
+        </ul>
+    </div>
     </div>
 
 </nav>
-
 <!--<div class="container-fluid res-back-color box-search">-->
 <div class="container-fluid restaurant-detail pad-top">
     <div class="container-fluid">
@@ -65,6 +64,36 @@
     </div>
 </div>
 </div>
+<!--<div class="container-fluid res-back-color box-search">-->
+    <!--<div class="container-fluid">-->
+        <!--<div class="row">-->
+            <!--<div class="col-lg-3 pull-right">-->
+                <!--<img class="img img-responsive img-thumbnail"-->
+                     <!--ng-src="{{model.restaurant.image_url}}">-->
+            <!--</div>-->
+            <!--<div class="col-lg-5 fontcol">-->
+                <!--<h1>{{model.restaurant.name}}</h1>-->
+                <!--<h3>Address: {{model.restaurant.location.address[0]}}, {{model.restaurant.location.city}}</h3>-->
+                <!--<h4>Phone: {{model.restaurant.display_phone}}</h4>-->
+                <!--<h4>Cuisines: {{model.restaurant.categories[0][0]}}, {{model.restaurant.categories[1][0]}}</h4>-->
+            <!--</div>-->
+            <!--<div class="col-lg-2 fontcol">-->
+                <!--<h6>Rating: {{model.restaurant.rating}}</h6>-->
+            <!--</div>-->
+            <!--<div class="col-lg-2 fontcol" ng-if="!model.thisUserLikes">-->
+                <!--<h6>Like this restaurant:</h6>-->
+                <!--<a class="glyphicon glyphicon-thumbs-up"  role="button"-->
+                   <!--ng-click="model.likeRestaurant()" ></a>-->
+            <!--</div>-->
+            <!--<div class="col-lg-2 fontcol" ng-if="model.thisUserLikes">-->
+                <!--<h6>Unlike this restaurant:</h6>-->
+                <!--<a class="glyphicon glyphicon-thumbs-down"  role="button"-->
+                   <!--ng-click="model.unlikeRestaurant()" ></a>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<!--</div>-->
 
 <div class="container-fluid">
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 pad">
@@ -80,9 +109,9 @@
                 {{model.error}}
             </div>
 
-            <li class="active"> <a href="#Similar" data-toggle="tab" aria-expanded="true">Similar Rating</a></li>
+            <li class="active"> <a href="#/user/{{model.userId}}/restaurant/rating/{{model.yelpRestId}}" data-toggle="tab" aria-expanded="true">Similar Rating</a></li>
             <li class=""><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/likes" data-toggle="tab" aria-expanded="false">Liked By</a></li>
-            <li class=""><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/reviews" data-toggle="tab" aria-expanded="false">Reviews</a></li>
+            <li class=""> <a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/reviews" data-toggle="tab" aria-expanded="false">Reviews</a></li>
             <li class=""> <a href="#/user/{{model.userId}}/{{model.yelpRestId}}/writeReview" data-toggle="tab" aria-expanded="false">Write a Review</a></li>
         </ul>
         <div id="myTabContent" class="tab-content">
@@ -107,33 +136,25 @@
                     </div>
                 </div>
                 <!--<div class="col-lg-1 col-md-1 col-sm-1"></div>-->
-                <!--</div>-->
-            </div>
+            <!--</div>-->
         </div>
     </div>
 </div>
+    </div>
 
-<!--<div class="container-fluid ">-->
-    <!--<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 pad">-->
-        <!--<ul class="nav nav-tabs">-->
-            <!--<li role="presentation" class="active">Similar cuisine restaurants that other users liked</li>-->
-            <!--<li role="presentation"><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/likes">Liked By</a></li>-->
-            <!--<li role="presentation"><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/reviews">Reviews</a></li>-->
-            <!--<li role="presentation" ><a href="#/user/{{model.userId}}/{{model.yelpRestId}}/writeReview">Write a review</a></li>-->
-        <!--</ul>-->
-        <!--<div class="container-fluid">-->
+
+<!--<div class="container-fluid">-->
             <!--<div class="row">-->
                 <!--<div class="col-lg-3 col-md-3 col-sm-3">-->
                 <!--</div>-->
-                <!--&lt;!&ndash;{{model.ratingRestaurant._restaurant.name}}&ndash;&gt;-->
                 <!--<div class="col-lg-6 col-md-6 col-sm-6">-->
-                    <!--<div class="box-search"     ng-repeat="restaurant in model.ratingRestaurant">-->
-                        <!--<div class="center-block">-->
+                    <!--<div class="box-search paddingfromtop"     ng-repeat="restaurant in model.ratingRestaurant">-->
                             <!--<div class="container-fluid row res-name">-->
-                                 <!--&lt;!&ndash;ng-if="!model.restaurant.name">&ndash;&gt;-->
-                                <!--<div class="col-sm-4 col-md-4 col-lg-4 "></div>-->
-                                <!--<div class="col-sm-4 col-md-4 col-lg-4 ">-->
+                                <!--<div class="col-sm-6 col-md-6 col-lg-6 pull-left ">-->
                                     <!--<h5><a href="#/user/{{model.userId}}/restaurant/{{restaurant._restaurant.restaurantId}}"> {{restaurant._restaurant.name}}</a></h5>-->
+                                <!--</div>-->
+                                <!--<div class="col-sm-2 col-md-2 col-lg-2 ">-->
+                                    <!--&lt;!&ndash;<h5><a href="#/user/{{model.userId}}/restaurant/{{restaurant._restaurant.restaurantId}}"> {{restaurant._restaurant.name}}</a></h5>&ndash;&gt;-->
                                     <!--<h7>Address: {{restaurant._restaurant.location}} </h7>-->
 
                                 <!--</div>-->

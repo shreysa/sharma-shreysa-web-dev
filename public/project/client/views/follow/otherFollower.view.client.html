@@ -23,26 +23,21 @@
                 <li>
                     <a href="#/user/{{model.user.userId}}/findPeople">Find People</a>
                 </li>
-                <li>
-                    <a href="#/login">Logout</a>
-                </li>
-                <!--<li>-->
-                <!--<a href="post.html">Logout</a>-->
-                <!--</li>-->
+
             </ul>
         </div>
     </div>
 
 </nav>
 
-<div class="pad-top">
+<div class="container-fluid pad-top">
     <div ng-if="model.success"
-         class="alert alert-success"
+         class="alert alert-success form-control"
          role="alert">
         {{model.success}}
     </div>
     <div ng-if="model.error"
-         class="alert alert-danger"
+         class="alert alert-danger form-control"
          role="alert">
         {{model.error}}
     </div>
@@ -51,7 +46,7 @@
             <li class=""><a href="#/user/{{model.user.userId}}/{{model.otherUser.otherUserId}}/profile"  data-toggle="tab" aria-expanded="false">Profile</a></li>
             <li class=""> <a href="#/user/{{model.user.userId}}/{{model.otherUser.otherUserId}}/likes" data-toggle="tab" aria-expanded="false">Likes</a></li>
             <li class=""><a href="#/user/{{model.user.userId}}/{{model.otherUser.otherUserId}}/restaurant/reviewsByUser"  data-toggle="tab" aria-expanded="false">Reviews</a></li>
-            <li class="active"> <a href="#followers" data-toggle="tab" aria-expanded="true">Followers</a></li>
+            <li class="active"> <a href="#/user/{{model.user.userId}}/followedBy/{{model.otherUser.otherUserId}}" data-toggle="tab" aria-expanded="true">Followers</a></li>
             <li class=""> <a href="#/user/{{model.user.userId}}/{{model.otherUser.otherUserId}}/follows" data-toggle="tab" aria-expanded="false">Follows</a></li>
         </ul>
         <div id="myTabContent" class="tab-content">

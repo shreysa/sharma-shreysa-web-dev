@@ -8,15 +8,15 @@
 
         var api = {
             findRestaurantByRating : findRestaurantByRating,
-            findRestaurantByCategory: findRestaurantByCategory
+       //     findRestaurantByCategory: findRestaurantByCategory
         };
 
         return api;
         
-        function findRestaurantByCategory(restaurantId, category) {
-            return $http.put("/api/projectuser/category/" + restaurantId + "/restaurant/", category);
-            
-        }
+        // function findRestaurantByCategory(restaurantId, category) {
+        //     return $http.put("/api/projectuser/category/" + restaurantId + "/restaurant/", category);
+        //    
+        // }
         
         function findRestaurantByRating(rating) {
             return $http.post("/api/projectuser/rating/for/Restaurant/visited/", rating);

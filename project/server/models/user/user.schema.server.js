@@ -8,7 +8,7 @@ module.exports = function () {
         password: String,
         firstName: String,
         lastName: String,
-      //  review: [ReviewSchema],
+        isAdmin: Boolean,
         email: String,
         phone: Number,
         photo: String,

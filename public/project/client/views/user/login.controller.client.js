@@ -15,7 +15,11 @@
                             var user = response.data;
                             console.log(response.data);
                             if (user != null) {
-                                $location.url("/user/" + user._id);
+                                if (user.isAdmin) {
+                                    $location.url("/user/admin/" + user._id);
+                                } else {
+                                    $location.url("/user/" + user._id);
+                                }
                             }
                             else {
                                 vm.error = "User not present or incorrect credentials";

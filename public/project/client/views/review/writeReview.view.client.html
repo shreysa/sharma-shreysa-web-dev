@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse  navbar-fixed-top">
+<nav class="navbar navbar-inverse  navbar-fixed-top" xmlns="http://www.w3.org/1999/html">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <!--<div class="navbar-header page-scroll">-->
@@ -23,12 +23,7 @@
                 <li>
                     <a href="#/user/{{model.userId}}/findPeople">Find People</a>
                 </li>
-                <li>
-                    <a href="#/login">Logout</a>
-                </li>
-                <!--<li>-->
-                <!--<a href="post.html">Logout</a>-->
-                <!--</li>-->
+
             </ul>
         </div>
     </div>
@@ -117,10 +112,10 @@
                 {{model.error}}
             </div>
 
-            <li class=""> <a href="#/user/{{model.userId}}/restaurant/category/{{model.yelpRestId}}" data-toggle="tab" aria-expanded="false">Similar Rating</a></li>
+            <li class=""> <a href="#/user/{{model.userId}}/restaurant/rating/{{model.yelpRestId}}" data-toggle="tab" aria-expanded="false">Similar Rating</a></li>
             <li class=""> <a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/likes" data-toggle="tab" aria-expanded="false">Liked By</a></li>
             <li class=""> <a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/reviews" data-toggle="tab" aria-expanded="false">Reviews</a></li>
-            <li class="active"> <a href="#writeReview" data-toggle="tab" aria-expanded="true">Write a Review</a></li>
+            <li class="active"> <a href="#/user/{{model.userId}}/{{model.yelpRestId}}/writeReview" data-toggle="tab" aria-expanded="true">Write a Review</a></li>
         </ul>
         <div id="myTabContent" class="tab-content">
             <div class="tab-pane fade active in" id="writeReview">
@@ -128,20 +123,28 @@
                 <div class="control-group form-group">
                      <!--ng-class="{true: 'error'}[submitted && reviewForm.review.$error.required]">-->
                     <label for="review">{{model.restaurant.name}}</label>
+
             <textarea ng-model="model.review.text"
                       rows="6"
                       class="form-control"
                       type="text"
                       name="review"
                       id="review"
-                      required></textarea>
+                      required ></textarea>
+                      <!--text="{{model.userReview.reviewText}}"-->
+
+
+
+
                     <!--<span class="help-inline validation"-->
                           <!--ng-show="submitted && reviewForm.review.$error.required">Cannot submit a blank review!!</span>-->
                 </div>
 
 
-                <a  ng-click="model.addReview(model.review)"
-                    class="btn btn-primary">Submit Review</a>
+                <a ng-if="model.hasReview"  ng-click="model.updateReview(model.review)"
+                    class="btn btn-primary">Update Review</a>
+                <a ng-if="!model.hasReview"  ng-click="model.addReview(model.review)"
+                   class="btn btn-primary">Submit Review</a>
             </form>
                 </div>
         </div>
