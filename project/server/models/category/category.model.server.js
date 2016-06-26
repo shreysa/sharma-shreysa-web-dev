@@ -9,9 +9,15 @@ module.exports = function () {
         addCategoryRestaurant: addCategoryRestaurant,
         findRestaurant: findRestaurant,
         findRestaurantByCategory: findRestaurantByCategory,
-        findRestaurantByRating: findRestaurantByRating
+        findRestaurantByRating: findRestaurantByRating,
+        findRestaurantByCity : findRestaurantByCity
     };
     return api;
+
+    function findRestaurantByCity(city) {
+        return Category.find({city: city})
+            .populate('_restaurant', 'restaurantId _id name location image');
+    }
 
     function addCategoryRestaurant(RestData) {
         return Category.create(RestData);

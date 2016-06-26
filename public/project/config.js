@@ -73,6 +73,15 @@
                     loggedIn: checkLoggedIn
                 }
             })
+            .when("/user/:userId/restaurant/:restaurantId/similar/city", {
+                templateUrl: "client/views/restaurant/cityRestaurant.view.client.html",
+                controller: "RestaurantHomeController",
+                controllerAs: "model",
+                resolve: {
+                    loggedIn: checkLoggedIn
+                }
+            })
+
             .when("/user/:userId/restaurant/:restaurantId/likes", {
                 templateUrl: "client/views/restaurant/restaurantLikedByUser.view.client.html",
                 controller: "RestaurantHomeController",

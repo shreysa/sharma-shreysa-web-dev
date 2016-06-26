@@ -8,6 +8,7 @@
 
         var api = {
             findRestaurantByRating : findRestaurantByRating,
+            findRestaurantByCity : findRestaurantByCity
        //     findRestaurantByCategory: findRestaurantByCategory
         };
 
@@ -21,6 +22,10 @@
         function findRestaurantByRating(rating) {
             return $http.post("/api/projectuser/rating/for/Restaurant/visited/", rating);
             // return $http.get("/api/projectuser/rating/for/Restaurant/visited", rating);
+        }
+        
+        function findRestaurantByCity(city) {
+            return $http.get("/api/restaurant/city/" + city);
         }
     }
 

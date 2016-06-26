@@ -73,6 +73,10 @@ body {
     background-size: cover;
     position: relative;
 }
+.pad-botm{
+    padding-bottom: 5px;
+}
+.pad-top-let{ padding-top: 5px}
 .back-pic{
     background-image: url(restaurant2.jpg);
     /*background-size: cover;*/

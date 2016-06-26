@@ -124,7 +124,8 @@ module.exports = function (app, models) {
                                         _restaurant: restDbId,
                                         category : restaurant.category,
                                         _user: userId,
-                                        rating: restaurant.rating
+                                        rating: restaurant.rating,
+                                        city: restaurant.city
                                     };
 
                                     reviewModel
@@ -174,9 +175,9 @@ module.exports = function (app, models) {
                             _restaurant: restDbId,
                             category : restaurant.category,
                             _user: userId,
-                            rating: restaurant.rating
+                            rating: restaurant.rating,
+                            city: restaurant.city
                         };
-
                         reviewModel
                             .addReview(review)
                             .then(

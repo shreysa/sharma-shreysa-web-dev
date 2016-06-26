@@ -5,7 +5,8 @@ module.exports = function () {
             _restaurant: {type: mongoose.Schema.ObjectId, ref: "Restaurant"},
             category: String,
                 _user: {type: mongoose.Schema.ObjectId, ref: "UserProject"},
-        rating : Number
+        rating : Number,
+        city : String
         },
         {collection: "project.category"});
     return CategorySchema;

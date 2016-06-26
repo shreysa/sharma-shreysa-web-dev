@@ -108,11 +108,10 @@
                  role="alert">
                 {{model.error}}
             </div>
-
-            <li class="active"> <a href="#Similar" data-toggle="tab" aria-expanded="true">Similar Rating</a></li>
-            <li class=""><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/likes" data-toggle="tab" aria-expanded="false">Liked By</a></li>
-            <li class=""> <a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/reviews" data-toggle="tab" aria-expanded="false">Reviews</a></li>
-            <li class=""> <a href="#/user/{{model.userId}}/{{model.yelpRestId}}/writeReview" data-toggle="tab" aria-expanded="false">Write a Review</a></li>
+            <h5> Similar Restaurants that users liked or reviewed with same:</h5>
+            <li class=""> <a href="#/user/{{model.userId}}/restaurant/rating/{{model.yelpRestId}}" data-toggle="tab" aria-expanded="false">Rating</a></li>
+            <li class=""><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/similar/city" data-toggle="tab" aria-expanded="false">City</a></li>
+            <li class="active"> <a href="#/user/{{model.userId}}/restaurant/category/{{model.yelpRestId}}" data-toggle="tab" aria-expanded="true">Cuisine</a></li>
         </ul>
         <div id="myTabContent" class="tab-content">
             <div class="tab-pane fade active in" id="Similar">
@@ -123,7 +122,6 @@
                     <!--</div>-->
 
                     <div  class="col-lg-12 col-md-12 col-sm-12 paddingfromtop"  ng-if="model.hasCategory" >
-                        Similar Restaurants based on rating that others reviewed or liked!
                         <div        ng-repeat="restaurant in model.categoryRestaurant ">
                             <div class="well well-lg ">
                                 <h5><a href="#/user/{{model.userId}}/restaurant/{{restaurant._restaurant.restaurantId}}"> {{restaurant._restaurant.name}}</a></h5>
@@ -132,14 +130,16 @@
                         </div>
                     </div>
                     <div class="col-lg-10 col-md-10 col-sm-10" ng-if="!model.hasRatingRestaurant" >
-                        <h3> Not liked any restaurant yet!!</h3>
+                        <h3> No user has liked or reviewed a restaurant with this cuisine yet!!</h3>
                     </div>
                 </div>
                 <!--<div class="col-lg-1 col-md-1 col-sm-1"></div>-->
                 <!--</div>-->
             </div>
+            <a class="btn btn-primary btn-block" href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/likes" role="button">Find more details about this restaurant</a>
         </div>
     </div>
+
 </div>
 
 

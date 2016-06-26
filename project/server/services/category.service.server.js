@@ -5,6 +5,22 @@ module.exports = function (app, models) {
 
     app.get("/api/projectuser/restaurant/category/type/:category", findRestaurantByCategory );
     app.post("/api/projectuser/rating/for/Restaurant/visited/", findRestaurantByRating);
+    app.get("/api/restaurant/city/:city", findRestaurantByCity);
+
+
+
+    function findRestaurantByCity(req, res) {
+        categoryModel
+            .findRestaurantByCity(req.params.city)
+            .then(
+                function (catRestObj) {
+                    res.json(catRestObj);
+                },
+                function (error) {
+                    res.statusCode(400).send(error);
+                }
+            );
+    }
 
 
     function findRestaurantByCategory(req, res) {

@@ -11,6 +11,7 @@
         vm.unlikeRestaurant = unlikeRestaurant;
         vm.addReview = addReview;
         vm.updateReview = updateReview;
+        vm.deleteReview = deleteReview;
 
         vm.userId = $routeParams.userId;
         var username = "";
@@ -70,7 +71,7 @@
                                 .findAllReviewsByRestaurantId(vm.restId)
                                 .then(
                                     function (response) {
-                                        if(response.data != null){
+                                        if(response.data.length >0){
                                         vm.reviews = response.data;
                                         console.log("this is the review data");
                                         console.log(vm.reviews);
@@ -111,11 +112,16 @@
                                 .getCategory(category)
                                 .then(
                                     function (response) {
-                                        if (response.data != null) {
+                                        if (response.data.length >0) {
                                             console.log("category is");
                                             vm.categoryRestaurant = response.data;
                                             console.log(vm.categoryRestaurant);
                                             vm.hasCategory = true;
+                                            for(i = 0; i< vm.categoryRestaurant.length; i++) {
+                                                if (vm.categoryRestaurant[i]._restaurant.name == vm.restaurant.name) {
+                                                    vm.categoryRestaurant.splice(i, 1);
+                                                }
+                                            }
                                         }
                                         else{
                                             vm.hasCategory = false;
@@ -126,7 +132,7 @@
                                 .findRestaurantByRating(ratingForRest)
                                 .then(
                                     function (response) {
-                                        if(response.data != null){
+                                        if(response.data.length >0){
                                         console.log("rating is when rest was old");
                                         vm.ratingRestaurant = response.data;
                                         for(i = 0; i< vm.ratingRestaurant.length; i++) {
@@ -138,6 +144,28 @@
 
                                         }else{
                                             vm.hasRatingRestaurant = false;
+
+                                        }
+                                    }
+                                );
+
+                            var city = vm.restaurant.location.city;
+                            CategoryService
+                                .findRestaurantByCity(city)
+                                .then(
+                                    function (response) {
+                                        if(response.data.length >0){
+                                            console.log("city is when rest was old");
+                                            vm.cityRestaurant = response.data;
+                                            for(i = 0; i< vm.cityRestaurant.length; i++) {
+                                                if (vm.cityRestaurant[i]._restaurant.name == vm.restaurant.name) {
+                                                    vm.cityRestaurant.splice(i, 1);
+                                                }
+                                            }
+                                            vm.hasCity = true;
+
+                                        }else{
+                                            vm.hasCity = false;
 
                                         }
                                     }
@@ -156,11 +184,16 @@
                                 .getCategory(category)
                                 .then(
                                     function (response) {
-                                        if (response.data != null) {
+                                        if (response.data.length >0) {
                                             console.log("category is");
                                             vm.categoryRestaurant = response.data;
                                             console.log(vm.categoryRestaurant);
                                             vm.hasCategory = true;
+                                            for(i = 0; i< vm.categoryRestaurant.length; i++) {
+                                                if (vm.categoryRestaurant[i]._restaurant.name == vm.restaurant.name) {
+                                                    vm.categoryRestaurant.splice(i, 1);
+                                                }
+                                            }
                                         }
                                         else{
                                             vm.hasCategory = false;
@@ -171,7 +204,7 @@
                                 .findRestaurantByRating(ratingForRest)
                                 .then(
                                     function (response) {
-                                        if(response.data != null){
+                                        if(response.data.length >0){
                                         console.log("rating is when rest was new");
                                         vm.ratingRestaurant = response.data;
                                         console.log(vm.ratingRestaurant);
@@ -187,6 +220,27 @@
                                 vm.hasRatingRestaurant = false;
 
                             }
+                                    }
+                                );
+                            var city = vm.restaurant.location.city;
+                            CategoryService
+                                .findRestaurantByCity(city)
+                                .then(
+                                    function (response) {
+                                        if(response.data.length >0){
+                                            console.log("city is when rest was old");
+                                            vm.cityRestaurant = response.data;
+                                            for(i = 0; i< vm.cityRestaurant.length; i++) {
+                                                if (vm.cityRestaurant[i]._restaurant.name == vm.restaurant.name) {
+                                                    vm.cityRestaurant.splice(i, 1);
+                                                }
+                                            }
+                                            vm.hasCity = true;
+
+                                        }else{
+                                            vm.hasCity = false;
+
+                                        }
                                     }
                                 );
                         }
@@ -261,10 +315,10 @@
                             .findAllLikedByRestaurantId(vm.restId)
                             .then(
                                 function (response) {
-                                    if(response.data!= null) {
+                                    if(response.data.length >0) {
                                         vm.usersWhoLiked = response.data;
                                         console.log(response.data);
-                                        console.log(vm.usersWhoLiked[0]._user.username);
+                                        // console.log(vm.usersWhoLiked[0]._user.username);
                                         vm.hasLiked = true;
                                     }else{
                                         vm.hasLiked = false;
@@ -301,7 +355,9 @@
                         function (response) {
                             console.log("review added");
                             console.log(response.data);
-                            vm.success = "Review Submitted!";
+                            alert("review was successfully submitted");
+                            vm.hasReview = true;
+                            $location.url("/user/" + vm.userId + "/restaurant/" +  vm.yelpRestId + "/reviews");
                         }, function (error) {
                             vm.error = "some error ocurred";
                         }
@@ -316,19 +372,41 @@
         }
 
         function updateReview() {
+            if (vm.review.text !=null ) {
+                ReviewService
+                    .updateReview(vm.review._id, vm.review.text)
+                    .then(
+                        function (response) {
+                            vm.success = "review was successfully updated";
+                            alert("review was successfully updated");
+                            vm.hasReview = true;
+                            $location.url("/user/" + vm.userId + "/restaurant/" + vm.yelpRestId + "/reviews");
+                        },
+                        function (error) {
+                            vm.error = "review could not be updated";
+                        }
+                    );
+            }
+            else {
+                    $("#review").css({'border-color': 'crimson'});
+                    vm.error = "Review text cannot be empty";
+                }
+        }
+        
+        function deleteReview() {
             ReviewService
-                .updateReview(vm.review._id, vm.review.text)
+                .deleteReview(vm.review._id)
                 .then(
                     function (response) {
-                        vm.success = "review was successfully updated";
-                        alert("review was successfully updated");
-                        $location.url("/user/" + vm.userId + "/restaurant/" +  vm.yelpRestId + "/reviews");
+                        vm.success = "review was successfully deleted";
+                        alert("review was successfully deleted");
+                        vm.hasReview = false;
+                        $location.url("/user/" + vm.userId + "/restaurant/" + vm.yelpRestId + "/likes");
                     },
                     function (error) {
-                        vm.error= "review could not be updated";
+                        vm.error = "review could not be deleted";
                     }
-
-                )
+                );
         }
 
 

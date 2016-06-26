@@ -83,7 +83,7 @@
                 {{model.error}}
             </div>
 
-            <li class=""> <a href="#/user/{{model.userId}}/restaurant/rating/{{model.yelpRestId}}" data-toggle="tab" aria-expanded="false">Similar Rating</a></li>
+
             <li class="active"><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/likes" data-toggle="tab" aria-expanded="true">Liked By</a></li>
             <li class=""> <a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/reviews" data-toggle="tab" aria-expanded="false">Reviews</a></li>
             <li class=""> <a href="#/user/{{model.userId}}/{{model.yelpRestId}}/writeReview" data-toggle="tab" aria-expanded="false">Write a Review</a></li>
@@ -107,6 +107,7 @@
                 </div>
                 <div class="col-lg-1 col-md-1 col-sm-1"></div>
             </div>
+            <a class="btn btn-success btn-block" href="#/user/{{model.userId}}/restaurant/rating/{{model.yelpRestId}}" role="button">Find similar restaurants</a>
         </div>
     </div>
 </div>
