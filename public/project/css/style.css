@@ -60,9 +60,10 @@ body {
 }
 
 .font-colr{
-    color: #fdfffd;
+    color: white;
     font-family: monospace;
-    font-weight: 700;
+    font-weight: 900;
+    font-stretch: expanded;
 
 }
 .footer-back-col{
