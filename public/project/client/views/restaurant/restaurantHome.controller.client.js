@@ -14,7 +14,7 @@
         vm.deleteReview = deleteReview;
         vm.checkUser = checkUser;
       
-        vm.navigateToReviews = navigateToReviews;
+       
 
         vm.userId = $routeParams.userId;
         var username = "";
