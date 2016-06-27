@@ -23,7 +23,7 @@
                 vm.error = "Passwords don't match";
             }
             else  if (email == null) {
-                vm.error = "email cannot be empty";
+                vm.error = "email is either empty or not proper";
             } else {
                 var isAdmin = false;
                             UserService

@@ -73,6 +73,10 @@ body {
     font-style: oblique;
 }
 
+.restaurant-searchfont{
+    color: #ec971f;
+}
+
 .admin-col{
     background-color: #ec971f;
 }

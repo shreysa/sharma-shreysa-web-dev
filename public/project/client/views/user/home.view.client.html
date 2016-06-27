@@ -71,16 +71,21 @@
         <div class="col-lg-6 col-md-6 col-sm-6">
             <div class="box-search"     ng-repeat="restaurant in model.business.businesses">
                 <div>
-                    <div class="container-fluid row res-name">
-                        <div class="col-sm-4 col-md-4 col-lg-4 pull-left"></div>
+                    <div class=" row home-box-pad res-name">
                         <div class="col-sm-4 col-md-4 col-lg-4 ">
-                            <h3 ><a  href="#/home/{{restaurant.id}}">{{restaurant.id}}</a></h3>
-                            <h6> {{restaurant.phone}} </h6>
-                            <h7>Rating: {{restaurant.rating}} </h7>
+                    <!--<div class="container-fluid row res-name">-->
+                        <!--<div class="col-sm-4 col-md-4 col-lg-4 pull-left"></div>-->
+                        <!--<div class="col-sm-4 col-md-4 col-lg-4 ">-->
+                            <h3  ><a class="restaurant-searchfont" href="#/home/{{restaurant.id}}">{{restaurant.id}}</a></h3>
+                        </div>
+                        <div></div>
+                        <div class="col-sm-4 col-md-4 col-lg-4 ">
+                            <h6 > {{restaurant.phone}} </h6>
+                            <h7 >Rating: {{restaurant.rating}} </h7>
 
                         </div>
                         <div class="col-sm-4 col-md-4 col-lg-4 ">
-                            <img class="img img-box img-responsive pull-right" ng-src={{restaurant.image_url}} alt="No image provided">
+                            <img class="img-thumbnail img-circle pull-right" ng-src={{restaurant.image_url}} alt="No image provided">
                         </div>
                         <!--<img ng-src="restaurant.image_url" width="100%">-->
                     </div>

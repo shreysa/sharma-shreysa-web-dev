@@ -26,7 +26,7 @@
                             }
                         },
                         function (error) {
-                            vm.error = "invalid credentials";
+                            vm.error = "Please enter details";
                         });
 
                 //  }
