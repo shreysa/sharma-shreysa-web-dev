@@ -22,6 +22,10 @@ body {
     background-position: center;
     position: absolute;
 }
+
+.pad-top-lil{
+    padding-top: 60px;
+}
 .pad-top{
     padding-top: 70px;
 }
