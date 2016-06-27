@@ -26,7 +26,11 @@
             // console.log("client");
             // return $http.get(url);
             var method = 'GET';
+            // if(index == 9){
+            //     index = index + 1;
+            // }
             index++
+            console.log(index);
             var url = 'http://api.yelp.com/v2/search';
             var params = {
                 callback: 'angular.callbacks._' + index,
@@ -54,7 +58,11 @@
           console.log("client");
             // return $http.get(url);
             var method = 'GET';
+            // if(index == 9){
+            //     index = -1;
+            // }
             index++
+            console.log(index);
             var url = 'http://api.yelp.com/v2/business/' + id;
             var params = {
                callback: 'angular.callbacks._' + index ,
