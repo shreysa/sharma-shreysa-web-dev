@@ -91,6 +91,7 @@
                 }
                     else{
                         vm.searchedAdmin = false;
+                        vm.friends = null;
                         vm.noUser = true;
                     }
                 });
