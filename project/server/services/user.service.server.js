@@ -42,7 +42,7 @@ module.exports = function (app, models) {
     app.get('/auth/google/callback',
         passport.authenticate('google', {
             successRedirect: '/project/#/user',
-            failureRedirect: 'project/#/review'
+            failureRedirect: '/project/#/review'
         }));
 
 
