@@ -16,7 +16,7 @@
             FollowService
                 .findAllFollowedByUserId(vm.otherUser.otherUserId)
                 .then(function (response) {
-                    if(response.data !=null) {
+                    if(response.data.length > 0) {
                         vm.follows = response.data;
                         console.log(vm.follows[0]._userFollow.username);
                         vm.isFollowing = true;

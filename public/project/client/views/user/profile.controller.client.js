@@ -12,8 +12,7 @@
         vm.navigateToProfile = navigateToProfile;
        vm.logout = logout;
         var index = -1;
-        //vm.user = null;
-       // vm.loadData = loadData;
+       
         var id = $routeParams["userId"];
 
 

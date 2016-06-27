@@ -28,20 +28,6 @@
                         function (error) {
                             vm.error = "Invalid credentials or no details entered";
                         });
-
-                //  }
-                //     else if(username == null && password == null){
-                //     vm.error = "Username and password cannot be empty";
-                // }
-                // else if(username== null){
-                //     vm.error = "Username cannot be empty";
-                // }
-                // else if (password == null){
-                //     vm.error = "password cannot be empty";
-                // }
-
-
-
             }
 
         }

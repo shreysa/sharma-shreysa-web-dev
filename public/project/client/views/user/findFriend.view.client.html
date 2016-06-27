@@ -46,11 +46,7 @@
 
             <div ng-if="!model.searchedAdmin"  class="media">
                 <div class="media-left media-middle pad-left " ng-repeat="user in model.friends">
-                    <!--<a href="#">-->
-                        <!--<img class="media-object" ng-src="" alt="image not available">-->
-                    <!--</a>-->
-                <!--</div>-->
-                <!--<div class="media-body media-middle">-->
+
                     <a ng-click="model.checkUser(user._id)"
                        class="  actionlink media-heading ">{{user.username}}</a>
 
@@ -59,34 +55,16 @@
 
             <div ng-if="model.searchedAdmin" class="media">
                 <div class="media-left media-middle pad-left " >
-                    <!--<a href="#">-->
-                    <!--<img class="media-object" ng-src="" alt="image not available">-->
-                    <!--</a>-->
-                    <!--</div>-->
-                    <!--<div class="media-body media-middle">-->
                     <h4> You cannot search for Admin</h4>
 
                 </div>
                 </div>
             <div ng-if="model.noUser" class="media">
                 <div class="media-left media-middle pad-left " >
-                    <!--<a href="#">-->
-                    <!--<img class="media-object" ng-src="" alt="image not available">-->
-                    <!--</a>-->
-                    <!--</div>-->
-                    <!--<div class="media-body media-middle">-->
                     <h4> No user with this username exists</h4>
 
                 </div>
             </div>
-
-            <!--<ul class="list-group ">-->
-                <!--<li ng-repeat="user in model.friends"-->
-                    <!--class="box-search2">-->
-                    <!--<a href="#/user/{{model.userId}}/{{user._id}}/profile"-->
-                       <!--class="actionlink">{{user.username}}</a>-->
-                <!--</li>-->
-            <!--</ul>-->
             <div class="list-group" >
                 <h2>Friend Suggestions</h2>
                 <ul >

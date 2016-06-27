@@ -18,7 +18,7 @@
                 .findAllReviewsByUserId(vm.otherUser.userId)
                 .then(
                     function (response) {
-                        if(response.data !=null) {
+                        if(response.data.length>0) {
                             vm.reviewsByUser = response.data;
                             console.log("here are the reviews");
                             console.log(vm.reviewsByUser);
