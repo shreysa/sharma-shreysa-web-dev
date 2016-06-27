@@ -14,11 +14,16 @@
             updateReview: updateReview,
             getReviewByUserId: getReviewByUserId,
             getAllReviews : getAllReviews,
-            deleteReviewByUserId : deleteReviewByUserId
+            deleteReviewByUserId : deleteReviewByUserId,
+            findRestaurant: findRestaurant
 
         };
 
         return api;
+        
+        function findRestaurant(restaurantId) {
+            return $http.get("/api/project/restaurant/review/like/follow/" + restaurantId);
+        }
         
         function deleteReviewByUserId(userId) {
             return $http.delete("/api/review/remove/usersReview/" + userId);

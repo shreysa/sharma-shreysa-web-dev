@@ -13,6 +13,8 @@
         vm.updateReview = updateReview;
         vm.deleteReview = deleteReview;
         vm.checkUser = checkUser;
+        vm.DBRestaurant = null;
+        vm.navigateToReviews = navigateToReviews;
 
         vm.userId = $routeParams.userId;
         var username = "";
@@ -27,6 +29,27 @@
                 .then(
                     function (response) {
                         vm.restaurant = response.data;
+                        
+                        // var restForDatabase = {
+                        //     restaurantId: vm.restaurant.id,
+                        //     name: vm.restaurant.name,
+                        //     image: vm.restaurant.image_url,
+                        //     location: vm.restaurant.location.address[0],
+                        //     city: vm.restaurant.location.city,
+                        //     phone: vm.restaurant.display_phone,
+                        //     rating: vm.restaurant.rating
+                        // };
+                        //
+                        // LikeService
+                        //     .addRestaurant(restForDatabase)
+                        //     .then(
+                        //         function (response) {
+                        //             console.log("restaurant added");
+                        //             vm.DBRestaurant = response.data;
+                        //         }, function (error) {
+                        //             vm.error = "error ocurred"
+                        //         })
+
 
             LikeService
                 .findRestaurant( vm.yelpRestId)
@@ -449,6 +472,10 @@
             }else{
                 $location.url("/user/" + vm.userId + "/" + userId + "/profile");
             }
+        }
+        
+        function navigateToReviews() {
+            $location.url("/user/" + vm.userId + "/restaurant/" + vm.DBRestaurant._id + "/reviews");
         }
 
 

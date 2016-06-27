@@ -5,7 +5,7 @@
 
     function YelpService($http) {
 
-        var index = -1;
+        var index = angular.callbacks.counter.toString(36);
         var api = {
 
             findRestaurant: findRestaurant,
@@ -21,15 +21,16 @@
             return result;
         }
 
-        function findRestaurant(searchFood, searchLocation) {
+        function findRestaurant(searchFood, searchLocation, callback) {
             // var url = "/api/yelp/" + searchFood + "/" + searchLocation;
             // console.log("client");
             // return $http.get(url);
+            var index = angular.callbacks.counter.toString(36);
             var method = 'GET';
             // if(index == 9){
             //     index = index + 1;
             // }
-            index++
+           // var index = angular.callbacks.counter.toString(36);
             console.log(index);
             var url = 'http://api.yelp.com/v2/search';
             var params = {
@@ -53,15 +54,17 @@
 
         }
 
-        function findRestaurantById(id) {
-            // var url = "/api/yelp/" + searchFood + "/" + searchLocation;
+        function findRestaurantById(id, callback) {
+
+          var index = angular.callbacks.counter.toString(36);
           console.log("client");
             // return $http.get(url);
             var method = 'GET';
+
             // if(index == 9){
             //     index = -1;
             // }
-            index++
+            // index++
             console.log(index);
             var url = 'http://api.yelp.com/v2/business/' + id;
             var params = {

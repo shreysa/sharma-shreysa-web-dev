@@ -5,7 +5,7 @@ module.exports = function (app, models) {
     var categoryModel = models.categoryModel;
 
 
-
+    app.post("/api/project/restaurant/user/viewed", addRestaurant)
     app.post("/api/projectuser/:userId/like", likeRestaurant);
     app.get("/api/projectuser/checkLike/:userId/restaurant/:restaurantId", findThisLikedByUserId);
     app.delete("/api/projectuser/:userId/removeLike/:restaurantId", unlikeRestaurant);
@@ -13,20 +13,29 @@ module.exports = function (app, models) {
     app.get("/api/projectuser/fetchLikedRestaurant/:userId", findAllLikedByUserId);
     app.get("/api/projectuser/restaurant/:restaurantId", findAllLikedByRestaurantId);
     app.delete("/api/unlike/user/restaurant/:userId", deleteLike);
-    // app.get("/api/findLike/Restaurant/user/:userId", findLikeByUserId);
-    //
-    //
-    //
-    // function findLikeByUserId(req, res) {
-    //     likeModel
-    //         .findLikeByUserId(req.params.userId)
-    //         .then(
-    //         function (likeObj) {
-    //             res.json(likeObj);
-    //         }, function (error) {
-    //                 res.statusCode(400).send(error);
-    //             });
-    // }
+   
+    function addRestaurant(req, res) {
+        restaurantModel
+            .findRestaurant(req.body.restaurantId)
+            .then(
+                function (restObj, error) {
+                    if (restObj == null) {
+                        restaurantModel
+                            .addRestaurant(req.body)
+                            .then(
+                                function (addRestObj) {
+                                    res.json(addRestObj);
+                                }, function (error) {
+                                    res.statusCode(400).send(error);
+                                })
+                    } else {
+                        res.json(restObj);
+                    }
+                }, function (error) {
+                    res.statusCode(400).send(error);
+                });
+    }
+    
 
 
     function deleteLike(req, res) {

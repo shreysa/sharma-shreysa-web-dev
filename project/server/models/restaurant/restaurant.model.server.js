@@ -6,7 +6,8 @@ module.exports = function () {
 
         var api = {
             findRestaurant: findRestaurant,
-            addRestaurant: addRestaurant
+            addRestaurant: addRestaurant,
+            findRestaurantByRestaurantId: findRestaurantByRestaurantId
         };
         return api;
 
@@ -17,6 +18,10 @@ module.exports = function () {
         function addRestaurant(restaurant) {
             return Restaurant.create(restaurant);
         }
+    
+         function findRestaurantByRestaurantId(id) {
+            return Restaurant.findOne({_id : id});
+    }
 
   
 };

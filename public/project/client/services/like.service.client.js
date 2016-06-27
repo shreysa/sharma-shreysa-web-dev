@@ -14,11 +14,16 @@
             findAllLikedByUserId: findAllLikedByUserId,
             findAllLikedByRestaurantId: findAllLikedByRestaurantId,
             getCategory: getCategory,
-            deleteLikeByUserId: deleteLikeByUserId
+            deleteLikeByUserId: deleteLikeByUserId,
+            addRestaurant : addRestaurant
         //    findLikeByUserId : findLikeByUserId
         };
 
         return api;
+        
+        function addRestaurant(restaurant) {
+            return $http.post("/api/project/restaurant/user/viewed", restaurant);
+        }
         
         
         // function findLikeByUserId(userId) {

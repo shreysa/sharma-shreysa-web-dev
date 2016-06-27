@@ -3,6 +3,7 @@ module.exports = function (app, models) {
     var reviewModel = models.reviewModel;
     var restaurantModel = models.restaurantModel;
     var categoryModel = models.categoryModel;
+    app.get("/api/project/restaurant/review/like/follow/:restaurantId", findRestaurant);
     app.delete("/api/review/remove/usersReview/:userId", deleteReviewByUserId);
     app.post("/api/projectuser/:userId/review/:restaurantId", addReview);
     app.get("/api/projectuser/user/:userId/restaurant/review/:restaurantId", getReviewByUserId);
@@ -13,6 +14,18 @@ module.exports = function (app, models) {
     app.get("/api/projectuser/review/restaurant", getAllReviews);
 
     
+    
+    function findRestaurant(req, res) {
+        restaurantModel
+            .findRestaurantByRestaurantId(req.params.restaurantId)
+            .then(
+                function (restObj) {
+                    res.json(restObj);
+                }, function (error) {
+                    res.statusCode(400).send(error);
+                }
+            );
+    }
     
     function deleteReviewByUserId(req, res) {
         reviewModel
