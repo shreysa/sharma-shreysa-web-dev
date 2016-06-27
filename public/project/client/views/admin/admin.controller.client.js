@@ -188,6 +188,22 @@
                                     vm.error = "user could not be deleted";
                                 }
                             );
+                                    ReviewService
+                                        .getAllReviews()
+                                        .then(
+                                            function (response) {
+                                                if (response.data != null) {
+                                                    vm.reviews = response.data;
+                                                    console.log(vm.reviews);
+                                                    // console.log(vm.reviews[0]._user.username);
+                                                    vm.hasReviews = true;
+                                                } else {
+                                                    vm.hasReviews = false;
+                                                }
+                                            },
+                                            function (error) {
+                                                vm.error = "some error ocurred";
+                                            });
                     }, function (error) {
                         vm.error = "Some error ocurred while deleting the user";
                     });
