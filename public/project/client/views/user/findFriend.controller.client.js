@@ -61,10 +61,38 @@
         
 
         function findFriend(findFriend) {
+
+
+
+            UserService
+                .getAdmins()
+                .then(
+                    function (response) {
+                        vm.administrators = response.data;
+                    }, function (error) {
+                        vm.error = "could not fetch admin data";
+                    }
+                );
+            
             UserService
                 .findFriend(findFriend)
-                .then(function (response) {
+                .then(function (response) {  
+                    if(response.data.length>0){
                     vm.friends = response.data;
+                    console.log(vm.friends);
+                    for(i = 0; i < vm.administrators.length; i++){
+                        if(vm.friends[0].username === vm.administrators[i].username){
+                            vm.searchedAdmin = true;
+
+                        }
+                    }
+                        vm.noUser = false;
+                    
+                }
+                    else{
+                        vm.searchedAdmin = false;
+                        vm.noUser = true;
+                    }
                 });
 
                
