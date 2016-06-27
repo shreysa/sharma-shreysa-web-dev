@@ -83,6 +83,7 @@
     }
     
     function updateUser(userId, user) {
+        delete user._id;
         return User
             .update({_id: userId},{
                 $set:user
