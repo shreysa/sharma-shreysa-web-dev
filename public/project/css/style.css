@@ -62,7 +62,19 @@ body {
 
 }
 .footer-back-col{
-    background-color: orange;
+    background-color: #204d74;
+
+}
+
+.homefont{
+    font-weight: 900;
+    color: antiquewhite;
+    font-family: cursive;
+    font-style: oblique;
+}
+
+.admin-col{
+    background-color: #ec971f;
 }
 .home-pic {
 
