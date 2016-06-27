@@ -12,7 +12,7 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="navbar-collapse collapse " id="navbar">
+    <div href="#/user/{{model.userId}}/home" class="navbar-collapse collapse " id="navbar">
         <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="#/user/{{model.userId}}/home">Search Restaurants</a>
@@ -128,7 +128,9 @@
     <div class="container ">
         <div class="row  navbar-text">
             <div class="col-lg-3 col-md-3 col-sm-3 bottom-cut footer-fontcolor ">
-                <span class=" glyphicon glyphicon-cutlery"></span>
+                <a href="#/user/{{model.userId}}/home">
+                    <span class="footer-fontcolor glyphicon glyphicon-cutlery"></span>
+                </a>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3  text-center">
             </div>

@@ -8,7 +8,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand page-scroll">Eat Hearty <span class="backgroundFont glyphicon glyphicon-cutlery"> </span> </a>
+        <a href="#/user/{{model.userId}}/home" class="navbar-brand page-scroll">Eat Hearty <span class="backgroundFont glyphicon glyphicon-cutlery"> </span> </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -145,7 +145,9 @@
     <div class="container ">
         <div class="row  navbar-text">
             <div class="col-lg-3 col-md-3 col-sm-3 bottom-cut footer-fontcolor ">
-                <span class=" glyphicon glyphicon-cutlery"></span>
+                <a href="#/user/{{model.userId}}/home">
+                    <span class="footer-fontcolor glyphicon glyphicon-cutlery"></span>
+                </a>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3  text-center">
             </div>
@@ -159,32 +161,3 @@
 
 
 
-<!--<div class="container-fluid">-->
-<!--<div class="row">-->
-<!--<div class="col-lg-3 col-md-3 col-sm-3">-->
-<!--</div>-->
-<!--<div class="col-lg-6 col-md-6 col-sm-6">-->
-<!--<div class="box-search paddingfromtop"     ng-repeat="restaurant in model.ratingRestaurant">-->
-<!--<div class="container-fluid row res-name">-->
-<!--<div class="col-sm-6 col-md-6 col-lg-6 pull-left ">-->
-<!--<h5><a href="#/user/{{model.userId}}/restaurant/{{restaurant._restaurant.restaurantId}}"> {{restaurant._restaurant.name}}</a></h5>-->
-<!--</div>-->
-<!--<div class="col-sm-2 col-md-2 col-lg-2 ">-->
-<!--&lt;!&ndash;<h5><a href="#/user/{{model.userId}}/restaurant/{{restaurant._restaurant.restaurantId}}"> {{restaurant._restaurant.name}}</a></h5>&ndash;&gt;-->
-<!--<h7>Address: {{restaurant._restaurant.location}} </h7>-->
-
-<!--</div>-->
-<!--<div class="col-sm-4 col-md-4 col-lg-4 ">-->
-<!--<img class="img img-box img-responsive" ng-src={{restaurant._restaurant.image}} alt="No image provided">-->
-<!--</div>-->
-<!--&lt;!&ndash;<img ng-src="restaurant.image_url" width="100%">&ndash;&gt;-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="col-lg-3 col-md-3 col-sm-3"></div>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--</div>-->
-<!--</div>-->
