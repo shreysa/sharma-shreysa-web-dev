@@ -278,6 +278,10 @@ p.navbar-text.pull-left{
     color: #ec971f;
 }
 
+.fontwt{
+    font-weight: 900;
+}
+
 .bottom-cut{
     position: absolute;
     left: 15px;

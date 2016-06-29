@@ -15,9 +15,9 @@ glyphicon-cutlery"> </span> </a>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="navbar-collapse collapse " id="navbar">
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav  navbar-nav navbar-right">
             <li>
-                <a href="#/register">Register</a>
+                <a  href="#/register">Register</a>
             </li>
             <li>
                 <a href="#login">Log In</a>
@@ -39,7 +39,7 @@ glyphicon-cutlery"> </span> </a>
                     <div class="col-md-5 col-sm-5 col-lg-5">
 
                         <input ng-model="model.searchFood"
-                               class="form-control text-input center-block"
+                               class="form-control text-input backgroundFont center-block"
                                name="searchFood"
                                value=""
                                placeholder="Italian, Thai, Burgers, Pizza .."
@@ -48,7 +48,7 @@ glyphicon-cutlery"> </span> </a>
                     </div>
                     <div class="col-sm-5 col-md-5 col-lg-5">
                         <input ng-model="model.searchLocation"
-                               class="form-control text-input center-block"
+                               class="form-control text-input backgroundFont center-block"
                                name="searchLocation"
                                value=""
                                placeholder="Boston, Indiana.."
@@ -56,7 +56,7 @@ glyphicon-cutlery"> </span> </a>
                     </div>
                     <div class="col-sm-2 col-md-2 col-lg-2">
                         <a ng-click="model.findRestaurant(model.searchFood,model.searchLocation)"
-                           class="central-block btn btn-default btn-sm form-control" role="button">
+                           class="central-block btn btn-default btn-sm form-control fontwt" role="button">
                             <span class="glyphicon glyphicon-search"></span>
                             Search</a>
 
@@ -75,9 +75,7 @@ glyphicon-cutlery"> </span> </a>
                 <div>
                     <div class=" row home-box-pad res-name">
                         <div class="col-sm-4 col-md-4 col-lg-4 ">
-                            <!--<div class="container-fluid row res-name">-->
-                            <!--<div class="col-sm-4 col-md-4 col-lg-4 pull-left"></div>-->
-                            <!--<div class="col-sm-4 col-md-4 col-lg-4 ">-->
+
                             <h3  ><a class="restaurant-searchfont" href="#/home/{{restaurant.id}}">{{restaurant.id}}
                             </a></h3>
                         </div>
