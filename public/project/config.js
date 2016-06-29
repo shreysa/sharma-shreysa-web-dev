@@ -146,6 +146,11 @@
                     loggedIn: checkLoggedIn
                 }
             })
+            // .when("/search/home/apiSearch", {
+            //     templateUrl: "client/views/user/restaurantApiDetail.view.client.html",
+            //     controller: "HomeController",
+            //     controllerAs: "model"
+            // })
 
             
             .when("/home", {

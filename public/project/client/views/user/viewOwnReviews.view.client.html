@@ -30,12 +30,14 @@
     </div>
 
 </nav>
-<div class="container-fluid pad-top">
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 pad">
+<div class="container-fluid  pad-top">
+    <div class="row">
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2    pad">
     <ul class="nav nav-tabs">
 
-        <li class=""> <a href="#/user/{{model.user.userId}}/user/ownLikes" data-toggle="tab" aria-expanded="false">Likes</a></li>
+
         <li class="active"> <a href="#/user/{{model.user.userId}}/own/reviewsByUser"  data-toggle="tab" aria-expanded="true">Reviews</a></li>
+        <li class=""> <a href="#/user/{{model.user.userId}}/user/ownLikes" data-toggle="tab" aria-expanded="false">Likes</a></li>
         <li class=""> <a href="#/user/{{model.user.userId}}/own/followedBy" data-toggle="tab" aria-expanded="false">Followers</a></li>
         <li class=""> <a href="#/user/{{model.user.userId}}/user/ownFollows" data-toggle="tab" aria-expanded="false">Follows</a></li>
     </ul>
@@ -64,6 +66,7 @@
     </div>
 </div>
 </div>
+    </div>
 
 <nav class="navbar navbar-inverse navbar-fixed-bottom">
     <div class="container ">

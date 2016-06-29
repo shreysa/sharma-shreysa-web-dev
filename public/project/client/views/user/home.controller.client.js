@@ -18,6 +18,7 @@
                         vm.business = response.data;
                         vm.hasBusiness = true;
                         vm.id = [];
+                    
                     }else{
                         vm.hasBusiness = false;
                     }

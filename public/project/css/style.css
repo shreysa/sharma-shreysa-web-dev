@@ -96,7 +96,11 @@ body {
     height: auto;
     background-position: center;
     background-size: cover;
-    position: relative;
+    position: static;
+}
+
+.backcolr{
+    background-color: #e4b9c0;
 }
 .pad-botm{
     padding-bottom: 5px;

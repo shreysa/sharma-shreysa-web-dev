@@ -31,6 +31,7 @@
 </nav>
 <!--<div class="container-fluid res-back-color box-search">-->
 <div class="container-fluid restaurant-detail pad-top">
+    <div class="row">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-3 pull-right">
@@ -63,6 +64,7 @@
         </div>
     </div>
 </div>
+</div>
 
 <div class="container-fluid ">
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 pad">
@@ -81,9 +83,9 @@
 
 
 
-                <li class=""><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/likes" data-toggle="tab" aria-expanded="false">Liked By</a></li>
+                <li class=""><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/likes" data-toggle="tab" aria-expanded="false">Likes</a></li>
                 <li class="active"> <a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/reviews" data-toggle="tab" aria-expanded="true">Reviews</a></li>
-                <li class=""> <a href="#/user/{{model.userId}}/{{model.yelpRestId}}/writeReview" data-toggle="tab" aria-expanded="false">Write a Review</a></li>
+                <li class=""> <a href="#/user/{{model.userId}}/{{model.yelpRestId}}/writeReview" data-toggle="tab" aria-expanded="false">Write Review</a></li>
             </ul>
             <div id="myTabContent" class="tab-content">
                 <div class="tab-pane fade active in" id="reviews">

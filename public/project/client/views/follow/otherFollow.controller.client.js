@@ -18,7 +18,7 @@
                 .then(function (response) {
                     if(response.data.length > 0) {
                         vm.follows = response.data;
-                        console.log(vm.follows[0]._userFollow.username);
+                       // console.log(vm.follows[0]._userFollow.username);
                         vm.isFollowing = true;
                     }else{
                         vm.isFollowing = false;
