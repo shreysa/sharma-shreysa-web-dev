@@ -6,6 +6,16 @@
     function Config($routeProvider) {
         $routeProvider
 
+            // .when("/user/admin/profile/admin/:adminId", {
+            //     templateUrl: "client/views/admin/adminProfile.view.client.html",
+            //     controller:"AdminProfileController",
+            //     controllerAs: "model",
+            //     resolve: {
+            //         loggedIn: checkLoggedIn
+            //     }
+            //
+            // })
+
             .when("/user/:userId/restaurant/:restaurantId/reviews", {
                 templateUrl: "client/views/review/showReview.view.client.html",
                 controller: "RestaurantHomeController",
@@ -146,6 +156,7 @@
                     loggedIn: checkLoggedIn
                 }
             })
+
             // .when("/search/home/apiSearch", {
             //     templateUrl: "client/views/user/restaurantApiDetail.view.client.html",
             //     controller: "HomeController",
@@ -191,6 +202,15 @@
                     loggedIn: checkLoggedIn
                 }
             })
+            // .when("/user/admin/profile/:adminId", {
+            //     templateUrl: "client/views/admin/adminProfile.view.client.html",
+            //     controller:"AdminProfileController",
+            //     controllerAs: "model",
+            //     resolve: {
+            //         loggedIn: checkLoggedIn
+            //     }
+            //
+            // })
             .when("/user", {
                 templateUrl: "client/views/user/profile.view.client.html",
                 controller:"ProfileController",

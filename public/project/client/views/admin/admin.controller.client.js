@@ -11,94 +11,95 @@
         vm.makeAdmin = makeAdmin;
         vm.deleteAdmin = deleteAdmin;
         vm.logout = logout;
+     //   vm.goToProfile = goToProfile;
 
-        function init(){
+        function init() {
             UserService
                 .findUserById(vm.user.userId)
                 .then(
                     function (response) {
                         vm.user = response.data;
-                        if(!vm.user.isAdmin){
+                        if (!vm.user.isAdmin) {
                             alert("incorrect access");
-                    }else{
-
-            UserService
-                .findUsers()
-                .then(
-                    function (response) {
-                        if (response.data != null){
-                            vm.allUsers = response.data;
-
-                            vm.users = [];
-
-                            for (i = 0; i < vm.allUsers.length; i++) {
-                                if (!vm.allUsers[i].isAdmin) {
-                                    vm.users.push(vm.allUsers[i]);
-                                }
-                            }
-                            if (vm.users.length > 0) {
-                                vm.hasUsers = true;
-                            } else {
-                                vm.hasUsers = false;
-                            }
                         } else {
-                            vm.hasUsers = false;
-                        }
 
-                        ReviewService
-                            .getAllReviews()
-                            .then(
-                                function (response) {
-                                    if (response.data != null) {
-                                        vm.reviews = response.data;
-                                        console.log(vm.reviews);
-                                        // console.log(vm.reviews[0]._user.username);
-                                        vm.hasReviews = true;
-                                    } else {
-                                        vm.hasReviews = false;
-                                    }
-                                },
-                                function (error) {
-                                    vm.error = "some error ocurred";
-                                })
+                            UserService
+                                .findUsers()
+                                .then(
+                                    function (response) {
+                                        if (response.data != null) {
+                                            vm.allUsers = response.data;
 
+                                            vm.users = [];
 
-                        UserService
-                            .getAdmins()
-                            .then(
-                                function (response) {
-                                    if (response.data.length >0) {
-                                        vm.allAdmins = response.data;
-
-                                        vm.admins = [];
-
-                                        for (i = 0; i < vm.allAdmins.length; i++) {
-                                            if (vm.allAdmins[i]._id != vm.user._id) {
-                                                vm.admins.push(vm.allAdmins[i]);
+                                            for (i = 0; i < vm.allUsers.length; i++) {
+                                                if (!vm.allUsers[i].isAdmin) {
+                                                    vm.users.push(vm.allUsers[i]);
+                                                }
                                             }
-                                        }
-                                        if (vm.admins.length > 0) {
-                                            vm.hasAdmin = true;
+                                            if (vm.users.length > 0) {
+                                                vm.hasUsers = true;
+                                            } else {
+                                                vm.hasUsers = false;
+                                            }
                                         } else {
-                                            vm.hasAdmin = false;
+                                            vm.hasUsers = false;
                                         }
-                                    } else {
-                                        vm.hasAdmin = false;
+
+                                        ReviewService
+                                            .getAllReviews()
+                                            .then(
+                                                function (response) {
+                                                    if (response.data != null) {
+                                                        vm.reviews = response.data;
+                                                        console.log(vm.reviews);
+                                                        // console.log(vm.reviews[0]._user.username);
+                                                        vm.hasReviews = true;
+                                                    } else {
+                                                        vm.hasReviews = false;
+                                                    }
+                                                },
+                                                function (error) {
+                                                    vm.error = "some error ocurred";
+                                                })
+
+
+                                        UserService
+                                            .getAdmins()
+                                            .then(
+                                                function (response) {
+                                                    if (response.data.length > 0) {
+                                                        vm.allAdmins = response.data;
+
+                                                        vm.admins = [];
+
+                                                        for (i = 0; i < vm.allAdmins.length; i++) {
+                                                            if (vm.allAdmins[i]._id != vm.user._id) {
+                                                                vm.admins.push(vm.allAdmins[i]);
+                                                            }
+                                                        }
+                                                        if (vm.admins.length > 0) {
+                                                            vm.hasAdmin = true;
+                                                        } else {
+                                                            vm.hasAdmin = false;
+                                                        }
+                                                    } else {
+                                                        vm.hasAdmin = false;
+                                                    }
+                                                },
+                                                function (error) {
+                                                    vm.error = "some error ocurred while fetching the admins";
+                                                })
+                                    }, function (error) {
+                                        vm.error = "error ocurred while fetching users";
                                     }
-                                },
-                                function (error) {
-                                    vm.error = "some error ocurred while fetching the admins";
-                                })
-                    }, function (error) {
-                        vm.error = "error ocurred while fetching users";
+                                );
+                        }
                     }
+                );
+        }
 
-
-
-        );} }
-
-                        );
-        }init();
+        init();
 
         function logout() {
             UserService
@@ -113,16 +114,16 @@
                     }
                 )
         }
-        
-        
+
+
         function deleteUser(userId) {
 
-                        
-                        LikeService
-                            .deleteLikeByUserId(userId)
-                            .then(
-                                function (response) {
-                                    console.log("Like removed");
+
+            LikeService
+                .deleteLikeByUserId(userId)
+                .then(
+                    function (response) {
+                        console.log("Like removed");
 
 
                         ReviewService
@@ -155,12 +156,12 @@
                                     console.log("error ocurred in removing follow");
                                 }
                             );
-                                    UserService
-                                        .deleteUser(userId)
-                                        .then(
-                                            function (response) {
-                                                vm.success = "User was successfully deleted";
-                                            });
+                        UserService
+                            .deleteUser(userId)
+                            .then(
+                                function (response) {
+                                    vm.success = "User was successfully deleted";
+                                });
                         UserService
                             .findUsers()
                             .then(
@@ -188,27 +189,27 @@
                                     vm.error = "user could not be deleted";
                                 }
                             );
-                                    ReviewService
-                                        .getAllReviews()
-                                        .then(
-                                            function (response) {
-                                                if (response.data != null) {
-                                                    vm.reviews = response.data;
-                                                    console.log(vm.reviews);
-                                                    // console.log(vm.reviews[0]._user.username);
-                                                    vm.hasReviews = true;
-                                                } else {
-                                                    vm.hasReviews = false;
-                                                }
-                                            },
-                                            function (error) {
-                                                vm.error = "some error ocurred";
-                                            });
+                        ReviewService
+                            .getAllReviews()
+                            .then(
+                                function (response) {
+                                    if (response.data != null) {
+                                        vm.reviews = response.data;
+                                        console.log(vm.reviews);
+                                        // console.log(vm.reviews[0]._user.username);
+                                        vm.hasReviews = true;
+                                    } else {
+                                        vm.hasReviews = false;
+                                    }
+                                },
+                                function (error) {
+                                    vm.error = "some error ocurred";
+                                });
                     }, function (error) {
                         vm.error = "Some error ocurred while deleting the user";
                     });
         }
-        
+
         function deleteReview(reviewId) {
             ReviewService
                 .deleteReview(reviewId)
@@ -269,12 +270,12 @@
                                 }, function (error) {
                                     vm.error = "error ocurred in fetching users after admin was made";
                                 }
-                                    );
+                            );
                         UserService
                             .getAdmins()
                             .then(
                                 function (response) {
-                                    if (response.data.length >0) {
+                                    if (response.data.length > 0) {
                                         vm.allAdmins = response.data;
 
                                         vm.admins = [];
@@ -289,14 +290,14 @@
                                         } else {
                                             vm.hasAdmin = false;
                                         }
-                                    }else{
+                                    } else {
                                         vm.hasAdmin = false;
                                     }
-                                    },
-                            function (error) {
-                                vm.error = "some error ocurred while fetching the admins";
-                            });
-                                    
+                                },
+                                function (error) {
+                                    vm.error = "some error ocurred while fetching the admins";
+                                });
+
                     },
                     function (error) {
                         vm.error = "user could not be made admin";
@@ -342,7 +343,7 @@
                             .getAdmins()
                             .then(
                                 function (response) {
-                                    if (response.data.length >0) {
+                                    if (response.data.length > 0) {
                                         vm.allAdmins = response.data;
 
                                         vm.admins = [];
@@ -369,6 +370,10 @@
                     });
         }
 
+
+        // function goToProfile() {
+        //     $location.url("/user/admin/profile/admin/" + vm.user._id);
+        // }
     }
 
 })();
