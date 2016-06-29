@@ -36,10 +36,10 @@
     <ul class="nav nav-tabs">
 
 
-        <li class=""> <a href="#/user/{{model.user.userId}}/own/reviewsByUser"  data-toggle="tab" aria-expanded="false">Reviews</a></li>
-        <li class=""> <a href="#/user/{{model.user.userId}}/user/ownLikes" data-toggle="tab" aria-expanded="false">Likes</a></li>
-        <li class="active"> <a href="#/user/{{model.user.userId}}/own/followedBy" data-toggle="tab" aria-expanded="true">Followers</a></li>
-        <li class=""> <a href="#/user/{{model.user.userId}}/user/ownFollows" data-toggle="tab" aria-expanded="false">Follows</a></li>
+        <li class=""> <a href="#/user/{{model.user.userId}}/own/reviewsByUser" class="backgroundFont"  data-toggle="tab" aria-expanded="false">Reviews</a></li>
+        <li class=""> <a href="#/user/{{model.user.userId}}/user/ownLikes" class="backgroundFont" data-toggle="tab" aria-expanded="false">Likes</a></li>
+        <li class="active"> <a href="#/user/{{model.user.userId}}/own/followedBy" class="backgroundFont" data-toggle="tab" aria-expanded="true">Followers</a></li>
+        <li class=""> <a href="#/user/{{model.user.userId}}/user/ownFollows" class="backgroundFont" data-toggle="tab" aria-expanded="false">Follows</a></li>
     </ul>
     <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade active in" id="followers">
@@ -51,7 +51,7 @@
                     <div        ng-repeat="user in model.followers">
                         <div class="well well-sm ">
 
-                            <h5>  <a href="#/user/{{model.user.userId}}/{{user._user._id}}/profile">
+                            <h5>  <a class="backgroundFont" href="#/user/{{model.user.userId}}/{{user._user._id}}/profile">
                                 {{user._user.username}}
                             </a> </h5>
                         </div>

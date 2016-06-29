@@ -85,10 +85,10 @@
             </div>
 
 
-            <li class="active"><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/likes" data-toggle="tab" aria-expanded="true">Likes</a></li>
-            <li class=""><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/reviews"  data-toggle="tab" aria-expanded="false">Reviews</a></li>
+            <li class="active"><a  href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/likes" class="backgroundFont" data-toggle="tab" aria-expanded="true">Likes</a></li>
+            <li class=""><a href="#/user/{{model.userId}}/restaurant/{{model.yelpRestId}}/reviews" class="backgroundFont"  data-toggle="tab" aria-expanded="false">Reviews</a></li>
 
-            <li class=""> <a href="#/user/{{model.userId}}/{{model.yelpRestId}}/writeReview" data-toggle="tab" aria-expanded="false">Write Review</a></li>
+            <li class=""> <a href="#/user/{{model.userId}}/{{model.yelpRestId}}/writeReview" class="backgroundFont" data-toggle="tab" aria-expanded="false">Review it</a></li>
         </ul>
         <div id="myTabContent" class="tab-content">
             <div class="tab-pane fade active in" id="likes">
@@ -99,7 +99,7 @@
                         <div      ng-repeat="users in model.usersWhoLiked">
                             <div class="well well-sm ">
 
-                                <h5>  <a ng-click="model.checkUser(users._user._id)">
+                                <h5>  <a class="backgroundFont" ng-click="model.checkUser(users._user._id)">
                                     <!--<a href="#/user/{{model.userId}}/{{users._user._id}}/profile">-->
                                         {{users._user.username}}</a> </h5>
                             </div>

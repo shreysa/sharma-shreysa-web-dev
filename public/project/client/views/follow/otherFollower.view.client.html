@@ -31,6 +31,7 @@
 </nav>
 
 <div class="container-fluid pad-top">
+    <div class="row">
     <div ng-if="model.success"
          class="alert alert-success form-control"
          role="alert">
@@ -43,11 +44,11 @@
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 pad">
         <ul class="nav nav-tabs">
-            <li class=""><a href="#/user/{{model.user.userId}}/{{model.otherUser.otherUserId}}/profile"  data-toggle="tab" aria-expanded="false">Profile</a></li>
-            <li class=""> <a href="#/user/{{model.user.userId}}/{{model.otherUser.otherUserId}}/likes" data-toggle="tab" aria-expanded="false">Likes</a></li>
-            <li class=""><a href="#/user/{{model.user.userId}}/{{model.otherUser.otherUserId}}/restaurant/reviewsByUser"  data-toggle="tab" aria-expanded="false">Reviews</a></li>
-            <li class="active"> <a href="#/user/{{model.user.userId}}/followedBy/{{model.otherUser.otherUserId}}" data-toggle="tab" aria-expanded="true">Followers</a></li>
-            <li class=""> <a href="#/user/{{model.user.userId}}/{{model.otherUser.otherUserId}}/follows" data-toggle="tab" aria-expanded="false">Follows</a></li>
+            <li class=""><a href="#/user/{{model.user.userId}}/{{model.otherUser.otherUserId}}/profile" class="backgroundFont" data-toggle="tab" aria-expanded="false">Profile</a></li>
+            <li class=""> <a href="#/user/{{model.user.userId}}/{{model.otherUser.otherUserId}}/likes" class="backgroundFont" data-toggle="tab" aria-expanded="false">Likes</a></li>
+            <li class=""><a href="#/user/{{model.user.userId}}/{{model.otherUser.otherUserId}}/restaurant/reviewsByUser" class="backgroundFont" data-toggle="tab" aria-expanded="false">Reviews</a></li>
+            <li class="active"> <a href="#/user/{{model.user.userId}}/followedBy/{{model.otherUser.otherUserId}}" class="backgroundFont" data-toggle="tab" aria-expanded="true">Followers</a></li>
+            <li class=""> <a href="#/user/{{model.user.userId}}/{{model.otherUser.otherUserId}}/follows" class="backgroundFont" data-toggle="tab" aria-expanded="false">Follows</a></li>
         </ul>
         <div id="myTabContent" class="tab-content">
             <div class="tab-pane fade active in" id="followers">
@@ -57,7 +58,7 @@
                     <div  class="col-lg-6 col-md-6 col-sm-6 paddingfromtop"  ng-if="model.hasFollowers" >
                         <div        ng-repeat="followed in model.followedBy">
                             <div class="well well-sm ">
-                                <h5><a href="#/user/{{model.user.userId}}/{{followed._user._id}}/profile">
+                                <h5><a class="backgroundFont" href="#/user/{{model.user.userId}}/{{followed._user._id}}/profile">
                                     {{followed._user.username}}</a></h5>
 
                             </div>
@@ -72,6 +73,7 @@
         </div>
     </div>
 </div>
+    </div>
 
 <nav class="navbar navbar-inverse navbar-fixed-bottom">
     <div class="container ">
