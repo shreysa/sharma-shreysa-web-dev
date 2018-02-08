@@ -11,15 +11,8 @@ module.exports = function () {
         findAllLikedByRestaurantId: findAllLikedByRestaurantId,
         unlikeRestaurant: unlikeRestaurant,
         deleteLike : deleteLike
-        
-        
-        
-        
-    };
+     };
     return api;
-    
-    
-   
 
     function deleteLike(userId) {
         return Like.remove({"_user" : userId});
@@ -45,8 +38,5 @@ module.exports = function () {
 
     function unlikeRestaurant(userId, restaurantId) {
         return Like.remove({"_user": userId, "_restaurant": restaurantId});
-    }
-    
-    
-    
+    }  
 };

@@ -26,7 +26,7 @@ module.exports = function (app, models) {
     function findRestaurantByCategory(req, res) {
         console.log(req.params.category);
         var category = req.params.category;
-      //  var categoryForRest = category.category;
+      
         categoryModel
             .findRestaurantByCategory(category)
             .then(

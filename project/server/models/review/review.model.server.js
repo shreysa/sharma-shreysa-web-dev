@@ -48,9 +48,7 @@ module.exports = function () {
                 }
             });
     }
-    
-    
-
+ 
     function findAllReviewsByRestaurantId(restaurantId) {
         return Review.find({_restaurant: restaurantId})
             .populate('_user', '_id username' );

@@ -1,103 +1,77 @@
-module.exports = function () {
-    var WidgetSchema = require("./widget.schema.server")();
-    var mongoose = require("mongoose");
+module.exports = function() {
+  var WidgetSchema = require("./widget.schema.server")();
+  var mongoose = require("mongoose");
 
-    var Widget = mongoose.model("Widget", WidgetSchema);
+  var Widget = mongoose.model("Widget", WidgetSchema);
 
-    var api = {
-        createWidget: createWidget,
-        findWidgetById: findWidgetById,
-        findAllWidgetsForPage: findAllWidgetsForPage,
-        updateWidget:  updateWidget,
-        deleteWidget: deleteWidget,
-        reorderWidget: reorderWidget
+  var api = {
+    createWidget: createWidget,
+    findWidgetById: findWidgetById,
+    findAllWidgetsForPage: findAllWidgetsForPage,
+    updateWidget: updateWidget,
+    deleteWidget: deleteWidget,
+    reorderWidget: reorderWidget
+  };
+  return api;
 
-    };
-    return api;
-
-    function reorderWidget(start, end, pageId) {
-        return Widget
-            .find({_page: pageId}, function (err, widgets) {
-                widgets.forEach(function (widget) {
-                    //               console.log("displaying length of this widget" + widget.name);
-                    //             console.log(widget.order);
-                   // delete widget._id;
-                    if(start< end){
-
-                    if(widget.order === start){
-                    //    console.log(widget.order);
-                     //   console.log("before end is assigned");
-                        widget.order = end;
-                        widget.save();
-                       // console.log(widget.order);
-                    }
-                    else if(widget.order > start && widget.order <= end){
-                     //   console.log("widget before - 1  " + widget.order);
-                        widget.order--;
-                       
-                        widget.save();
-                      //  console.log(widget.order);
-
-                    }
-                    } else{
-                        if(widget.order === start){
-                            //    console.log(widget.order);
-                            //   console.log("before end is assigned");
-                            widget.order = end;
-                            widget.save();
-                            // console.log(widget.order);
-                        }
-
-                    else if(widget.order < start && widget.order >= end){
-                      //  console.log("widget before + 1  " + widget.order);
-                        widget.order++;
-                      
-                        widget.save();
-                        //console.log(widget.order);
-
-                    }
-                    }
-                });
+  function reorderWidget(start, end, pageId) {
+    return Widget.find({ _page: pageId }, function(err, widgets) {
+      widgets.forEach(function(widget) {
+        if (start < end) {
+          if (widget.order === start) {
+            widget.order = end;
+            widget.save();
+          } else if (widget.order > start && widget.order <= end) {
+            widget.order--;
+            widget.save();
+          }
+        } else {
+          if (widget.order === start) {
+            widget.order = end;
+            widget.save();
+          } else if (widget.order < start && widget.order >= end) {
+            widget.order++;
+            widget.save();
+          }
+        }
+      });
     });
-    }
+  }
 
-    function createWidget(pageId, widget) {
-       // console.log(newWidget);
-       // console.log("models");
-        widget._page = pageId;
+  function createWidget(pageId, widget) {
+    widget._page = pageId;
 
-        return Widget
-            .find({_page: pageId})
-            .then(
-                function (widgets) {
-                    console.log(widgets.length);
-                    widget.order = widgets.length;
-                    return Widget.create(widget);
-                },
-            function (error) {
-                return null;
-            });
-    }
+    return Widget.find({ _page: pageId }).then(
+      function(widgets) {
+        console.log(widgets.length);
+        widget.order = widgets.length;
+        return Widget.create(widget);
+      },
+      function(error) {
+        return null;
+      }
+    );
+  }
 
-    function findWidgetById(widgetId) {
-        return Widget.findById({_id: widgetId});
-    }
+  function findWidgetById(widgetId) {
+    return Widget.findById({ _id: widgetId });
+  }
 
-    function findAllWidgetsForPage(pageId) {
-        return Widget.find({"_page": pageId});
-    }
+  function findAllWidgetsForPage(pageId) {
+    return Widget.find({ _page: pageId });
+  }
 
-    function updateWidget(widgetId, newWidget) {
-      //  console.log("in models");
-       // console.log(newWidget);
-        delete newWidget._id;
-        return Widget
-            .update({_id: widgetId},{
-                $set: newWidget
-            });
-    }
+  function updateWidget(widgetId, newWidget) {
+    delete newWidget._id;
+    return Widget.update(
+      { _id: widgetId },
+      {
+        $set: newWidget
+      }
+    );
+  }
 
-    function deleteWidget(widgetId) {
-        return Widget.remove({_id: widgetId});
-    }
+  function deleteWidget(widgetId) {
+    return Widget.remove({ _id: widgetId });
+  }
 };
