@@ -1,7 +1,7 @@
 {
-  "name": "web-dev",
+  "name": "mean-stack",
   "version": "1.0.0",
-  "description": "Web Dev at Northeastern University",
+  "description": "Mean Stack application",
   "main": "server.js",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
@@ -23,9 +23,9 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\"",
     "start": "node server.js"
   },
-  "author": "Jose G. Annunziato",
+  "author": "Shreysa Sharma",
   "license": "ISC"
 }
