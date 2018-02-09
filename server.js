@@ -6,24 +6,9 @@ var passport = require('passport');
 
 var connectionString = 'mongodb://127.0.0.1:27017/cs5610summer1';
 
-// if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
-//  connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
-//      process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
-//      process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
-//      process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
-//      process.env.OPENSHIFT_APP_NAME;
-// }
-
-if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
- connectionString = process.env.MONGODB_DB_USERNAME + ":" +
-     process.env.MONGODB_DB_PASSWORD + "@" +
-     process.env.MONGODB_DB_HOST + ':' +
-     process.env.MONGODB_DB_PORT + '/' +
-     process.env.APP_NAME;
-}
-
 var mongoose = require("mongoose");
-mongoose.connect(connectionString);
+
+mongoose.connect(process.env.MONGO_URL);
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -31,8 +16,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 app.use(session({ secret: process.env.SESSION_SECRET }));
-
-
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -46,9 +29,9 @@ var project = require('./project/app.js');
 project(app);
 
 require("./experiments/todos.js")(app);
-//require ("./test/app.js")(app);
+
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
-var port      = process.env.OPENSHIFT_NODEJS_PORT || 3000;
+var port      = process.env.OPENSHIFT_NODEJS_PORT || 5000;
 
 app.listen(port, ipaddress);
